@@ -3,7 +3,8 @@ import { StatusBar } from 'expo-status-bar';
 import PrimaryButton from "../ui/PrimaryButton";
 import PrimaryBlack from "../ui/PrimaryBlack";
 
-function IntroPage () {
+function IntroScreen ({navigation}) {
+
   return (
     <View style={styles.container}>
 
@@ -14,7 +15,7 @@ function IntroPage () {
       <View style={styles.twoButtonsContaner}>
 
         <View style={styles.buttonContainer}>
-          <PrimaryBlack>Login</PrimaryBlack>
+          <PrimaryBlack onPress={()=> navigation.navigate('Login')}>Login</PrimaryBlack>
         </View>
         
         <View style={styles.buttonContainer}>
@@ -23,13 +24,11 @@ function IntroPage () {
 
       </View>
      
-      
-
     </View>
   );
 }
 
-export default IntroPage
+export default IntroScreen
 
 const styles = StyleSheet.create({
   container: {
@@ -37,10 +36,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 60,
   },
   image:{
     width: 300,
     height: 140,
+    
   },
   buttonContainer: {
     marginBottom: 2,
