@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image, } from "react-native";
+import { View, StyleSheet, Image, } from "react-native";
 import PrimaryButton from "../ui/PrimaryButton";
 import InputField from "../ui/inputFeild";
 
-
-function LoginScreen () {
+function SecondSignupScreen () {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   const handleEmailChange = (text) => {
     setEmail(text);
@@ -16,10 +16,16 @@ function LoginScreen () {
     setPassword(text);
   };
 
-  // console.log(email, password);
+  const handlePasswordCOnfirmation = (text) => {
+    setPasswordConfirmation(text);
+  };
+
+  //console.log(email, password, passwordConfirmation);
 
   return (
+
     <View style={styles.container}>
+
       <Image
         style={styles.image}
         source={require("../assets/images/logo.png")}
@@ -38,25 +44,33 @@ function LoginScreen () {
         <InputField
           iconName={"lock"}
           placeholder={"Password"}
-          name={"password"}
           value={password}
           onChange={handlePasswordChange}
           type="password"
           // label={"Password"}
           secureTextEntry={true}
         />
-      </View>
 
-      <TouchableOpacity>
-        <Text style={styles.forgotPasswordButtonText}>Forgot Password?</Text>
-      </TouchableOpacity>
+        <InputField
+          iconName={"lock"}
+          placeholder={"Password Confirmation"}
+          value={passwordConfirmation}
+          onChange={handlePasswordCOnfirmation}
+          type="password"
+          // label={"PasswordConfirmation"}
+          secureTextEntry={true}
+        />
+      </View>
 
       <View style={styles.buttonContainer}>
-        <PrimaryButton>Login</PrimaryButton>
+        <PrimaryButton>Sign Up</PrimaryButton>
       </View>
+      
     </View>
-  );
-};
+  )
+}
+
+export default SecondSignupScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -95,5 +109,3 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
 });
-
-export default LoginScreen;

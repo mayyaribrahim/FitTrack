@@ -1,22 +1,23 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image, } from "react-native";
+import { View, StyleSheet,Image, } from "react-native";
 import PrimaryButton from "../ui/PrimaryButton";
 import InputField from "../ui/inputFeild";
 
 
-function LoginScreen () {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleEmailChange = (text) => {
-    setEmail(text);
+function SignupScreen ({ navigation }) {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  
+  const handleFirstName = (text) => {
+    setFirstName(text);
   };
 
-  const handlePasswordChange = (text) => {
-    setPassword(text);
+  const handleLastName = (text) => {
+    setLastName(text);
   };
 
-  // console.log(email, password);
+
+  // console.log(firstName, lastName);
 
   return (
     <View style={styles.container}>
@@ -26,37 +27,37 @@ function LoginScreen () {
       />
 
       <View style={styles.inputContainer}>
+
         <InputField
           iconName={"user"}
-          placeholder={"Email"}
-          value={email}
-          onChange={handleEmailChange}
-          type="email"
-          // label={"Email"}
+          placeholder={"First Name"}
+          value={firstName}
+          onChange={handleFirstName}
+          type="firstName"
+          // label={"firstName"}
         />
 
         <InputField
-          iconName={"lock"}
-          placeholder={"Password"}
-          name={"password"}
-          value={password}
-          onChange={handlePasswordChange}
-          type="password"
-          // label={"Password"}
-          secureTextEntry={true}
+          iconName={"user"}
+          placeholder={"Last Name"}
+          value={lastName}
+          onChange={handleLastName}
+          type="LastName"
+          // label={"lastName"}
         />
+
       </View>
 
-      <TouchableOpacity>
-        <Text style={styles.forgotPasswordButtonText}>Forgot Password?</Text>
-      </TouchableOpacity>
+      
 
       <View style={styles.buttonContainer}>
-        <PrimaryButton>Login</PrimaryButton>
+        <PrimaryButton onPress={() => navigation.navigate("SecondSignup")}>Next</PrimaryButton>
       </View>
     </View>
   );
 };
+
+export default SignupScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -96,4 +97,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+
