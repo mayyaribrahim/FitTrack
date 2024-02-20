@@ -3,24 +3,24 @@ import { View, StyleSheet, Image, } from "react-native";
 import PrimaryButton from "../ui/PrimaryButton";
 import InputField from "../ui/inputFeild";
 
-function SecondSignupScreen () {
+function SecondSignupScreen ({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
-  const handleEmailChange = (text) => {
-    setEmail(text);
+  const handleEmailChange = (enteredEmail) => {
+    setEmail(enteredEmail);
   };
 
-  const handlePasswordChange = (text) => {
-    setPassword(text);
+  const handlePasswordChange = (enteredPassword) => {
+    setPassword(enteredPassword);
   };
 
-  const handlePasswordCOnfirmation = (text) => {
-    setPasswordConfirmation(text);
+  const handlePasswordConfirmation = (enteredPasswordConf) => {
+    setPasswordConfirmation(enteredPasswordConf);
   };
 
-  //console.log(email, password, passwordConfirmation);
+  console.log(email, password, passwordConfirmation);
 
   return (
 
@@ -55,7 +55,7 @@ function SecondSignupScreen () {
           iconName={"lock"}
           placeholder={"Password Confirmation"}
           value={passwordConfirmation}
-          onChange={handlePasswordCOnfirmation}
+          onChange={handlePasswordConfirmation}
           type="password"
           // label={"PasswordConfirmation"}
           secureTextEntry={true}
@@ -63,7 +63,7 @@ function SecondSignupScreen () {
       </View>
 
       <View style={styles.buttonContainer}>
-        <PrimaryButton>Sign Up</PrimaryButton>
+        <PrimaryButton onPress={() => navigation.navigate("StartNow")}>Sign Up</PrimaryButton>
       </View>
       
     </View>

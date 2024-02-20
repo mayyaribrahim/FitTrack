@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import { TextInput, StyleSheet, Text, View, Pressable } from "react-native";
-import { Feather ,MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import { Feather ,MaterialCommunityIcons, FontAwesome6 } from "@expo/vector-icons";
 
 
 function InputField ({
@@ -14,17 +14,26 @@ function InputField ({
   secondIconName,
 
 }) {
-  const [password, setPassword] = useState("");
   const [secureText, setSecureText] = useState(true);
 
   return (
     
     <View style={styles.container}>
 
-      <Feather name={iconName} size={20} color="#BEBEBE" /> 
-    
-      {label ? <Text style={styles.label}>{label}</Text> : null}
+      {/*<FontAwesome6 name={secondIconName} size={20} color="#BEBEBE" />*/}
+      {/*{label ? <Text style={styles.label}>{label}</Text> : null}*/}
 
+      <View style={styles.secondIcon}>
+        <FontAwesome6 name={secondIconName} size={20} color="#BEBEBE" /> 
+      </View>
+      
+
+      <View style={styles.icon}>
+        <Feather name={iconName} size={20} color="#BEBEBE" /> 
+      </View>
+      
+       
+       
       <TextInput
         value={value}
         onChangeText={onChange}
@@ -41,6 +50,7 @@ function InputField ({
           />
         </Pressable>
       )}
+
     </View>
   );
 };
@@ -59,13 +69,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   input: {
-    width: "77%",
+    width: "73%",
     height: 45,
     borderColor: 'red',
     //borderWidth: 1,
+    right: 14,
   },
   label: {
     marginBottom: 5,
+  },
+  icon: {
+    right:13,
+    
+  },
+  secondIcon: {
+    right:2,
+    
   },
 });
 

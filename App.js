@@ -1,12 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createSwitchNavigator } from "@react-navigation/core";
 
 import IntroScreen from './screens/IntroScreen';
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
 import SecondSignupScreen from './screens/SecondSignupScreen';
+import StartNow from './screens/StartNow';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,7 +18,7 @@ export default function App() {
       
       <NavigationContainer>
 
-        <Stack.Navigator>
+      <Stack.Navigator initialRouteName="Intro" screenOptions={{headerStyle: {backgroundColor: 'white',}, headerTitleStyle: {color: 'white'}, headerShadowVisible: false,}}>
 
           <Stack.Screen 
             name="Intro" component={IntroScreen} 
@@ -50,6 +51,16 @@ export default function App() {
 
           <Stack.Screen 
             name="SecondSignup" component={SecondSignupScreen} 
+            options={{ 
+              headerStyle: {backgroundColor: 'white',}, 
+              headerTitleStyle: {color: 'white'},
+              headerShadowVisible: false,
+              headerBackTitle: 'Back'
+            }}
+          />
+
+          <Stack.Screen 
+            name="StartNow" component={StartNow} 
             options={{ 
               headerStyle: {backgroundColor: 'white',}, 
               headerTitleStyle: {color: 'white'},

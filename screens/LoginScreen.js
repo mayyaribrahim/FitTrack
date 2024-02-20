@@ -8,15 +8,15 @@ function LoginScreen () {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleEmailChange = (text) => {
-    setEmail(text);
+  const handleEmailChange = (enteredEmail) => {
+    setEmail(enteredEmail);
   };
 
-  const handlePasswordChange = (text) => {
-    setPassword(text);
+  const handlePasswordChange = (enteredPassword) => {
+    setPassword(enteredPassword);
   };
 
-  // console.log(email, password);
+  console.log(email, password);
 
   return (
     <View style={styles.container}>

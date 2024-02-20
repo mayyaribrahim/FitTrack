@@ -2,22 +2,28 @@ import React, { useState } from "react";
 import { View, StyleSheet,Image, } from "react-native";
 import PrimaryButton from "../ui/PrimaryButton";
 import InputField from "../ui/inputFeild";
+import { FontAwesome6 } from '@expo/vector-icons';
 
 
-function SignupScreen ({ navigation }) {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+function StartNow ({ navigation }) {
+  const [age, setAge] = useState("");
+  const [height, setHeight] = useState("");
+  const [weight, setWeight] = useState("");
   
-  const handleFirstName = (enteredFirstName) => {
-    setFirstName(enteredFirstName);
+  const handleAge = (enteredAge) => {
+    setAge(enteredAge);
   };
 
-  const handleLastName = (enteredLastName) => {
-    setLastName(enteredLastName);
+  const handleHeight = (enteredHeight) => {
+    setHeight(enteredHeight);
+  };
+
+  const handleWeight = (enteredWeight) => {
+    setWeight(enteredWeight);
   };
 
 
-  console.log(firstName, lastName);
+  console.log(age, height, weight);
 
   return (
     <View style={styles.container}>
@@ -30,34 +36,42 @@ function SignupScreen ({ navigation }) {
 
         <InputField
           iconName={"user"}
-          placeholder={"First Name"}
-          value={firstName}
-          onChange={handleFirstName}
-          type="firstName"
-          // label={"firstName"}
+          placeholder={"Age"}
+          value={age}
+          onChange={handleAge}
+          type="age"
+          // label={"Age"}
         />
 
         <InputField
           iconName={"user"}
-          placeholder={"Last Name"}
-          value={lastName}
-          onChange={handleLastName}
-          type="LastName"
-          // label={"lastName"}
+          placeholder={"Height"}
+          value={height}
+          onChange={handleHeight}
+          type="Height"
+          // label={"Height"}
         />
 
+        
+        <InputField
+          secondIconName={"weight-scale"}
+          placeholder={"Weight"}
+          value={weight}
+          onChange={handleWeight}
+          type="weight"
+          // label={"Weight"}
+        />
+        
       </View>
 
-      
-
       <View style={styles.buttonContainer}>
-        <PrimaryButton onPress={() => navigation.navigate("SecondSignup")}>Next</PrimaryButton>
+        <PrimaryButton>Start Now!</PrimaryButton>
       </View>
     </View>
   );
 };
 
-export default SignupScreen;
+export default StartNow;
 
 const styles = StyleSheet.create({
   container: {
