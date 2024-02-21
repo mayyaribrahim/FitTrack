@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, StyleSheet,Image, } from "react-native";
-import PrimaryButton from "../ui/PrimaryButton";
-import InputField from "../ui/inputFeild";
+import PrimaryButton from "../components/PrimaryButton";
+import InputField from "../components/inputFeild";
 import { FontAwesome6 } from '@expo/vector-icons';
 
 
@@ -65,7 +65,7 @@ function StartNow ({ navigation }) {
       </View>
 
       <View style={styles.buttonContainer}>
-        <PrimaryButton>Start Now!</PrimaryButton>
+        <PrimaryButton onPress={() => navigation.navigate("OnboardingTutorial")}>Start Now!</PrimaryButton>
       </View>
     </View>
   );

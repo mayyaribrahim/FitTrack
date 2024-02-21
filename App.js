@@ -8,6 +8,7 @@ import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
 import SecondSignupScreen from './screens/SecondSignupScreen';
 import StartNow from './screens/StartNow';
+import OnboardingTutorial from './screens/OnboardingTutorial';
 
 const Stack = createNativeStackNavigator();
 
@@ -68,6 +69,19 @@ export default function App() {
               headerBackTitle: 'Back'
             }}
           />
+
+          <Stack.Screen
+            name="OnboardingTutorial"
+            component={OnboardingTutorial}
+            options={{
+              headerStyle: { backgroundColor: "#ffffffff" },
+              headerTitleStyle: { color: "#ffffff00" },
+              headerShadowVisible: false,
+              headerBackVisible: false,
+            }}
+          />
+
+          
 
         </Stack.Navigator>
         

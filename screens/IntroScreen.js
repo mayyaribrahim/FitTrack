@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import PrimaryButton from "../ui/PrimaryButton";
-import PrimaryBlack from "../ui/PrimaryBlack";
+import PrimaryButton from "../components/PrimaryButton";
+import PrimaryBlack from "../components/PrimaryBlack";
 
 function IntroScreen({ navigation }) {
   return (
