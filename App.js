@@ -19,55 +19,32 @@ export default function App() {
       
       <NavigationContainer>
 
-      <Stack.Navigator initialRouteName="Intro" screenOptions={{headerStyle: {backgroundColor: 'white',}, headerTitleStyle: {color: 'white'}, headerShadowVisible: false,}}>
+      <Stack.Navigator 
+        initialRouteName="Intro" 
+        screenOptions={{headerStyle: {backgroundColor: 'white',}, 
+        headerTitleStyle: {color: 'white'}, 
+        headerShadowVisible: false,
+        headerBackTitle: 'Back'
+      }}>
 
           <Stack.Screen 
             name="Intro" component={IntroScreen} 
-            options={{ 
-              headerStyle: {backgroundColor: 'white',}, 
-              headerTitleStyle: {color: 'white'},
-              headerShadowVisible: false,
-            }}
           />
 
           <Stack.Screen 
             name="Login" component={LoginScreen} 
-            options={{ 
-              headerStyle: {backgroundColor: 'white',}, 
-              headerTitleStyle: {color: 'white'},
-              headerShadowVisible: false,
-              headerBackTitle: 'Back'
-            }}
           />
 
           <Stack.Screen 
             name="Signup" component={SignupScreen} 
-            options={{ 
-              headerStyle: {backgroundColor: 'white',}, 
-              headerTitleStyle: {color: 'white'},
-              headerShadowVisible: false,
-              headerBackTitle: 'Back'
-            }}
           />
 
           <Stack.Screen 
             name="SecondSignup" component={SecondSignupScreen} 
-            options={{ 
-              headerStyle: {backgroundColor: 'white',}, 
-              headerTitleStyle: {color: 'white'},
-              headerShadowVisible: false,
-              headerBackTitle: 'Back'
-            }}
           />
 
           <Stack.Screen 
             name="StartNow" component={StartNow} 
-            options={{ 
-              headerStyle: {backgroundColor: 'white',}, 
-              headerTitleStyle: {color: 'white'},
-              headerShadowVisible: false,
-              headerBackTitle: 'Back'
-            }}
           />
 
           <Stack.Screen
@@ -78,19 +55,15 @@ export default function App() {
               headerTitleStyle: { color: "#ffffff00" },
               headerShadowVisible: false,
               headerBackVisible: false,
+              //gestureEnabled: false,
             }}
           />
-
-          
 
         </Stack.Navigator>
         
       </NavigationContainer>
       
     </>
-
-    
-
     
   );
 }

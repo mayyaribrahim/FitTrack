@@ -22,8 +22,17 @@ const OnboardingTutorial = () => {
     }
   };
 
+  const handleTitle = () => {
+    if (currentIndex === Slides.length - 1) {
+      return "Get Started";
+    } else {
+      return "Next";
+    }
+  };
+
   return (
     <View style={styles.container}>
+
       <View style={{ flex: 2 }}>
         <FlatList
           data={Slides}
@@ -43,8 +52,10 @@ const OnboardingTutorial = () => {
           ref={slidesRef}
         />
       </View>
+
       <Indicator data={Slides} scrollX={scrollX} />
-      <NextButton scrollTo={scrollTo} />
+      <NextButton scrollTo={scrollTo} title={handleTitle()} />
+
     </View>
   );
 };
