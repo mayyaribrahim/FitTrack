@@ -1,10 +1,10 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
 
 import HomeScreen from '../screens/HomeScreen';
 
 const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
+
 function MyTabs() {
   return (
     <Tab.Navigator>
@@ -12,6 +12,5 @@ function MyTabs() {
     </Tab.Navigator>
   );
 }
-
 
 export default MyTabs;
