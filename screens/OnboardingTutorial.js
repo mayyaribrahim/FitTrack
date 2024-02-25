@@ -19,10 +19,11 @@ const OnboardingTutorial = () => {
   const scrollTo = () => {
     if (currentIndex < Slides.length - 1) {
       slidesRef.current.scrollToIndex({ index: currentIndex + 1 });
-    }
+    }else if (currentIndex === Slides.length ) {
   };
+}
 
-  const handleTitle = () => {
+  function handleTitle () {
     if (currentIndex === Slides.length - 1) {
       return "Get Started";
     } else {

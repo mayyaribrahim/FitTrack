@@ -20,7 +20,9 @@ function SignupScreen ({ navigation }) {
   console.log(firstName, lastName);
 
   return (
+
     <View style={styles.container}>
+
       <Image
         style={styles.image}
         source={require("../assets/images/logo.png")}
@@ -48,11 +50,10 @@ function SignupScreen ({ navigation }) {
 
       </View>
 
-      
-
       <View style={styles.buttonContainer}>
         <PrimaryButton onPress={() => navigation.navigate("SecondSignup")}>Next</PrimaryButton>
       </View>
+      
     </View>
   );
 };

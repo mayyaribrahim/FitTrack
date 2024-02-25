@@ -3,8 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Image, } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 import InputField from "../components/inputFeild";
 
-
-function LoginScreen () {
+function LoginScreen ({navigation}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -52,7 +51,7 @@ function LoginScreen () {
       </TouchableOpacity>
 
       <View style={styles.buttonContainer}>
-        <PrimaryButton>Login</PrimaryButton>
+        <PrimaryButton onPress={() => navigation.navigate('home')}>Login</PrimaryButton>
       </View>
     </View>
   );
