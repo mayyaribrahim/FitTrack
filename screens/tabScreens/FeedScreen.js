@@ -1,21 +1,18 @@
-import { View, Text, StyleSheet } from "react-native";
-import GreyBox from "../../components/GreyBox";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
+import TabScreenTitle from "../../components/TabScreenTitle";
 
 function FeedScreen() {
   return (
     
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
 
-      <View style={styles.TitleContainer}>
-        <Text style={styles.PageTitle}>Feed</Text>
+      <TabScreenTitle title={"Explore"} />
+
+      <View style={styles.boxContainer}>
+        <View style={styles.box}></View>
       </View>
 
-      <View>
-      <View style={styles.box}></View>
-    </View>
-
-    </View>
+    </ScrollView>
   )
 }
 
@@ -23,24 +20,27 @@ export default FeedScreen;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    paddingTop: 45,
   },
   box: {
-    width: 341,
-    height: 680,
+    width: 345,
+    height: 677,
     borderRadius: 20,
-    backgroundColor: "red",
+    backgroundColor: "#EAEAEA", 
+    
   },
-  TitleContainer: {
-    alignItems: 'flex-start',
+  boxContainer: {
+    alignItems: "center",
+    justifyContent: "flex-end",
   },
+  
   PageTitle: {
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: "bold",
     color: "#000",
     textAlign: "left",
+    paddingLeft: 25,
+    paddingBottom: 3,
   },
 })
