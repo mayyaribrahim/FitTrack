@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, StyleSheet,Image, } from "react-native";
-import PrimaryButton from "../components/PrimaryButton";
-import InputField from "../components/inputFeild";
+import PrimaryButton from "../../components/PrimaryButton";
+import InputField from "../../components/inputFeild";
 import { FontAwesome6 } from '@expo/vector-icons';
 
 
@@ -29,7 +29,7 @@ function StartNow ({ navigation }) {
     <View style={styles.container}>
       <Image
         style={styles.image}
-        source={require("../assets/images/logo.png")}
+        source={require("../../assets/images/logo.png")}
       />
 
       <View style={styles.inputContainer}>

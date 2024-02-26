@@ -7,8 +7,8 @@ function PrimaryButton({ children, onPress }) {
       <Pressable
         style={({ pressed }) =>
           pressed
-            ? [styles.buttonInnerContainer, styles.pressed]
-            : styles.buttonInnerContainer
+          ? [styles.buttonInnerContainer, styles.pressed]
+          : styles.buttonInnerContainer
         }
         onPress={onPress}
         android_ripple={{ color: "#19498E" }}

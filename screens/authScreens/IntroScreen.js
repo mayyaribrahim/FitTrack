@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import PrimaryButton from "../components/PrimaryButton";
-import PrimaryBlack from "../components/PrimaryBlack";
+import PrimaryButton from "../../components/PrimaryButton";
+import PrimaryBlack from "../../components/PrimaryBlack";
 
 function IntroScreen({ navigation }) {
   return (
@@ -10,7 +10,7 @@ function IntroScreen({ navigation }) {
 
       <Image
         style={styles.image}
-        source={require("../assets/images/logo2.png")}
+        source={require("../../assets/images/logo2.png")}
       />
 
       <View style={styles.twoButtonsContainer}>
