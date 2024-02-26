@@ -17,9 +17,8 @@ function MyTabs() {
       headerShown: false, 
       tabBarShowLabel: false,
       tabBarStyle:styles.container,
-      tabBarItemStyle: styles.tabItem,
       tabBarActiveTintColor: 'white',
-      tabBarInactiveTintColor: 'gray',
+      tabBarInactiveTintColor: 'grey',
     }}
     safeAreaInsets={{bottom: 0,}}
     >
@@ -80,7 +79,4 @@ const styles = StyleSheet.create({
     borderRadius: 45,
     backgroundColor: '#292929',
   },
-  tabItem: {
-    
-  }
 })

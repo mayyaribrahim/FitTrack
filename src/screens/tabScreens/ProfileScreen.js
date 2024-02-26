@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Button } from "react-native";
 import TabScreenTitle from "../../components/TabScreenTitle";
 
 function ProfileScreen() {
@@ -9,7 +9,9 @@ function ProfileScreen() {
       <TabScreenTitle title={"Profile"} />
 
       <View style={styles.boxContainer}>
-        <View style={styles.box}></View>
+        <View style={styles.box}>
+        </View>
+        
       </View>
 
     </ScrollView>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image, } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image, KeyboardAvoidingView, Platform, } from "react-native";
 import PrimaryButton from "../../components/PrimaryButton";
 import InputField from "../../components/inputFeild";
 
@@ -18,12 +18,16 @@ function LoginScreen ({navigation}) {
   console.log(email, password);
 
   return (
-    <View style={styles.container}>
-      <Image
-        style={styles.image}
-        source={require("../../assets/images/logo.png")}
-      />
+    
+    <KeyboardAvoidingView
+    behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      style={styles.container}>
 
+      
+      <View>    
+        <Image style={styles.image} source={require("../../assets/images/logo.png")}/> 
+      </View>
+      
       <View style={styles.inputContainer}>
         <InputField
           iconName={"user"}
@@ -31,7 +35,6 @@ function LoginScreen ({navigation}) {
           value={email}
           onChange={handleEmailChange}
           type="email"
-          // label={"Email"}
         />
 
         <InputField
@@ -41,19 +44,22 @@ function LoginScreen ({navigation}) {
           value={password}
           onChange={handlePasswordChange}
           type="password"
-          // label={"Password"}
           secureTextEntry={true}
         />
       </View>
 
-      <TouchableOpacity>
+      
+        <TouchableOpacity>
         <Text style={styles.forgotPasswordButtonText}>Forgot Password?</Text>
       </TouchableOpacity>
+      
 
       <View style={styles.buttonContainer}>
         <PrimaryButton onPress={() => navigation.navigate('home')}>Login</PrimaryButton>
       </View>
-    </View>
+      
+    </KeyboardAvoidingView>
+    
   );
 };
 
@@ -62,26 +68,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    paddingTop: 110,
+    justifyContent: 'center',
   },
 
   image: {
     width: 95,
-    height: 95,
+    height: 100,
   },
 
   inputContainer: {
     marginTop: 40,
-  },
-
-  label: {
-    marginBottom: 5,
-    fontSize: 18,
-  },
-
-  textInput: {
-    paddingVertical: 14,
-    paddingHorizontal: 10,
   },
 
   forgotPasswordButtonText: {
@@ -91,7 +87,7 @@ const styles = StyleSheet.create({
   },
 
   buttonContainer: {
-    marginTop: 30,
+    marginTop: 10,
   },
 });
 
