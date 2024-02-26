@@ -13,6 +13,7 @@ function MyTabs() {
   return (
 
     <Tab.Navigator
+    initialRouteName="Home"
     screenOptions={{
       headerShown: false, 
       tabBarShowLabel: false,
@@ -22,32 +23,35 @@ function MyTabs() {
     }}
     safeAreaInsets={{bottom: 0,}}
     >
-      <Tab.Screen 
-        name="Feed" 
-        component={FeedScreen} 
-        options={{
-          tabBarIcon: ({color, size}) => (
-            <Ionicons name='newspaper' color={color} size={size}/>
-          )
-        }}
-      />
 
       <Tab.Screen 
         name="Home" 
         component={HomeScreen} 
         options={{
           tabBarIcon: ({color, size}) => (
-            <Ionicons name='home' color={color} size={size}/>
+            <Ionicons name='home' color={color} size={30}/>
           )
         }}
       />
+
+      <Tab.Screen 
+        name="Feed" 
+        component={FeedScreen} 
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <Ionicons name='newspaper' color={color} size={30}/>
+          )
+        }}
+      />
+
+      
 
       <Tab.Screen 
         name="macros" 
         component={CalCulationScreen} 
         options={{
           tabBarIcon: ({color, size}) => (
-            <Ionicons name='calculator' color={color} size={size}/>
+            <Ionicons name='calculator' color={color} size={30}/>
           )
         }}
       />
@@ -57,7 +61,7 @@ function MyTabs() {
         component={ProfileScreen} 
         options={{
           tabBarIcon: ({color, size}) => (
-            <Ionicons name='person' color={color} size={size}/>
+            <Ionicons name='person' color={color} size={30}/>
           )
         }}
         />

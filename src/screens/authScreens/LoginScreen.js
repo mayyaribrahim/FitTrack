@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image, KeyboardAvoidingView, Platform, } from "react-native";
 import PrimaryButton from "../../components/PrimaryButton";
-import InputField from "../../components/inputFeild";
+import InputField from "../../components/InputFeild";
 
 function LoginScreen ({navigation}) {
   const [email, setEmail] = useState("");
