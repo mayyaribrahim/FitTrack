@@ -1,4 +1,4 @@
-import ExCategory from "../models/excategory";
+import ExCategory from "../models/ExCategory";
 
 export const CATEGORIES = [
   new ExCategory('c1', 'Chest'),
