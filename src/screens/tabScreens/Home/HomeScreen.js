@@ -1,15 +1,16 @@
 import { View, Text, StyleSheet, ScrollView, FlatList, Image } from "react-native";
-import ExCategoryGrid from "../../components/ExCategoryGrid";
-import { CATEGORIES } from "../../data/ButtonsData";
-import { Ionicons } from "@expo/vector-icons";
+import ExCategoryGrid from "../../../components/ExCategoryGrid";
+import { EXERCISESCATEGORIES } from "../../../data/ExercisesData";
 
-function HomeScreen() {
+
+function HomeScreen({navigation}) {
+  
   function renderCategoryItem(itemData) {
 
     function pressHandler() {
-      //navigation.navigate('MealsOverview', {
-        //categoryId: itemData.item.id, 
-      //});
+      navigation.navigate('ExercisesOverView', {
+        exerciseCategoryId: itemData.item.id, 
+      });
     }
   
     return (
@@ -31,7 +32,7 @@ function HomeScreen() {
           <Text style={styles.PageTitle}>Hello Mayyar</Text>
         </View>
         
-        <Image style={styles.image} source={require("../../assets/images/user.png")}/>
+        <Image style={styles.image} source={require("../../../assets/images/user.png")}/>
       </View>
       
       <View style={styles.boxContainer}>
@@ -42,15 +43,17 @@ function HomeScreen() {
             <View style={styles.blueBox}></View>
           </View>
 
-          <View style={styles.gridContainer}>
+          
             <FlatList
-              data={CATEGORIES}
+              data={EXERCISESCATEGORIES}
               keyExtractor={(item) => item.id}
               renderItem={renderCategoryItem}
-              numColumns={2}
-              scrollEnabled = {false}
+              numColumns={1}
+              horizontal
+              scrollEnabled = {true}
+              
             />
-          </View>
+          
 
         </View>
 
@@ -73,7 +76,7 @@ const styles = StyleSheet.create({
     width: 345,
     height: 677,
     borderRadius: 20,
-    backgroundColor: "#EAEAEA", 
+    backgroundColor: "#fbfbfb", 
   },
 
  boxContainer: {
@@ -85,7 +88,7 @@ const styles = StyleSheet.create({
     width: 320,
     height: 120,
     borderRadius: 20,
-    backgroundColor: "#246CD3",
+    backgroundColor: "#FFE9CA",
   },
 
   blueBoxContainer: {

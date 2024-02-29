@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 300,
-    height: 140,
+    height: 143,
   },
   buttonContainer: {
     marginBottom: 2,

@@ -2,16 +2,15 @@ import { StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
-import HomeScreen from '../screens/tabScreens/HomeScreen';
+import HStack from '../screens/tabScreens/Home/HStack';
 import FeedScreen from '../screens/tabScreens/FeedScreen';
-import CalCulationScreen from '../screens/tabScreens/CalculationScreen';
+import ToolsScreen from '../screens/tabScreens/ToolsScreen';
 import ProfileScreen from '../screens/tabScreens/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
 function MyTabs() {
   return (
-
     <Tab.Navigator
     initialRouteName="Home"
     screenOptions={{
@@ -21,12 +20,12 @@ function MyTabs() {
       tabBarActiveTintColor: 'white',
       tabBarInactiveTintColor: 'grey',
     }}
-    safeAreaInsets={{bottom: 0,}}
+    safeAreaInsets={{bottom: 0}}
     >
 
       <Tab.Screen 
         name="Home" 
-        component={HomeScreen} 
+        component={HStack} 
         options={{
           tabBarIcon: ({color, size}) => (
             <Ionicons name='home' color={color} size={30}/>
@@ -44,11 +43,9 @@ function MyTabs() {
         }}
       />
 
-      
-
       <Tab.Screen 
         name="macros" 
-        component={CalCulationScreen} 
+        component={ToolsScreen} 
         options={{
           tabBarIcon: ({color, size}) => (
             <Ionicons name='calculator' color={color} size={30}/>
@@ -81,6 +78,6 @@ const styles = StyleSheet.create({
     height: 70,
     elevation: 0,
     borderRadius: 45,
-    backgroundColor: '#292929',
+    backgroundColor: '#272D34',
   },
 })
