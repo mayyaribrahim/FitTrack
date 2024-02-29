@@ -50,7 +50,7 @@ export default ProfileScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#white",
+    backgroundColor: "white",
     paddingTop: 45,
   },
   box: {
@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
   },
   boxContainer: {
     alignItems: "center",
-    backgroundColor: "white",
   },
   
   PageTitle: {

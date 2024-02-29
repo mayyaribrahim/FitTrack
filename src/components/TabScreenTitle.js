@@ -14,6 +14,7 @@ export default TabScreenTitle;
 
 const styles = StyleSheet.create({
   PageTitle: {
+    fontFamily: 'poppins-semibold',
     fontSize: 30,
     fontWeight: "bold",
     color: "#000",

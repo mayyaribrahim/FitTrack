@@ -37,6 +37,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   buttonText: {
+    fontFamily: 'poppins',
+    fontSize: 16,
     color: "white",
     textAlign: "center",
   },

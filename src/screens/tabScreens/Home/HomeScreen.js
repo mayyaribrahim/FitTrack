@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, FlatList, Image } from "react-native";
+import { View, Text, StyleSheet, ScrollView, FlatList, Image, Platform } from "react-native";
 import ExCategoryGrid from "../../../components/ExCategoryGrid";
 import { EXERCISESCATEGORIES } from "../../../data/ExercisesData";
 
@@ -14,10 +14,15 @@ function HomeScreen({navigation}) {
     }
   
     return (
-      <ExCategoryGrid
+      <View  style={styles.categoryGrid}>
+        <ExCategoryGrid
         title={itemData.item.title}
+        titleColor={itemData.item.titleColor}
+        buttonColor={itemData.item.buttonColor}
         onPress={pressHandler}
       />
+      </View>
+      
     );
   }
 
@@ -35,29 +40,18 @@ function HomeScreen({navigation}) {
         <Image style={styles.image} source={require("../../../assets/images/user.png")}/>
       </View>
       
-      <View style={styles.boxContainer}>
-
-        <View style={styles.box}>
-
-          <View style={styles.blueBoxContainer}>
-            <View style={styles.blueBox}></View>
-          </View>
-
-          
-            <FlatList
-              data={EXERCISESCATEGORIES}
-              keyExtractor={(item) => item.id}
-              renderItem={renderCategoryItem}
-              numColumns={1}
-              horizontal
-              scrollEnabled = {true}
-              
-            />
-          
-
-        </View>
-
-      </View>
+        <View style={styles.Box}></View>
+        
+        <FlatList
+          data={EXERCISESCATEGORIES}
+          keyExtractor={(item) => item.id}
+          renderItem={renderCategoryItem}
+          numColumns={1}
+          horizontal
+          scrollEnabled = {true}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.flatListCon}
+        />
 
     </ScrollView>
   )
@@ -70,36 +64,29 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     paddingTop: 60,
+    
   },
 
-  box: {
-    width: 345,
-    height: 677,
+  Box: {
+    width: 340,
+    height: 161,
     borderRadius: 20,
-    backgroundColor: "#fbfbfb", 
-  },
-
- boxContainer: {
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-  },
-
-  blueBox: {
-    width: 320,
-    height: 120,
-    borderRadius: 20,
-    backgroundColor: "#FFE9CA",
-  },
-
-  blueBoxContainer: {
-    alignItems: 'center',
+    backgroundColor: "#E1F0F4",
+    alignSelf: "center",
     marginTop: 20,
+    marginBottom: 7,
     bottom: 6,
+    shadowColor: "black",
+    shadowOpacity: 0.230,
+    shadowOffset: { width: 0, height: 3 }, 
+    elevation: 4,
+    overflow: Platform.OS === "android" ? "hidden" : "visible",
   },
+
 
   PageTitle: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: '500',
     color: "#000",
   },
 
@@ -116,13 +103,20 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: 'space-between',
     paddingHorizontal: 25,
-   // borderWidth: 1,
-   // borderColor: 'red',
     bottom: 7,
   },
 
   gridContainer: {
     margin: 10,
     bottom: 9,
-  }
+  },
+  categoryGrid: {
+    left: 13,
+    marginBottom: 5,
+    
+  },
+
+  flatListCon: {
+    paddingRight: 25,
+  },
 })

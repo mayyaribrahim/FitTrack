@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   input: {
+    fontFamily: 'poppins',
     width: "73%",
     height: 45,
     borderColor: 'red',

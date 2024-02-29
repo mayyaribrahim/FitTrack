@@ -11,9 +11,11 @@ export class exercise {
 
 
 export class exerciseCategory {
-    constructor(id, title) {
+    constructor(id, title, titleColor, buttonColor) {
       this.id = id;
       this.title = title;
+      this.titleColor = titleColor;
+      this.buttonColor = buttonColor;
     }
 }
   
@@ -25,14 +27,14 @@ export class exerciseCategory {
 
 
 export const EXERCISESCATEGORIES = [
-  new exerciseCategory('c1', 'Chest'),
-  new exerciseCategory('c2', 'Back'),
-  new exerciseCategory('c3', 'Shoulders'),
-  new exerciseCategory('c4', 'Arms'),
-  new exerciseCategory('c5', 'Legs'),
-  new exerciseCategory('c6', 'Abs'),
-  new exerciseCategory('c7', 'Cardio'),
-  new exerciseCategory('c8', 'Body Weight')
+  new exerciseCategory('c1', 'Chest', '#FFFFFF', '#272D34'),
+  new exerciseCategory('c2', 'Back', '#272D34', '#E1F0F4'),
+  new exerciseCategory('c3', 'Shoulders', '#272D34', '#FFE9CA'),
+  new exerciseCategory('c4', 'Arms', '#FFFFFF', '#272D34'),
+  new exerciseCategory('c5', 'Legs', '#272D34', '#E1F0F4'),
+  new exerciseCategory('c6', 'Abs', '#272D34', '#FFE9CA'),
+  new exerciseCategory('c7', 'Cardio', '#FFFFFF', '#272D34'),
+  new exerciseCategory('c8', 'Body Weight', '#272D34', '#E1F0F4')
 ];
 
 

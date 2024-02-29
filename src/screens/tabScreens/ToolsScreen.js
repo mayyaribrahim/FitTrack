@@ -53,8 +53,6 @@ const styles = StyleSheet.create({
   },
   boxContainer: {
     alignItems: 'center',
-    justifyContent: 'flex-end',
-  
   },
 
   primaryButton: {
