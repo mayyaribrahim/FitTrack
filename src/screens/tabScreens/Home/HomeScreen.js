@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     marginBottom: 7,
     bottom: 6,
     shadowColor: "black",
-    shadowOpacity: 0.230,
+    shadowOpacity: 0.30,
     shadowOffset: { width: 0, height: 3 }, 
     elevation: 4,
     overflow: Platform.OS === "android" ? "hidden" : "visible",
@@ -106,10 +106,7 @@ const styles = StyleSheet.create({
     bottom: 7,
   },
 
-  gridContainer: {
-    margin: 10,
-    bottom: 9,
-  },
+  
   categoryGrid: {
     left: 13,
     marginBottom: 5,

@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -17,7 +17,7 @@ function MyTabs() {
       headerShown: false, 
       tabBarShowLabel: false,
       tabBarStyle:styles.container,
-      tabBarActiveTintColor: 'white',
+      tabBarActiveTintColor: '#272D34',
       tabBarInactiveTintColor: 'grey',
     }}
     safeAreaInsets={{bottom: 0}}
@@ -74,10 +74,16 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '90%',
     left: '5%',
-    bottom: 25,
+    bottom: 30,
     height: 70,
     elevation: 0,
-    borderRadius: 45,
-    backgroundColor: '#272D34',
+    borderRadius: 22,
+    backgroundColor: '#ffffff',
+    borderTopWidth: 0,
+    shadowColor: "black",
+    shadowOpacity: 0.30,
+    shadowOffset: { width: 0, height: 3 }, 
+    elevation: 4,
+    overflow: Platform.OS === "android" ? "hidden" : "visible",
   },
 })

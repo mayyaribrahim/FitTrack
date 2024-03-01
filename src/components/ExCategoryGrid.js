@@ -32,9 +32,9 @@ const styles = StyleSheet.create({
   gridItem: {
     flex: 1,
     margin: 5,
-    marginRight: 7,
-    height: 173,
-    width: 145,
+    marginRight: 14,
+    height: 185,
+    width: 150,
     elevation: 4,
     overflow: Platform.OS === "android" ? "hidden" : "visible",
     shadowColor: "black",
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
-    borderRadius: 20,
+    borderRadius: 22,
     overflow: "hidden",
   },
 
