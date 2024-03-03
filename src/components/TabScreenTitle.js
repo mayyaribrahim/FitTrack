@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     paddingBottom: 3,
   },
   TitleContainer: {
-    alignItems: 'flex-start',
+    alignSelf: 'flex-start',
     paddingLeft: 25, 
   }
 })

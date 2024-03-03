@@ -1,10 +1,11 @@
 import { Pressable, View, Text, StyleSheet, Platform } from "react-native";
 
 
-function ExCategoryGrid({ title, titleColor, buttonColor ,onPress }) {
+function ExCategoryGrid({ title, titleColor, buttonColor, iconContainer, onPress }) {
   
   return (
     <View style={styles.gridItem}>
+
       <Pressable
         android_ripple={{ color: "#ccc" }}
         style={({ pressed }) => [
@@ -14,10 +15,15 @@ function ExCategoryGrid({ title, titleColor, buttonColor ,onPress }) {
         ]}
         onPress={onPress}
       >
+
+        <View style={[styles.iconContainer, {backgroundColor: iconContainer}]}></View>
+
         <View style={styles.innerContainer}>
+
           <View style={styles.textContainer}>
-          <Text style={[styles.title, {color: titleColor}]}>{title}</Text>
-        </View>
+            <Text style={[styles.title, {color: titleColor}]}>{title}</Text>
+          </View>
+
         </View>
         
         
@@ -32,9 +38,9 @@ const styles = StyleSheet.create({
   gridItem: {
     flex: 1,
     margin: 5,
-    marginRight: 14,
-    height: 185,
-    width: 150,
+    marginRight: 11,
+    height: 175,
+    width: 140,
     elevation: 4,
     overflow: Platform.OS === "android" ? "hidden" : "visible",
     shadowColor: "black",
@@ -49,7 +55,7 @@ const styles = StyleSheet.create({
   },
 
   buttonPressed: {
-    opacity: 0.5,
+    opacity: 0.9,
   },
 
   textContainer: {
@@ -65,8 +71,18 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
+  iconContainer: {
+    
+    width: 47,
+    height: 47,
+    borderRadius: 30,
+    alignSelf: 'center',
+    top: 20,
+    left: 37,
+  },
+
   title: {
-    fontFamily: 'poppins-extralight',
+    fontFamily: 'poppins-light',
     fontSize: 23,
     fontWeight: '300'
   },

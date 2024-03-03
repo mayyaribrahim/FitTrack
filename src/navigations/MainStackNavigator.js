@@ -11,8 +11,6 @@ const MainStackNavigator = () => {
     <Stack.Navigator 
       initialRouteName="Intro" 
       screenOptions={{
-        headerStyle: {backgroundColor: 'white',}, 
-        headerTitleStyle: {color: 'white'}, 
         headerShadowVisible: false,
         headerBackTitle: 'Back'
       }}

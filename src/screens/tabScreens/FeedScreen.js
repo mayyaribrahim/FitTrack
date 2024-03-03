@@ -8,8 +8,8 @@ function FeedScreen() {
 
       <TabScreenTitle title={"Explore"} />
 
-      <View style={styles.boxContainer}>
-        <View style={styles.box}></View>
+      <View style={styles.container}>
+        
       </View>
 
     </ScrollView>
@@ -23,18 +23,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     paddingTop: 45,
   },
-  box: {
-    width: 345,
-    height: 677,
-    borderRadius: 20,
-    backgroundColor: "#EAEAEA", 
-    
-  },
-  boxContainer: {
-    alignItems: "center",
-    justifyContent: "flex-end",
-  },
-  
+
   PageTitle: {
     fontSize: 30,
     fontWeight: "bold",

@@ -22,26 +22,24 @@ export default PrimaryBlack;
 
 const styles = StyleSheet.create({
   buttonOuterContainer: {
-    borderRadius: 28,
+    borderRadius: 10,
     margin: 4,
     overflow: "hidden",
-    width: 300,
+    width: 297,
+    alignSelf: "center",
   },
   buttonInnerContainer: {
-    backgroundColor: "#292929",
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    elevation: 2,
-    height: 44,
+    backgroundColor: "#E1F0F4",
+    height: 47,
     justifyContent: "center",
   },
   buttonText: {
     fontFamily: 'poppins',
     fontSize: 16,
-    color: "white",
+    color: "#272D34",
     textAlign: "center",
   },
   pressed: {
-    opacity: 0.90,
+    opacity: 0.80,
   },
 });

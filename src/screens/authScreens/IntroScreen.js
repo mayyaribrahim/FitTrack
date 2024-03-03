@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, Platform } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import PrimaryButton from "../../components/PrimaryButton";
 import PrimaryBlack from "../../components/PrimaryBlack";
@@ -16,13 +16,12 @@ function IntroScreen({ navigation }) {
       <View style={styles.twoButtonsContainer}>
 
         <View style={styles.buttonContainer}>
-          <PrimaryBlack onPress={() => navigation.navigate("Login")}>
-            Login
-          </PrimaryBlack>
+          <PrimaryButton onPress={() => navigation.navigate("Signup")}>Sign up</PrimaryButton>
         </View>
 
         <View style={styles.buttonContainer}>
-          <PrimaryButton onPress={() => navigation.navigate("Signup")}>Sign up</PrimaryButton>
+          
+          <PrimaryBlack onPress={() => navigation.navigate("Login")}>Login</PrimaryBlack>
         </View>
 
       </View>
@@ -46,7 +45,12 @@ const styles = StyleSheet.create({
     height: 143,
   },
   buttonContainer: {
-    marginBottom: 2,
+    marginBottom: 3,
+    shadowColor: "black",
+    shadowOpacity: 0.30,
+    shadowOffset: { width: 0, height: 3 }, 
+    elevation: 4,
+    overflow: Platform.OS === "android" ? "hidden" : "visible",
   },
   twoButtonsContainer: {
     paddingTop: 70,

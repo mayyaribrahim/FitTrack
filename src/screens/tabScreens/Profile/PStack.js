@@ -1,18 +1,18 @@
 import React from 'react';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import HomeScreen from "./HomeScreen";
-import ExercisesScreen from './ExercisesScreen';
+import ProfileScreen from './ProfileScreen';
+import PersonalInfo from './PersonalInfo';
 
 const Stack = createNativeStackNavigator();
 
-function HStack() {
+function PStack() {
   return (
     <Stack.Navigator initialRouteName="HomeScreen">
 
       <Stack.Screen 
         name="HomeScreen" 
-        component={HomeScreen} 
+        component={ProfileScreen} 
         options=
         {{
           headerShown: false,
@@ -21,7 +21,7 @@ function HStack() {
 
       <Stack.Screen 
         name="ExercisesOverView" 
-        component={ExercisesScreen} 
+        component={PersonalInfo} 
         options=
         {{
           headerStyle: {backgroundColor: 'white',}, 
@@ -35,4 +35,4 @@ function HStack() {
   )
 }
 
-export default HStack;
+export default PStack;

@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     marginBottom: 150,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#246CD3",
+    backgroundColor: "#272D34",
     overflow: "hidden",
   },
   buttonInnerContainer: {
@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     width: 364,
   },
   text: {
+    fontFamily: 'poppins',
     fontSize: 16,
     color: "#ffffff",
   },

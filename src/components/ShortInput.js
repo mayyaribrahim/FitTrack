@@ -1,9 +1,9 @@
 import { React, useState } from "react";
-import { TextInput, StyleSheet, Text, View, Pressable, Platform } from "react-native";
+import { TextInput, StyleSheet, Text, View, Pressable } from "react-native";
 import { Feather ,MaterialCommunityIcons, FontAwesome6 } from "@expo/vector-icons";
 
 
-function InputField ({
+function ShortInput ({
   placeholder,
   value,
   onChange,
@@ -52,7 +52,7 @@ function InputField ({
   );
 };
 
-export default InputField;
+export default ShortInput;
 
 const styles = StyleSheet.create({
   container: {
@@ -60,15 +60,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#E9E9E9",
     borderRadius: 7,
     paddingHorizontal: 12,
-    width: 300,
+    width: 146,
     gap: 10,
-    margin: 8,
+    marginVertical: 8,
+    marginLeft: 8,
     alignItems: 'center',
-    shadowColor: "black",
-    shadowOpacity: 0.05,
-    shadowOffset: { width: 0, height: 3 }, 
-    elevation: 4,
-    overflow: Platform.OS === "android" ? "hidden" : "visible",
   },
   input: {
     fontFamily: 'poppins',
@@ -77,7 +73,6 @@ const styles = StyleSheet.create({
     borderColor: 'red',
     //borderWidth: 1,
     right: 14,
-    
   },
   label: {
     marginBottom: 5,

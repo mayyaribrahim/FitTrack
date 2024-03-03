@@ -69,25 +69,30 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: 'center',
+    bottom: 60,
   },
 
   image: {
     width: 95,
     height: 100,
+    
+    resizeMode: "contain",
   },
 
   inputContainer: {
-    marginTop: 40,
+    marginTop: 20,
+    
   },
 
   forgotPasswordButtonText: {
     color: "black",
     fontSize: 12,
-    marginTop: 14,
+    
   },
 
   buttonContainer: {
-    marginTop: 10,
+    marginTop: 30,
+    
   },
 });
 

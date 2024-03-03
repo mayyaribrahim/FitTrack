@@ -3,9 +3,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
 import HStack from '../screens/tabScreens/Home/HStack';
+import PStack from '../screens/tabScreens/Profile/Pstack';
 import FeedScreen from '../screens/tabScreens/FeedScreen';
 import ToolsScreen from '../screens/tabScreens/ToolsScreen';
-import ProfileScreen from '../screens/tabScreens/ProfileScreen';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -55,7 +56,7 @@ function MyTabs() {
       
       <Tab.Screen 
         name="profile" 
-        component={ProfileScreen} 
+        component={PStack} 
         options={{
           tabBarIcon: ({color, size}) => (
             <Ionicons name='person' color={color} size={30}/>
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
     shadowColor: "black",
     shadowOpacity: 0.30,
-    shadowOffset: { width: 0, height: 3 }, 
+    shadowOffset: { width: 0, height: 2 }, 
     elevation: 4,
     overflow: Platform.OS === "android" ? "hidden" : "visible",
   },

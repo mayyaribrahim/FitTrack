@@ -25,15 +25,14 @@ export default PrimaryButton;
 
 const styles = StyleSheet.create({
   buttonOuterContainer: {
-    borderRadius: 28,
+    borderRadius: 10,
     margin: 4,
     overflow: "hidden",
     width: 300,
-    justifyContent: "center",
   },
   buttonInnerContainer: {
-    backgroundColor: "#246CD3",
-    height: 44,
+    backgroundColor: "#272D34",
+    height: 50,
     justifyContent: "center",
   },
   buttonText: {
