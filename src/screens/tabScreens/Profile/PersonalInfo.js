@@ -1,4 +1,4 @@
-import { React } from "react";
+
 import { Text, View, StyleSheet, Image, KeyboardAvoidingView, Platform, } from "react-native";
 import PrimaryButton from "../../../components/PrimaryButton";
 import InputField from "../../../components/InputFeild";
@@ -9,13 +9,7 @@ function PersonalInfo () {
 return (
 
   <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.container}>
-
-
-    <View style={styles.titleContainer}>
-      <TabScreenTitle title={"Personal Info"} />
-    </View>
-   
-
+    
     <View style={styles.imageContainer}>
       <Image style={styles.image} source={require("../../../assets/images/user.png")}/>
     </View>

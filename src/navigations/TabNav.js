@@ -2,8 +2,9 @@ import { StyleSheet, Platform } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
-import HStack from '../screens/tabScreens/Home/HStack';
-import PStack from '../screens/tabScreens/Profile/Pstack';
+
+import HomeScreen from '../screens/tabScreens/Home/HomeScreen';
+import ProfileScreen from '../screens/tabScreens/Profile/ProfileScreen';
 import FeedScreen from '../screens/tabScreens/FeedScreen';
 import ToolsScreen from '../screens/tabScreens/ToolsScreen';
 
@@ -26,7 +27,7 @@ function MyTabs() {
 
       <Tab.Screen 
         name="Home" 
-        component={HStack} 
+        component={HomeScreen} 
         options={{
           tabBarIcon: ({color, size}) => (
             <Ionicons name='home' color={color} size={30}/>
@@ -56,7 +57,7 @@ function MyTabs() {
       
       <Tab.Screen 
         name="profile" 
-        component={PStack} 
+        component={ProfileScreen} 
         options={{
           tabBarIcon: ({color, size}) => (
             <Ionicons name='person' color={color} size={30}/>

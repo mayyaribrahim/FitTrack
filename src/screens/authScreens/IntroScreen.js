@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginBottom: 3,
     shadowColor: "black",
-    shadowOpacity: 0.30,
+    shadowOpacity: 0.15,
     shadowOffset: { width: 0, height: 3 }, 
     elevation: 4,
     overflow: Platform.OS === "android" ? "hidden" : "visible",

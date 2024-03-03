@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { TextInput, StyleSheet, Text, View, Pressable } from "react-native";
+import { TextInput, StyleSheet, Text, View, Pressable, Platform } from "react-native";
 import { Feather ,MaterialCommunityIcons, FontAwesome6 } from "@expo/vector-icons";
 
 
@@ -65,6 +65,11 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     marginLeft: 8,
     alignItems: 'center',
+    shadowColor: "black",
+    shadowOpacity: 0.05,
+    shadowOffset: { width: 0, height: 3 }, 
+    elevation: 4,
+    overflow: Platform.OS === "android" ? "hidden" : "visible",
   },
   input: {
     fontFamily: 'poppins',

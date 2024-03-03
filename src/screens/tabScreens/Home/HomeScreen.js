@@ -72,6 +72,8 @@ function HomeScreen({navigation}) {
           contentContainerStyle={styles.flatListCon}
         />
 
+       
+
     </ScrollView>
   )
 }
@@ -128,7 +130,7 @@ const styles = StyleSheet.create({
     marginBottom: 9,
     bottom: 6,
     shadowColor: "black",
-    shadowOpacity: 0.30,
+    shadowOpacity: 0.20,
     shadowOffset: { width: 0, height: 3 }, 
     elevation: 4,
     overflow: Platform.OS === "android" ? "hidden" : "visible",

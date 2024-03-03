@@ -1,8 +1,31 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, Alert } from "react-native";
 import TabScreenTitle from "../../../components/TabScreenTitle";
 import PrimaryButton from "../../../components/PrimaryButton";
 
 function ProfileScreen({navigation}) {
+
+  const handleLogout = () => {
+    Alert.alert(
+      "Logout",
+      "Are you sure you want to logout?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "Logout",
+          onPress: () => {
+            navigation.navigate("Intro");
+            Alert.alert("Logout Successful");
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
+
   return (
     
     <View style={styles.container}>
@@ -20,14 +43,16 @@ function ProfileScreen({navigation}) {
       <View style={styles.buttonsContainer}>
 
         <View style={styles.primaryButton}>
-          <PrimaryButton onPress={() => navigation.navigate('PersonalInfo')}>Personal Information</PrimaryButton>
+          <PrimaryButton onPress={() => navigation.navigate('Personal Information')}>Personal Information</PrimaryButton>
         </View>
 
         <View style={styles.primaryButton}>
-          <PrimaryButton>Setting</PrimaryButton>
+          
+        <PrimaryButton onPress={() => navigation.navigate('Settings')}>Settings</PrimaryButton>
+
         </View>
 
-        <PrimaryButton>Logout</PrimaryButton>
+        <PrimaryButton onPress={handleLogout}>Logout</PrimaryButton>
 
       </View>
 

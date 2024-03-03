@@ -10,7 +10,7 @@ function PrimaryBlack({ children, onPress }) {
             : styles.buttonInnerContainer
         }
         onPress={onPress}
-        android_ripple={{ color: "#black" }}
+        android_ripple={{ color: "#869ba0" }}
       >
         <Text style={styles.buttonText}>{children}</Text>
       </Pressable>
@@ -21,6 +21,7 @@ function PrimaryBlack({ children, onPress }) {
 export default PrimaryBlack;
 
 const styles = StyleSheet.create({
+
   buttonOuterContainer: {
     borderRadius: 10,
     margin: 4,
@@ -28,17 +29,20 @@ const styles = StyleSheet.create({
     width: 297,
     alignSelf: "center",
   },
+
   buttonInnerContainer: {
     backgroundColor: "#E1F0F4",
-    height: 47,
+    height: 50,
     justifyContent: "center",
   },
+
   buttonText: {
     fontFamily: 'poppins',
     fontSize: 16,
     color: "#272D34",
     textAlign: "center",
   },
+
   pressed: {
     opacity: 0.80,
   },
