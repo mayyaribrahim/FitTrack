@@ -13,7 +13,7 @@ const Tab = createBottomTabNavigator();
 export default function App() {
 
 
-  useFonts({
+  const [Loaded] = useFonts({
     'poppins': require('./src/assets/fonts/Poppins-Regular.ttf'),
 
     'poppins-semibold': require('./src/assets/fonts/Poppins-SemiBold.ttf'),
@@ -26,6 +26,10 @@ export default function App() {
     'poppins-thin': require('./src/assets/fonts/Poppins-Thin.ttf'),
     'poppins-medium': require('./src/assets/fonts/Poppins-Medium.ttf'),
   });
+
+  if (!Loaded) {
+    return null;
+  }
 
   return (
     <>

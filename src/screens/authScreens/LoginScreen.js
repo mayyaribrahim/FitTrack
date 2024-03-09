@@ -30,7 +30,7 @@ function LoginScreen ({navigation}) {
       
       <View style={styles.inputContainer}>
         <InputField
-          iconName={"user"}
+          iconName={"mail"}
           placeholder={"Email"}
           value={email}
           onChange={handleEmailChange}
@@ -66,34 +66,35 @@ function LoginScreen ({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#ffff",
     alignItems: "center",
     justifyContent: 'center',
-    bottom: 60,
+    
   },
 
   image: {
-    width: 95,
+    width: 145,
     height: 100,
-    
+    bottom: 70,
     resizeMode: "contain",
   },
 
   inputContainer: {
-    marginTop: 20,
-    
+    marginTop: 20, 
+    bottom: 50,
   },
 
   forgotPasswordButtonText: {
+    fontFamily: 'poppins',
     color: "black",
     fontSize: 12,
-    
+    bottom: 45,
   },
 
   buttonContainer: {
-    marginTop: 30,
-    
+    bottom: 20,
   },
+  
 });
 
 export default LoginScreen;

@@ -1,9 +1,7 @@
-
 import { Text, View, StyleSheet, Image, KeyboardAvoidingView, Platform, } from "react-native";
 import PrimaryButton from "../../../components/PrimaryButton";
 import InputField from "../../../components/InputFeild";
 import ShortInput from "../../../components/ShortInput";
-import TabScreenTitle from "../../../components/TabScreenTitle";
 
 function PersonalInfo () {
 return (
@@ -25,7 +23,7 @@ return (
       />
 
       <InputField
-        iconName={"user"}
+        iconName={"mail"}
         placeholder={"Email"}
         //value={password}
         //onChange={handlePasswordChange}
@@ -33,7 +31,7 @@ return (
       />
 
       <InputField
-        iconName={"user"}
+        secondIconName={"calendar"}
         placeholder={"Age"}
         //value={password}
         //onChange={handlePasswordChange}
@@ -43,7 +41,7 @@ return (
       <View style={styles.ShortInputContainer}>
 
         <ShortInput
-          iconName={"user"}
+          secondIconName={"ruler"}
           placeholder={"Height"}
           //value={password}
           //onChange={handlePasswordChange}
@@ -51,7 +49,7 @@ return (
         />
 
         <ShortInput
-          iconName={"user"}
+          secondIconName={"weight-scale"}
           placeholder={"Weight"}
           //value={password}
           //onChange={handlePasswordChange}

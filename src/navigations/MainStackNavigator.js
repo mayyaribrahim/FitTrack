@@ -24,10 +24,11 @@ const MainStackNavigator = () => {
   return (
     
     <Stack.Navigator 
-      initialRouteName="Intro" 
       screenOptions={{ 
       headerShadowVisible: false,
-      headerBackTitle: 'Back'}}>
+      headerBackTitle: 'Back',
+      cardStyle: { backgroundColor: 'white' }
+      }}>
 
       {/*Authentication Stacks*/}
       <Stack.Screen name="Intro" component={IntroScreen} options={{headerTitleStyle: {color: 'white'},}}/>

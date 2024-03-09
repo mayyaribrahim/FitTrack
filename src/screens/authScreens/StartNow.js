@@ -35,7 +35,7 @@ function StartNow ({ navigation }) {
       <View style={styles.inputContainer}>
 
         <InputField
-          iconName={"user"}
+          secondIconName={"calendar"}
           placeholder={"Age"}
           value={age}
           onChange={handleAge}
@@ -44,7 +44,7 @@ function StartNow ({ navigation }) {
         />
 
         <InputField
-          iconName={"user"}
+          secondIconName={"ruler"}
           placeholder={"Height"}
           value={height}
           onChange={handleHeight}
@@ -82,8 +82,9 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    width: 95,
-    height: 95,
+    width: 145,
+    height: 100,
+    resizeMode: "contain",
   },
 
   inputContainer: {

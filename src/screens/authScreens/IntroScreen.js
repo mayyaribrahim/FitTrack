@@ -42,17 +42,14 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 300,
-    height: 143,
+    height: 140,
+    resizeMode: "contain",
   },
   buttonContainer: {
     marginBottom: 3,
-    shadowColor: "black",
-    shadowOpacity: 0.15,
-    shadowOffset: { width: 0, height: 3 }, 
-    elevation: 4,
-    overflow: Platform.OS === "android" ? "hidden" : "visible",
+    
   },
   twoButtonsContainer: {
-    paddingTop: 70,
+    paddingTop: 40,
   },
 });

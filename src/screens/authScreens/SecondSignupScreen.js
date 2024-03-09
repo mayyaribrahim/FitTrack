@@ -33,7 +33,7 @@ function SecondSignupScreen ({ navigation }) {
 
       <View style={styles.inputContainer}>
         <InputField
-          iconName={"user"}
+          iconName={"mail"}
           placeholder={"Email"}
           value={email}
           onChange={handleEmailChange}
@@ -81,8 +81,9 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    width: 95,
+    width: 145,
     height: 100,
+    resizeMode: "contain",
   },
 
   inputContainer: {

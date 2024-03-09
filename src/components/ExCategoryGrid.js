@@ -1,10 +1,10 @@
 import { Pressable, View, Text, StyleSheet, Platform } from "react-native";
-
+import {  FontAwesome6 } from "@expo/vector-icons";
 
 function ExCategoryGrid({ title, titleColor, buttonColor, iconContainer, onPress }) {
   
   return (
-    <View style={styles.gridItem}>
+   <View style={styles.gridItem}>
 
       <Pressable
         android_ripple={{ color: "#ccc" }}
@@ -16,7 +16,11 @@ function ExCategoryGrid({ title, titleColor, buttonColor, iconContainer, onPress
         onPress={onPress}
       >
 
-        <View style={[styles.iconContainer, {backgroundColor: iconContainer}]}></View>
+        <View style={[styles.iconContainer, {backgroundColor: iconContainer}]}>
+          <View>
+            <FontAwesome6 name='dumbbell' size={20} color="#BEBEBE"/>
+          </View>
+        </View>
 
         <View style={styles.innerContainer}>
 
@@ -39,8 +43,8 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 5,
     marginRight: 11,
-    height: 175,
-    width: 140,
+    height: 160,
+    width: 133,
     elevation: 4,
     overflow: Platform.OS === "android" ? "hidden" : "visible",
     shadowColor: "#000000",
@@ -77,13 +81,13 @@ const styles = StyleSheet.create({
     height: 47,
     borderRadius: 30,
     alignSelf: 'center',
-    top: 20,
-    left: 37,
+    top: 16,
+    left: 33,
   },
 
   title: {
     fontFamily: 'poppins-light',
-    fontSize: 23,
+    fontSize: 20,
     fontWeight: '300'
   },
 });

@@ -12,21 +12,22 @@ function HomeScreen({navigation}) {
         exerciseCategoryId: itemData.item.id, 
       });
     }
+
+    const item = itemData.item;
   
     return (
       <View  style={styles.categoryGrid}>
         <ExCategoryGrid
-        title={itemData.item.title}
-        titleColor={itemData.item.titleColor}
-        buttonColor={itemData.item.buttonColor}
-        iconContainer= {itemData.item.iconContainer}
+        title={item.title}
+        titleColor={item.titleColor}
+        buttonColor={item.buttonColor}
+        iconContainer= {item.iconContainer}
         onPress={pressHandler}
       />
       </View>
       
     );
   }
-
 
   return (
     
@@ -43,36 +44,38 @@ function HomeScreen({navigation}) {
 
       </View>
       
-        <View style={styles.box}>
+      <View style={styles.box}>
+        <Text style={styles.boxTitle}>Exercises</Text>
+        <Text style={styles.boxDescription}>all the exercises {'\n'}you need</Text>
+        <Image style={styles.dumble} source={require("../../../assets/images/dumble.png")}/>
+      </View>
 
-          <Text style={styles.boxTitle}>Exercises</Text>
-          <Text style={styles.boxDescription}>all the exercises {'\n'} you need</Text>
-          <Image style={styles.dumble} source={require("../../../assets/images/dumble.png")}/>
+      <View style={styles.categoriesContainer}>
 
-        </View>
+        <Text style={styles.categories}>categories</Text>
 
-        <View style={styles.categoriesContainer}>
+        <TouchableOpacity>
+          <Text style={styles.viewAll}>View All</Text>
+        </TouchableOpacity>
 
-          <Text style={styles.categories}>categories</Text>
-
-          <TouchableOpacity>
-            <Text style={styles.viewAll}>View All</Text>
-          </TouchableOpacity>
-
-        </View>
+      </View>
         
-        <FlatList
-          data={EXERCISESCATEGORIES}
-          keyExtractor={(item) => item.id}
-          renderItem={renderCategoryItem}
-          numColumns={1}
-          horizontal
-          scrollEnabled = {true}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.flatListCon}
-        />
+      <FlatList
+        data={EXERCISESCATEGORIES}
+        keyExtractor={(item) => item.id}
+        renderItem={renderCategoryItem}
+        numColumns={1}
+        horizontal
+        scrollEnabled = {true}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.flatListCon}
+      />
 
-       
+      <View style={styles.secondBox}>
+        <Text style={styles.boxTitle}>Meal Plans</Text>
+        <Text style={styles.boxDescription}>all the Meals you{'\n'}need</Text>
+        <Image style={styles.veg} source={require("../../../assets/images/veg.png")}/>
+      </View>
 
     </ScrollView>
   )
@@ -117,17 +120,42 @@ const styles = StyleSheet.create({
     bottom: 60,
     transform: [{ rotate: '311deg' }],
     left: 15,
-    bottom: 60,
+   
+  },
+
+  veg: {
+    width: 130,
+    height: 140,
+    alignSelf: 'flex-end',
+    resizeMode: "contain",
+    left: 7,
+    bottom: 80,
   },
 
   box: {
-    width: 340,
-    height: 161,
+    width: 335,
+    height: 153,
     borderRadius: 20,
     backgroundColor: "#E1F0F4",
     alignSelf: "center",
     marginTop: 20,
-    marginBottom: 9,
+    marginBottom: 2,
+    bottom: 6,
+    shadowColor: "black",
+    shadowOpacity: 0.20,
+    shadowOffset: { width: 0, height: 3 }, 
+    elevation: 4,
+    overflow: Platform.OS === "android" ? "hidden" : "visible",
+  },
+
+  secondBox: {
+    width: 335,
+    height: 153,
+    borderRadius: 20,
+    backgroundColor: "#E1F0F4",
+    alignSelf: "center",
+    marginTop: 45,
+    marginBottom: 500,
     bottom: 6,
     shadowColor: "black",
     shadowOpacity: 0.20,
@@ -153,7 +181,7 @@ const styles = StyleSheet.create({
   },
 
   categoriesContainer: {
-    marginBottom: 7,
+    marginBottom: 2,
     flexDirection: "row",
     justifyContent: 'space-between',
   },
