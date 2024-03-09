@@ -1,9 +1,36 @@
 import { View, Text, StyleSheet, ScrollView, FlatList, Image, Platform, TouchableOpacity } from "react-native";
 import ExCategoryGrid from "../../../components/ExCategoryGrid";
-import { EXERCISESCATEGORIES } from "../../../data/ExercisesData";
+import MlCategoryGrid from "../../../components/MlCategoryGrid";
+import { EXERCISESCATEGORIES, MEALCATEGORIES } from "../../../data/ExercisesData";
 
 
 function HomeScreen({navigation}) {
+
+
+  function renderMealCategoryItem(itemData) {
+
+    function pressHandler() {
+      navigation.navigate('MealOverView', {
+        mealCategoryId: itemData.item.id, 
+      });
+    }
+
+    const item = itemData.item;
+  
+    return (
+      <View  style={styles.categoryGrid}>
+        <MlCategoryGrid
+        title={item.title}
+        titleColor={item.titleColor}
+        buttonColor={item.buttonColor}
+        iconContainer= {item.iconContainer}
+        iconColor={item.iconColor}
+        onPress={pressHandler}
+      />
+      </View>
+      
+    );
+  }
   
   function renderCategoryItem(itemData) {
 
@@ -22,6 +49,7 @@ function HomeScreen({navigation}) {
         titleColor={item.titleColor}
         buttonColor={item.buttonColor}
         iconContainer= {item.iconContainer}
+        iconColor={item.iconColor}
         onPress={pressHandler}
       />
       </View>
@@ -31,7 +59,7 @@ function HomeScreen({navigation}) {
 
   return (
     
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
 
 
       <View style={styles.headerContainer}>
@@ -77,6 +105,31 @@ function HomeScreen({navigation}) {
         <Image style={styles.veg} source={require("../../../assets/images/veg.png")}/>
       </View>
 
+      <View style={styles.categoriesContainer}>
+
+        <Text style={styles.categories}>categories</Text>
+
+        <TouchableOpacity>
+          <Text style={styles.viewAll}>View All</Text>
+        </TouchableOpacity>
+
+      </View>
+
+      <FlatList
+        data={MEALCATEGORIES}
+        keyExtractor={(item) => item.id}
+        renderItem={renderMealCategoryItem}
+        numColumns={1}
+        horizontal
+        scrollEnabled = {true}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.flatListCon}
+      />
+
+      <View style={{marginBottom: 500}}>
+
+      </View>
+
     </ScrollView>
   )
 }
@@ -94,18 +147,20 @@ const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: "row",
     justifyContent: 'space-between',
-    paddingHorizontal: 25,
-    bottom: 7,
+    paddingRight: 25,
+    marginBottom: 10,
+    top: 4,
   },
 
   PageTitle: {
-    fontFamily: 'poppins',
+    fontFamily: 'poppins-semibold',
     fontSize: 20,
-    
+    left: 18,
   },
 
   titleContainer: {
     top: 20,
+    left: 4,
   },
 
   userImage: {
@@ -114,9 +169,10 @@ const styles = StyleSheet.create({
   },
 
   dumble: {
-    width: 170,
+    width: 145,
     height: 88,
     alignSelf: 'flex-end',
+    resizeMode: "contain",
     bottom: 60,
     transform: [{ rotate: '311deg' }],
     left: 15,
@@ -134,34 +190,28 @@ const styles = StyleSheet.create({
 
   box: {
     width: 335,
-    height: 153,
-    borderRadius: 20,
+    height: 160,
+    borderRadius: 27,
     backgroundColor: "#E1F0F4",
     alignSelf: "center",
-    marginTop: 20,
-    marginBottom: 2,
+    marginTop: 22,
+    
     bottom: 6,
-    shadowColor: "black",
-    shadowOpacity: 0.20,
-    shadowOffset: { width: 0, height: 3 }, 
-    elevation: 4,
-    overflow: Platform.OS === "android" ? "hidden" : "visible",
+    //shadowColor: "black",
+    //shadowOpacity: 0.20,
+    //shadowOffset: { width: 0, height: 3 }, 
+    //elevation: 4,
+    //overflow: Platform.OS === "android" ? "hidden" : "visible",
   },
 
   secondBox: {
     width: 335,
-    height: 153,
-    borderRadius: 20,
-    backgroundColor: "#E1F0F4",
+    height: 160,
+    borderRadius: 27,
+    backgroundColor: "#fef1e0",
     alignSelf: "center",
     marginTop: 45,
-    marginBottom: 500,
     bottom: 6,
-    shadowColor: "black",
-    shadowOpacity: 0.20,
-    shadowOffset: { width: 0, height: 3 }, 
-    elevation: 4,
-    overflow: Platform.OS === "android" ? "hidden" : "visible",
   },
 
   boxTitle:{
@@ -169,33 +219,35 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: "#272D34",
     left: 23,
-    top: 20,
+    top: 27,
   },
 
   boxDescription: {
     fontFamily: 'poppins-light',
-    fontSize: 18,
+    fontSize: 16,
     color: "#272D34",
     left: 23,
-    top: 20,
+    top: 25,
   },
 
   categoriesContainer: {
     marginBottom: 2,
     flexDirection: "row",
     justifyContent: 'space-between',
+    
   },
 
   categories:{
     fontFamily: 'poppins-medium',
-    fontSize: 17,
-    left: 29,
+    fontSize: 20,
+    left: 22,
   },
 
   viewAll:{
+    
     fontFamily: 'poppins-medium',
     fontSize: 14,
-    right: 20,
+    right: 32,
     top: 3,
   },
 
@@ -203,12 +255,12 @@ const styles = StyleSheet.create({
 
   
   categoryGrid: {
-    left: 13,
+    left: 16,
     marginBottom: 5,
     
   },
 
   flatListCon: {
-    paddingRight: 20,
+    paddingRight: 35,
   },
 })

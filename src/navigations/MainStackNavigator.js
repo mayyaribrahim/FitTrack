@@ -12,6 +12,7 @@ import OnboardingTutorial from '../screens/authScreens/OnboardingTutorial';
 
 import HomeScreen from '../screens/tabScreens/Home/HomeScreen';
 import ExercisesScreen from '../screens/tabScreens/Home/ExercisesScreen';
+import MealsScreen from '../screens/tabScreens/Home/MealsScreen';
 
 import ProfileScreen from '../screens/tabScreens/Profile/ProfileScreen';
 import PersonalInfo from '../screens/tabScreens/Profile/PersonalInfo';
@@ -48,6 +49,7 @@ const MainStackNavigator = () => {
       {/*Home Stacks*/}
       <Stack.Screen name="HomeScreen" component={HomeScreen} options={{headerShown: false,}} />
       <Stack.Screen name="ExercisesOverView" component={ExercisesScreen} />
+      <Stack.Screen name="MealOverView" component={MealsScreen} />
 
 
       {/*Profile Stacks*/}

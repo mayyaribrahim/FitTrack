@@ -1,7 +1,7 @@
 import { Pressable, View, Text, StyleSheet, Platform } from "react-native";
-import {  FontAwesome6, Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
-function ExCategoryGrid({ title, titleColor, buttonColor, iconContainer, iconColor, onPress }) {
+function MlCategoryGrid({ title, titleColor, buttonColor, iconContainer, iconColor, onPress }) {
   
   return (
    <View style={styles.gridItem}>
@@ -37,7 +37,7 @@ function ExCategoryGrid({ title, titleColor, buttonColor, iconContainer, iconCol
   );
 }
 
-export default ExCategoryGrid;
+export default MlCategoryGrid;
 
 const styles = StyleSheet.create({
   gridItem: {
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "flex-start",
     bottom: 10,
-    left: 4,
+    left: 2,
   },
 
   innerContainer: {
@@ -95,6 +95,6 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: 'poppins-light',
     fontSize: 20,
-    fontWeight: '300'
+    
   },
 });
