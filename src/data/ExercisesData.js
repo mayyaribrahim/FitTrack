@@ -11,10 +11,10 @@ export class exerciseCategory {
 export const EXERCISESCATEGORIES = [
   new exerciseCategory('c1', 'Chest',       '#FFFFFF', '#272D34', '#303740', '#FFFFFF'),
   new exerciseCategory('c2', 'Back',        '#272D34', '#E1F0F4', '#D2E9EF', '#272D34'),
-  new exerciseCategory('c3', 'Shoulders',   '#272D34', '#FFE9CA', '#F1DCBA', '#272D34'),
+  new exerciseCategory('c3', 'Shoulders',   '#272D34', '#fef1e0', '#fde9c8', '#272D34'),
   new exerciseCategory('c4', 'Arms',        '#FFFFFF', '#272D34', '#303740', '#FFFFFF'),
   new exerciseCategory('c5', 'Legs',        '#272D34', '#E1F0F4', '#D2E9EF', '#272D34'),
-  new exerciseCategory('c6', 'Abs',         '#272D34', '#FFE9CA', '#F1DCBA', '#272D34'),
+  new exerciseCategory('c6', 'Abs',         '#272D34', '#fef1e0', '#fde9c8', '#272D34'),
   new exerciseCategory('c7', 'Cardio',      '#FFFFFF', '#272D34', '#303740', '#FFFFFF'),
   new exerciseCategory('c8', 'Body Weight', '#272D34', '#E1F0F4', '#D2E9EF', '#272D34')
 ];
@@ -37,7 +37,7 @@ export class MealCategory {
   export const MEALCATEGORIES = [                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
     new MealCategory('mc1', 'Balanced',  '#FFFFFF', '#272D34', '#303740', '#FFFFFF'),
     new MealCategory('mc2', 'Low Carb ', '#272D34', '#E1F0F4', '#D2E9EF', '#272D34'),
-    new MealCategory('mc3', 'Vegan',     '#272D34', '#FFE9CA', '#F1DCBA', '#272D34'),
+    new MealCategory('mc3', 'Vegan',     '#272D34', '#fef1e0', '#fde9c8', '#272D34'),
     new MealCategory('mc4', 'Bulking',   '#FFFFFF', '#272D34', '#303740', '#FFFFFF'),
   ];
 

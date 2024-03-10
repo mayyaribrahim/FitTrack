@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingTop: 60,
+    paddingTop: 45,
     
   },
 
@@ -195,13 +195,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#E1F0F4",
     alignSelf: "center",
     marginTop: 22,
-    
     bottom: 6,
-    //shadowColor: "black",
-    //shadowOpacity: 0.20,
-    //shadowOffset: { width: 0, height: 3 }, 
-    //elevation: 4,
-    //overflow: Platform.OS === "android" ? "hidden" : "visible",
   },
 
   secondBox: {
@@ -240,14 +234,14 @@ const styles = StyleSheet.create({
   categories:{
     fontFamily: 'poppins-medium',
     fontSize: 20,
-    left: 22,
+    left: 26,
   },
 
   viewAll:{
     
     fontFamily: 'poppins-medium',
     fontSize: 14,
-    right: 32,
+    right: 26,
     top: 3,
   },
 
