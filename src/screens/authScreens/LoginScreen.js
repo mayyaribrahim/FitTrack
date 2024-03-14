@@ -55,7 +55,7 @@ function LoginScreen ({navigation}) {
       
     
       <View style={styles.buttonContainer}>
-      <PrimaryButton onPress={() => navigation.navigate('home' , { screen: 'HomeScreen', params: { email } })}>Login</PrimaryButton>
+      <PrimaryButton onPress={() => navigation.navigate('home' )}>Login</PrimaryButton>
       </View>
       
     </KeyboardAvoidingView>
@@ -69,30 +69,30 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffff",
     alignItems: "center",
     justifyContent: 'center',
-    marginBottom: 100,
+    
   },
 
   image: {
     width: 145,
     height: 100,
-    // bottom: 70,
+    bottom: 70,
     resizeMode: "contain",
   },
 
   inputContainer: {
     marginTop: 20, 
-    // bottom: 50,
+    bottom: 50,
   },
 
   forgotPasswordButtonText: {
     fontFamily: 'poppins',
     color: "black",
     fontSize: 12,
-    // bottom: 45,
+    bottom: 45,
   },
 
   buttonContainer: {
-    // bottom: 20,
+    bottom: 60,
     marginTop: 30,
   },
   

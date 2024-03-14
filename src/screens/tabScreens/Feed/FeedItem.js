@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: '#E9E9E9',
     padding: 15,
+    
   },
 
   pressedItem: {

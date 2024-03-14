@@ -2,26 +2,26 @@ import { View, Text, StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import TabScreenTitle from "../../../components/TabScreenTitle";
 import PrimaryButton from "../../../components/PrimaryButton";
 
-function Settings() {
+function Settings({navigation}) {
   return (
     
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
 
       <View style={styles.buttonsContainer}>
 
         <View style={styles.primaryButton}>
-          <PrimaryButton>Change Password</PrimaryButton>
+          <PrimaryButton onPress={() => navigation.navigate('Change Password')}>Change Password</PrimaryButton>
         </View>
 
         <View style={styles.primaryButton}>
-          <PrimaryButton>About</PrimaryButton>
+          <PrimaryButton onPress={() => navigation.navigate('About')}>About</PrimaryButton>
         </View>
 
-        <PrimaryButton>Terms and Conditions</PrimaryButton>
+        <PrimaryButton onPress={() => navigation.navigate('Terms And Conditions')}>Terms and Conditions</PrimaryButton>
 
       </View>
 
-    </View>
+    </SafeAreaView>
   )
 }
 

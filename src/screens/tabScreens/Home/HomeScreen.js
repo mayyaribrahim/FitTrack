@@ -4,9 +4,9 @@ import MlCategoryGrid from "../../../components/MlCategoryGrid";
 import { EXERCISESCATEGORIES, MEALCATEGORIES } from "../../../data/ExercisesData";
 
 
-function HomeScreen({navigation, route}) {
+function HomeScreen({navigation}) {
 
-  const { email } = route.params || { email: 'default@email.com' };
+  
 
 
   function renderMealCategoryItem(itemData) {
@@ -65,7 +65,7 @@ function HomeScreen({navigation, route}) {
     <View style={styles.headerContainer}>
 
       <View style={styles.titleContainer}>
-        <Text style={styles.PageTitle}>Hello {email}</Text>
+        <Text style={styles.PageTitle}>Hello Mayyar</Text>
       </View>
         
       <Image style={styles.userImage} source={require("../../../assets/images/user.png")}/>

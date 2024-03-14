@@ -20,10 +20,10 @@ function FeedInput(props) {
 
       <SafeAreaView style={styles.inputContainer}>
 
-      <View style={styles.userContainer}>
-        <Image style={styles.userImage} source={require("../../../assets/images/user.png")}/>
-        <Text style={styles.userName}>Mayyar Ibrahim</Text>
-      </View>
+        <View style={styles.userContainer}>
+          <Image style={styles.userImage} source={require("../../../assets/images/user.png")}/>
+          <Text style={styles.userName}>Mayyar Ibrahim</Text>
+        </View>
       
 
         <View style={styles.buttonContainer}>
@@ -38,12 +38,15 @@ function FeedInput(props) {
 
         </View>
 
-        <TextInput style={styles.textInput} 
-          placeholder='write something'
-          onChangeText={TweetInputHandler} 
-          value={enteredTweetText}
-          
-        /> 
+        
+          <TextInput style={styles.textInput} 
+            placeholder='write something'
+            onChangeText={TweetInputHandler} 
+            value={enteredTweetText}
+            multiline={true} 
+          /> 
+        
+        
         {/* this value means after typing the goal in the inputtext it will make it a blank again
         because we wrote  setEnteredTweetText('') in the function*/}
         
@@ -88,6 +91,10 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
 
+  textInputCon:{
+    justifyContent: 'flex-start',
+  },
+
   textInput: {
     fontFamily: "poppins",
     textAlign: 'left',
@@ -97,9 +104,11 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     width: '90%',
     paddingBottom: 200,
-    padding: 16,
-    
-    
+    paddingTop: 20,
+    paddingHorizontal: 20,
+    borderColor: 'black',
+    borderWidth: 1,
+    textAlign: 'justify'
   },
 
   buttonContainer:{

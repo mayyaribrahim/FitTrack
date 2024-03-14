@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, Alert } from "react-native";
+import { View, Text, StyleSheet, Image, Alert, SafeAreaView } from "react-native";
 import TabScreenTitle from "../../../components/TabScreenTitle";
 import PrimaryButton from "../../../components/PrimaryButton";
 
@@ -28,7 +28,7 @@ function ProfileScreen({navigation}) {
 
   return (
     
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
 
       <TabScreenTitle title={"Profile"} />
 
@@ -56,7 +56,7 @@ function ProfileScreen({navigation}) {
 
       </View>
 
-    </View>
+    </SafeAreaView>
         
   )
 }
@@ -67,7 +67,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
-    paddingTop: 45,
     alignItems: "center",
   },
  

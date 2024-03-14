@@ -1,8 +1,8 @@
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import TabScreenTitle from "../../components/TabScreenTitle";
-import PrimaryButton from "../../components/PrimaryButton";
+import TabScreenTitle from "../../../components/TabScreenTitle";
+import PrimaryButton from "../../../components/PrimaryButton";
 
-function ToolsScreen() {
+function ToolsScreen({navigation}) {
   return (
     
     <View style={styles.container}>
@@ -12,14 +12,14 @@ function ToolsScreen() {
       <View style={styles.buttonsContainer}>
 
         <View style={styles.primaryButton}>
-          <PrimaryButton>Favorite Exercises</PrimaryButton>
+          <PrimaryButton onPress={() => navigation.navigate('Favorite Exercises')}>Favorite Exercises</PrimaryButton>
         </View>
 
         <View style={styles.primaryButton}>
-          <PrimaryButton>Favorite Meals</PrimaryButton>
+          <PrimaryButton onPress={() => navigation.navigate('Favorite Meals')}>Favorite Meals</PrimaryButton>
         </View>
 
-        <PrimaryButton>Macros calculator</PrimaryButton>
+        <PrimaryButton onPress={() => navigation.navigate('Macros Calculator')}>Macros Calculator</PrimaryButton>
 
       </View>
 
