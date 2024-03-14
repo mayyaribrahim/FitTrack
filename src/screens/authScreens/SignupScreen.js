@@ -67,7 +67,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: 'center',
-    
   },
 
   image: {
@@ -83,6 +82,7 @@ const styles = StyleSheet.create({
   },
 
   label: {
+    fontFamily: 'poppins',
     marginBottom: 5,
     fontSize: 18,
   },

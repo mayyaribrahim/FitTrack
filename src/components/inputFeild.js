@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import { TextInput, StyleSheet, Text, View, Pressable, Platform } from "react-native";
 import { Feather ,MaterialCommunityIcons, FontAwesome6 } from "@expo/vector-icons";
-import { Ionicons } from '@expo/vector-icons';
+
 
 
 function InputField ({ placeholder, value, onChange, label, type, iconName, secondIconName, }) {

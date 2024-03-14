@@ -79,12 +79,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     alignItems: "center",
     justifyContent: 'center',
-    bottom: 40,
-  },
 
-  titleContainer: { 
-    alignSelf: 'flex-start',
-    bottom: 50,
   },
 
   image: {
@@ -96,21 +91,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 100,
-    bottom: 35,
+    bottom: 65,
   },
 
   inputContainer: {
     bottom: 20,
     marginBottom: 10,
+    bottom: 45,
   },
 
   ShortInputContainer: {
     flexDirection: 'row',
-    
   },
 
   primaryButton: {
-
+    bottom: 35,
   },
 
 })

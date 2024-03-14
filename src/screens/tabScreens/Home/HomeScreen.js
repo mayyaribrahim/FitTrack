@@ -1,10 +1,12 @@
-import { View, Text, StyleSheet, ScrollView, FlatList, Image, Platform, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, ScrollView, FlatList, Image, Platform, TouchableOpacity, SafeAreaView } from "react-native";
 import ExCategoryGrid from "../../../components/ExCategoryGrid";
 import MlCategoryGrid from "../../../components/MlCategoryGrid";
 import { EXERCISESCATEGORIES, MEALCATEGORIES } from "../../../data/ExercisesData";
 
 
-function HomeScreen({navigation}) {
+function HomeScreen({navigation, route}) {
+
+  const { email } = route.params || { email: 'default@email.com' };
 
 
   function renderMealCategoryItem(itemData) {
@@ -58,20 +60,21 @@ function HomeScreen({navigation}) {
   }
 
   return (
-    
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+  <SafeAreaView  style={styles.container} >
 
+    <View style={styles.headerContainer}>
 
-      <View style={styles.headerContainer}>
-
-        <View style={styles.titleContainer}>
-          <Text style={styles.PageTitle}>Hello Mayyar</Text>
-        </View>
-        
-        <Image style={styles.userImage} source={require("../../../assets/images/user.png")}/>
-
+      <View style={styles.titleContainer}>
+        <Text style={styles.PageTitle}>Hello {email}</Text>
       </View>
-      
+        
+      <Image style={styles.userImage} source={require("../../../assets/images/user.png")}/>
+
+    </View>
+
+
+    <ScrollView style={styles.scrollcontainer} showsVerticalScrollIndicator={false}>
+
       <View style={styles.box}>
         <Text style={styles.boxTitle}>Exercises</Text>
         <Text style={styles.boxDescription}>all the exercises {'\n'}you need</Text>
@@ -126,11 +129,14 @@ function HomeScreen({navigation}) {
         contentContainerStyle={styles.flatListCon}
       />
 
-      <View style={{marginBottom: 500}}>
+      <View style={{marginBottom: 100}}>
 
       </View>
 
     </ScrollView>
+
+  </SafeAreaView>
+
   )
 }
 
@@ -139,9 +145,12 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "white",
+  },
+
+  scrollcontainer: {
     backgroundColor: "#fff",
-    paddingTop: 45,
-    
+    paddingTop: 5,
   },
 
   headerContainer: {

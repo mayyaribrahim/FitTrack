@@ -28,7 +28,7 @@ const MainStackNavigator = () => {
       screenOptions={{ 
       headerShadowVisible: false,
       headerBackTitle: 'Back',
-      cardStyle: { backgroundColor: 'white' }
+      cardStyle: { backgroundColor: "#ffffffff" },
       }}>
 
       {/*Authentication Stacks*/}

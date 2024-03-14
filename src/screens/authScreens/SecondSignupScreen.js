@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Image, } from "react-native";
+import { View, StyleSheet, Image, KeyboardAvoidingView, Platform, } from "react-native";
 import PrimaryButton from "../../components/PrimaryButton";
 import InputField from "../../components/InputFeild";
 
@@ -24,7 +24,9 @@ function SecondSignupScreen ({ navigation }) {
 
   return (
 
-    <View style={styles.container}>
+    <KeyboardAvoidingView 
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      style={styles.container}>
 
       <Image
         style={styles.image}
@@ -66,7 +68,7 @@ function SecondSignupScreen ({ navigation }) {
         <PrimaryButton onPress={() => navigation.navigate("StartNow")}>Sign Up</PrimaryButton>
       </View>
       
-    </View>
+    </KeyboardAvoidingView>
   )
 }
 
@@ -77,36 +79,31 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    paddingTop: 110,
+    justifyContent: 'center',
   },
 
   image: {
     width: 145,
     height: 100,
+    bottom: 70,
     resizeMode: "contain",
   },
 
   inputContainer: {
-    marginTop: 40,
+    marginTop: 20,
+    bottom: 50,
   },
 
   label: {
+    fontFamily: 'poppins',
     marginBottom: 5,
     fontSize: 18,
   },
 
-  textInput: {
-    paddingVertical: 14,
-    paddingHorizontal: 10,
-  },
-
-  forgotPasswordButtonText: {
-    color: "black",
-    fontSize: 12,
-    marginTop: 14,
-  },
+  
 
   buttonContainer: {
     marginTop: 30,
+    bottom: 60,
   },
 });

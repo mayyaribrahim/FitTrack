@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { View, StyleSheet,Image, } from "react-native";
+import { View, StyleSheet,Image, KeyboardAvoidingView, Platform, } from "react-native";
 import PrimaryButton from "../../components/PrimaryButton";
 import InputField from "../../components/InputFeild";
-import { FontAwesome6 } from '@expo/vector-icons';
+
 
 
 function StartNow ({ navigation }) {
@@ -26,11 +26,12 @@ function StartNow ({ navigation }) {
   console.log(age, height, weight);
 
   return (
-    <View style={styles.container}>
-      <Image
-        style={styles.image}
-        source={require("../../assets/images/logo.png")}
-      />
+
+    <KeyboardAvoidingView 
+    behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      style={styles.container}>
+
+      <Image style={styles.image} source={require("../../assets/images/logo.png")}/>
 
       <View style={styles.inputContainer}>
 
@@ -67,7 +68,8 @@ function StartNow ({ navigation }) {
       <View style={styles.buttonContainer}>
         <PrimaryButton onPress={() => navigation.navigate("OnboardingTutorial")}>Start Now!</PrimaryButton>
       </View>
-    </View>
+
+    </KeyboardAvoidingView>
   );
 };
 
@@ -78,17 +80,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    paddingTop: 110,
+    justifyContent: 'center',
   },
 
   image: {
     width: 145,
     height: 100,
+    bottom: 70,
     resizeMode: "contain",
   },
 
   inputContainer: {
     marginTop: 40,
+    bottom: 50,
   },
 
   label: {
@@ -96,19 +100,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 
-  textInput: {
-    paddingVertical: 14,
-    paddingHorizontal: 10,
-  },
-
-  forgotPasswordButtonText: {
-    color: "black",
-    fontSize: 12,
-    marginTop: 14,
-  },
-
   buttonContainer: {
     marginTop: 30,
+    bottom: 60,
   },
 });
 

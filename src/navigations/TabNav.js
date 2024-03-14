@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import HomeScreen from '../screens/tabScreens/Home/HomeScreen';
 import ProfileScreen from '../screens/tabScreens/Profile/ProfileScreen';
-import FeedScreen from '../screens/tabScreens/FeedScreen';
+import FeedScreen from '../screens/tabScreens/Feed/FeedScreen';
 import ToolsScreen from '../screens/tabScreens/ToolsScreen';
 
 
@@ -76,8 +76,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '90%',
     left: '5%',
-    bottom: 18,
-    height: 70,
+    bottom: 29,
+    height: 65,
     elevation: 0,
     borderRadius: 22,
     backgroundColor: 'white',
@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 }, 
     elevation: 4,
     overflow: Platform.OS === "android" ? "hidden" : "visible",
-    opacity: 0.9,
+    
   },
 })
+//585353

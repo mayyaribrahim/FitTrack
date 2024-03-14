@@ -1,5 +1,6 @@
 import { Pressable, View, Text, StyleSheet, Platform } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome6 } from "@expo/vector-icons";
+import { Iconify } from 'react-native-iconify';
 
 function MlCategoryGrid({ title, titleColor, buttonColor, iconContainer, iconColor, onPress }) {
   
@@ -19,7 +20,7 @@ function MlCategoryGrid({ title, titleColor, buttonColor, iconContainer, iconCol
         <View style={[styles.iconContainer, {backgroundColor: iconContainer}]}>
 
           <View style={styles.icons} >
-            <Ionicons name='barbell-outline' size={27} color={iconColor}/>
+          <FontAwesome6 name="bowl-food" size={20} color={iconColor} />
           </View>
         </View>
 
@@ -85,11 +86,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     top: 16,
     left: 33,
-  },
-
-  icons: {
-    transform: [{ rotate: '311deg' }],
-    
   },
 
   title: {

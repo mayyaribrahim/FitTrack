@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import TabScreenTitle from "../../../components/TabScreenTitle";
 import PrimaryButton from "../../../components/PrimaryButton";
 
@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#ffffff",
-    
     alignItems: 'center',
   },
 
