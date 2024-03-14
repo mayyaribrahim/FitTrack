@@ -17,7 +17,6 @@ function ProfileScreen({navigation}) {
           text: "Logout",
           onPress: () => {
             navigation.navigate("Intro");
-            Alert.alert("Logout Successful");
           },
         },
       ],

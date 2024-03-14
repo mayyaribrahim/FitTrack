@@ -4,7 +4,7 @@ import { Feather ,MaterialCommunityIcons, FontAwesome6 } from "@expo/vector-icon
 
 
 
-function InputField ({ placeholder, value, onChange, label, type, iconName, secondIconName, }) {
+function InputField ({ placeholder, value, onChange, label, type, iconName, secondIconName, keyboardType }) {
   
   const [secureText, setSecureText] = useState(true);
 
@@ -20,16 +20,16 @@ function InputField ({ placeholder, value, onChange, label, type, iconName, seco
         <Feather name={iconName} size={20} color="#BEBEBE" /> 
       </View>
       
-      
-       
       <TextInput
         value={value}
         label= {label}
         onChangeText={onChange}
         placeholder={placeholder}
+        keyboardType={keyboardType}
         secureTextEntry={type === "password" ? secureText : false}
         style={styles.input}
       />
+
       {type === "password" && (
         <Pressable onPress={() => setSecureText((prev) => !prev)}>
           <MaterialCommunityIcons

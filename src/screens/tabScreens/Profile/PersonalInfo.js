@@ -13,6 +13,27 @@ return (
     </View>
 
     <View style={styles.inputContainer}>
+      <View style={styles.ShortInputContainer}>
+
+        <ShortInput
+          secondIconName={"ruler"}
+          placeholder={"Height"}
+          keyboardType="numeric"
+          //value={password}
+          //onChange={handlePasswordChange}
+          type="Height"
+        />
+
+        <ShortInput
+          secondIconName={"weight-scale"}
+          placeholder={"Weight"}
+          keyboardType="numeric"
+          //value={password}
+          //onChange={handlePasswordChange}
+          type="Weight"
+        />
+
+      </View > 
 
       <InputField
         iconName={"user"}
@@ -33,30 +54,11 @@ return (
       <InputField
         secondIconName={"calendar"}
         placeholder={"Age"}
+        keyboardType="numeric"
         //value={password}
         //onChange={handlePasswordChange}
         type="Age"
       />
-
-      <View style={styles.ShortInputContainer}>
-
-        <ShortInput
-          secondIconName={"ruler"}
-          placeholder={"Height"}
-          //value={password}
-          //onChange={handlePasswordChange}
-          type="Height"
-        />
-
-        <ShortInput
-          secondIconName={"weight-scale"}
-          placeholder={"Weight"}
-          //value={password}
-          //onChange={handlePasswordChange}
-          type="Weight"
-        />
-
-      </View > 
 
       
 

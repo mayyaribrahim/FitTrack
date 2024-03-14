@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, ScrollView, SafeAreaView } from "react-native";
-import TabScreenTitle from "../../../components/TabScreenTitle";
+
 import PrimaryButton from "../../../components/PrimaryButton";
 
 function Settings({navigation}) {

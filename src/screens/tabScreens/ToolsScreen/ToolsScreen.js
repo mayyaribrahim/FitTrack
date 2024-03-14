@@ -1,11 +1,11 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import TabScreenTitle from "../../../components/TabScreenTitle";
 import PrimaryButton from "../../../components/PrimaryButton";
 
 function ToolsScreen({navigation}) {
   return (
     
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
 
       <TabScreenTitle title={"Tools"} />
 
@@ -23,7 +23,7 @@ function ToolsScreen({navigation}) {
 
       </View>
 
-    </View>
+    </SafeAreaView>
   )
 }
 
@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#ffffff",
-    paddingTop: 45,
     alignItems: 'center',
   },
 

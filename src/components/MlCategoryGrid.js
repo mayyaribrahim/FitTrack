@@ -1,6 +1,5 @@
 import { Pressable, View, Text, StyleSheet, Platform } from "react-native";
 import { Ionicons, FontAwesome6 } from "@expo/vector-icons";
-import { Iconify } from 'react-native-iconify';
 
 function MlCategoryGrid({ title, titleColor, buttonColor, iconContainer, iconColor, onPress }) {
   
@@ -20,7 +19,7 @@ function MlCategoryGrid({ title, titleColor, buttonColor, iconContainer, iconCol
         <View style={[styles.iconContainer, {backgroundColor: iconContainer}]}>
 
           <View style={styles.icons} >
-          <FontAwesome6 name="bowl-food" size={20} color={iconColor} />
+          <Ionicons name="restaurant" size={20} color={iconColor} />
           </View>
         </View>
 

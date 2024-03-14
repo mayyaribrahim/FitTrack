@@ -3,17 +3,7 @@ import { TextInput, StyleSheet, Text, View, Pressable, Platform } from "react-na
 import { Feather ,MaterialCommunityIcons, FontAwesome6 } from "@expo/vector-icons";
 
 
-function ShortInput ({
-  placeholder,
-  value,
-  onChange,
-  label,
-  type,
-  secureTextEntry,
-  iconName,
-  secondIconName,
-
-}) {
+function ShortInput ({ placeholder, value, onChange, label, type, iconName, secondIconName, keyboardType}) {
   const [secureText, setSecureText] = useState(true);
 
   return (
@@ -28,16 +18,16 @@ function ShortInput ({
         <Feather name={iconName} size={20} color="#BEBEBE" /> 
       </View>
       
-       
-       
       <TextInput
         value={value}
         label= {label}
         onChangeText={onChange}
         placeholder={placeholder}
+        keyboardType={keyboardType}
         secureTextEntry={type === "password" ? secureText : false}
         style={styles.input}
       />
+      
       {type === "password" && (
         <Pressable onPress={() => setSecureText((prev) => !prev)}>
           <MaterialCommunityIcons

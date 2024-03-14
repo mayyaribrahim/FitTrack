@@ -17,6 +17,7 @@ import MealsScreen from '../screens/tabScreens/Home/MealsScreen';
 import FavExercise from '../screens/tabScreens/ToolsScreen/FavExercise';
 import FavMeals from '../screens/tabScreens/ToolsScreen/FavMeals';
 import Calculator from '../screens/tabScreens/ToolsScreen/Calculator';
+import DropDown from '../screens/tabScreens/ToolsScreen/DropDown';
 
 import ProfileScreen from '../screens/tabScreens/Profile/ProfileScreen';
 import PersonalInfo from '../screens/tabScreens/Profile/PersonalInfo';
@@ -61,6 +62,7 @@ const MainStackNavigator = () => {
       <Stack.Screen name="Favorite Exercises" component={FavExercise} />
       <Stack.Screen name="Favorite Meals" component={FavMeals} />
       <Stack.Screen name="Macros Calculator" component={Calculator} />
+      <Stack.Screen name="Drop Down" component={DropDown} />
 
       {/*Profile Stacks*/}
       <Stack.Screen name="ProfileStacks" component={ProfileScreen} options={{headerShown: false,}}/>
@@ -70,8 +72,6 @@ const MainStackNavigator = () => {
       <Stack.Screen name="About" component={About} />
       <Stack.Screen name="Terms And Conditions" component={TermsAndCond} />
       
-
-
     </Stack.Navigator>
   );
 };

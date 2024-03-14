@@ -41,6 +41,7 @@ function StartNow ({ navigation }) {
           value={age}
           onChange={handleAge}
           type="age"
+          keyboardType="numeric"
           // label={"Age"}
         />
 
@@ -50,6 +51,7 @@ function StartNow ({ navigation }) {
           value={height}
           onChange={handleHeight}
           type="Height"
+          keyboardType="numeric"
           // label={"Height"}
         />
 
@@ -60,6 +62,7 @@ function StartNow ({ navigation }) {
           value={weight}
           onChange={handleWeight}
           type="weight"
+          keyboardType="numeric"
           // label={"Weight"}
         />
         
