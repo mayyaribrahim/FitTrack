@@ -5,7 +5,7 @@ function FeedInput(props) {
   const [enteredTweetText, setEnteredTweetText] = useState('');
 
   
-  function TweetInputHandler(enteredText) {
+  function tweetInputHandler(enteredText) {
     setEnteredTweetText(enteredText);
   }
 
@@ -41,7 +41,7 @@ function FeedInput(props) {
         
           <TextInput style={styles.textInput} 
             placeholder='write something'
-            onChangeText={TweetInputHandler} 
+            onChangeText={tweetInputHandler} 
             value={enteredTweetText}
             multiline={true} 
           /> 

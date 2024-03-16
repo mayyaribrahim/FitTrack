@@ -16,6 +16,10 @@ function LoginScreen ({navigation}) {
   };
 
   console.log(email, password);
+
+  function handleLogin() {
+    navigation.navigate('home' )
+  }
   
   return (
     
@@ -55,7 +59,7 @@ function LoginScreen ({navigation}) {
       
     
       <View style={styles.buttonContainer}>
-      <PrimaryButton onPress={() => navigation.navigate('home' )}>Login</PrimaryButton>
+      <PrimaryButton onPress={() => navigation.navigate('home')}>Login</PrimaryButton>
       </View>
       
     </KeyboardAvoidingView>

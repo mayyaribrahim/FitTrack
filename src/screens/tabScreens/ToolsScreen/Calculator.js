@@ -1,15 +1,59 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { View, Text, StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import PrimaryButton from "../../../components/PrimaryButton";
 
 import InputField from "../../../components/InputFeild";
 import ShortInput from "../../../components/ShortInput";
-import DropDown from "./DropDown";
+import DropDown from "../../../components/DropDown";
+import TrainDropDown from "../../../components/TrainDropDown";
+import { calculateMacros } from "../../../hooks/calculateMarcos";
+
+
 
 
 function Calculator({navigation}) {
+  const [height, setHeight] = useState("");
+  const [weight, setWeight] = useState("");
+  const [age, setAge] = useState("");
+  const [selectedGoal, setSelectedGoal] = useState('');
+  const [selectedDay, setSelectedDay] = useState('');
+
+  
+
+  const handleHeightChange = (enteredHeight) => {
+    setHeight(enteredHeight);
+  };
+
+  const handleWeightChange = (enteredWeight) => {
+    setWeight(enteredWeight);
+  };
+
+  const handleAgeChange = (enteredAge) => {
+    setAge(enteredAge);
+  };
+
+  
+  function addDayHandler(trainDay) {
+    setSelectedDay(trainDay)
+    // console.log(trainDay)
+  }
+
+  function addGoalHandler(goal) {
+    setSelectedGoal(goal)
+   // console.log(goal)
+  }
 
 
+   useEffect(() => {
+    if(!selectedGoal || !selectedDay||
+      !height||
+      !weight||
+      !age) {
+        return
+      }
+   calculateMacros(selectedGoal, selectedDay, height, weight, age);
+  }, [calculateMacros]);
+  
   return (
     
     <SafeAreaView style={styles.container}>
@@ -22,18 +66,16 @@ function Calculator({navigation}) {
             secondIconName={"ruler"}
             placeholder={"Height"}
             keyboardType="numeric"
-            //value={password}
-            //onChange={handlePasswordChange}
-            type="Height"
+            value={height}
+            onChange={handleHeightChange}
           />
 
           <ShortInput
             secondIconName={"weight-scale"}
             placeholder={"Weight"}
             keyboardType="numeric"
-            //value={password}
-            //onChange={handlePasswordChange}
-            type="Weight"
+            value={weight}
+            onChange={handleWeightChange}
           />
 
         </View > 
@@ -41,32 +83,25 @@ function Calculator({navigation}) {
           iconName={"calendar"}
           placeholder={"Age"}
           keyboardType="numeric"
-          //value={email}
-          //onChange={handleEmailChange}
-          type="name"
+          value={age}
+          onChange={handleAgeChange}
         />
 
-        <InputField
-          iconName={"bar-chart-2"}
-          placeholder={"Training Days"}
-          keyboardType="numeric"
-          //value={password}
-          //onChange={handlePasswordChange}
-          type="email"
-        />
-      
+        
       </View>
 
       <View style={styles.dropDownContainer}>
-        <DropDown />
+        <TrainDropDown onAddDay={addDayHandler} />
+      </View>
+
+      <View>
+        <DropDown onAddGoal={addGoalHandler} />
       </View>
       
 
       <View style={styles.primaryButton}>
-      <PrimaryButton>Calculate</PrimaryButton>
+      <PrimaryButton onPress={() => calculateMacros(height, weight, age, selectedGoal, selectedDay )}>Calculate</PrimaryButton>
       </View>  
-
-      
 
     </SafeAreaView>
   )

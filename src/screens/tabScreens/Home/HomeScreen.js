@@ -7,7 +7,7 @@ import { EXERCISESCATEGORIES, MEALCATEGORIES } from "../../../data/ExercisesData
 function HomeScreen({navigation}) {
 
   
-
+  
 
   function renderMealCategoryItem(itemData) {
 

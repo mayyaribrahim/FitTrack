@@ -3,17 +3,25 @@ import React, {useRef, useState} from 'react';
 import { Ionicons, FontAwesome6 } from '@expo/vector-icons';
 
 
-const countries = [
-  {country: 'Weight Maintain',},
-  {country: 'Weight Loss',},
-  {country: 'Weight Gain',},
+const trainingDays = [
+  {trainDay: 'little to no exercise',},
+  {trainDay: 'Exercise 1-3 times/week',},
+  {trainDay: 'Exercise 4-5 times/week',},
+  {trainDay: 'Exercise 6-7 times/week',},
 ];
-const DropDown = () => {
+const TrainDropDown = ({onAddDay}) => {
   const [clicked, setClicked] = useState(false);
-  const [data, setData] = useState(countries);
-  const [selectedGoal, setSelectedGoal] = useState('');
-  
-  
+  const [data, setData] = useState(trainingDays);
+  const [selectedDay, setSelectedDay] = useState('');
+
+  const handleDaysSelection = (trainDay) => {
+    setSelectedDay(trainDay);
+    setClicked(false); // Close dropdown after selection
+    onAddDay(trainDay); // Call onAddGoal after updating the selected goal
+  };
+
+
+
   return (
     <View >
 
@@ -45,8 +53,8 @@ const DropDown = () => {
            <FontAwesome6 name='bullseye' size={20} color="#BEBEBE" />
         </View>
       
-        <Text style={{fontWeight:'600', color: '#BEBEBE', fontFamily: 'poppins', fontSize: 15}}>
-          {selectedGoal == '' ? 'Goal' : selectedGoal}
+        <Text style={{fontWeight:'600', color: selectedDay !== '' ? 'black' : '#BEBEBE', fontFamily: 'poppins', fontSize: 15}}>
+          {selectedDay == '' ? 'Training Days' : selectedDay}
         </Text>
         
         <View style={{position: 'absolute', right: 12}}>
@@ -87,11 +95,8 @@ const DropDown = () => {
                     borderBottomWidth: 0.5,
                     borderColor: '#8e8e8e',
                   }}
-                  onPress={() => {
-                    setSelectedGoal(item.country);
-                    setClicked(!clicked);
-                  }}>
-                  <Text style={{fontWeight: '600', color: '#7c7c7c', fontFamily: 'poppins'}}>{item.country}</Text>
+                  onPress={() => handleDaysSelection(item.trainDay)}>
+                  <Text style={{fontWeight: '600', color: '#7c7c7c', fontFamily: 'poppins'}}>{item.trainDay}</Text>
                 </TouchableOpacity>
               );
             }}
@@ -102,4 +107,4 @@ const DropDown = () => {
   );
 };
 
-export default DropDown;
+export default TrainDropDown;
