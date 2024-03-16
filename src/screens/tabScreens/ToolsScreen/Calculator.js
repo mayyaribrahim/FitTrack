@@ -17,7 +17,6 @@ function Calculator({navigation}) {
   const [age, setAge] = useState("");
   const [selectedGoal, setSelectedGoal] = useState('');
   const [selectedDay, setSelectedDay] = useState('');
-
   
 
   const handleHeightChange = (enteredHeight) => {
@@ -35,12 +34,12 @@ function Calculator({navigation}) {
   
   function addDayHandler(trainDay) {
     setSelectedDay(trainDay)
-    // console.log(trainDay)
+    //console.log(trainDay)
   }
 
   function addGoalHandler(goal) {
     setSelectedGoal(goal)
-   // console.log(goal)
+   //console.log(goal)
   }
 
 
@@ -53,6 +52,8 @@ function Calculator({navigation}) {
       }
    calculateMacros(selectedGoal, selectedDay, height, weight, age);
   }, [calculateMacros]);
+
+  
   
   return (
     

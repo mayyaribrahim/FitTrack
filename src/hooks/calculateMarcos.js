@@ -64,4 +64,12 @@ export const calculateMacros = (height, weight, age, selectedGoal, selectedDay) 
     console.log('Carbs (g):', carbs);
     console.log('Fat (g):', fat);
     console.log('Calories:', calories);
+
+    return {
+      calories,
+      protein,
+      carbs,
+      fat
+    };
+    
   }
