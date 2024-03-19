@@ -36,6 +36,8 @@ function ExercisesScreen({ route, navigation }) {
       renderItem={RenderExerciseItem}
       />
 
+      
+
     </View>
   )
 

@@ -1,7 +1,9 @@
-import { Text, View, StyleSheet, Image, KeyboardAvoidingView, Platform, } from "react-native";
+import { Text, View, StyleSheet, Image, KeyboardAvoidingView, Platform, TouchableOpacity, } from "react-native";
 import PrimaryButton from "../../../components/PrimaryButton";
 import InputField from "../../../components/InputFeild";
 import ShortInput from "../../../components/ShortInput";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import Avatar from "../../../components/Avatar";
 
 function PersonalInfo () {
 return (
@@ -9,7 +11,15 @@ return (
   <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.container}>
     
     <View style={styles.imageContainer}>
-      <Image style={styles.image} source={require("../../../assets/images/user.png")}/>
+
+      <TouchableOpacity style={styles.touchableContainer}>
+        <Image style={styles.image} source={require("../../../assets/images/user.png")}/>
+      </TouchableOpacity >
+
+      <TouchableOpacity style={styles.editButton}>
+        <MaterialCommunityIcons name="pencil" size={24} color="#b5b5b7" />
+      </TouchableOpacity>
+      
     </View>
 
     <View style={styles.inputContainer}>
@@ -92,8 +102,21 @@ const styles = StyleSheet.create({
   imageContainer: {
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 100,
-    bottom: 65,
+    borderRadius: 250,
+    bottom: 80,
+  },
+
+  editButton:{
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    right: 6,
+    bottom: 0,
+    backgroundColor: "#E9E9E9",
+    
   },
 
   inputContainer: {

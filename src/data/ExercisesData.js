@@ -184,7 +184,7 @@ export const EXERCISES = [
 
 
 export class meal {
-    constructor(id, categoryIds, title, affordability, complexity, imageUrl, duration, ingredients, steps) {
+    constructor(id, categoryIds, title, affordability, complexity, imageUrl, duration, ingredients, steps, calories, protein, carb, fat) {
       this.id = id;
       this.categoryIds = categoryIds;
       this.title = title;
@@ -194,6 +194,10 @@ export class meal {
       this.duration = duration;
       this.ingredients = ingredients;
       this.steps = steps;
+      this.calories = calories
+      this.protein = protein
+      this.carb = carb
+      this.fat = fat
     }
   }
 
@@ -212,13 +216,18 @@ export const MEALS = [
         30,
         ['Chicken Breast', 'Mixed Greens', 'Cherry Tomatoes', 'Cucumber', 'Olive Oil'],
         [
-        '1. Marinate chicken with olive oil, salt, and pepper.',
-        '2. Grill chicken until fully cooked.',
-        '3. Chop mixed greens, tomatoes, and cucumber.',
-        '4. Combine grilled chicken and vegetables.',
-        '5. Drizzle with olive oil and serve.'
-        ]
+            '1. Marinate chicken with olive oil, salt, and pepper.',
+            '2. Grill chicken until fully cooked.',
+            '3. Chop mixed greens, tomatoes, and cucumber.',
+            '4. Combine grilled chicken and vegetables.',
+            '5. Drizzle with olive oil and serve.'
+        ],
+        350,
+        25,
+        15,
+        20
     ),
+
     new meal(
         'm2',
         ['mc1'],
@@ -229,13 +238,18 @@ export const MEALS = [
         45,
         ['Quinoa', 'Bell Peppers', 'Black Beans', 'Corn', 'Tomato Sauce'],
         [
-        '1. Cook quinoa according to package instructions.',
-        '2. Cut bell peppers in half and remove seeds.',
-        '3. Mix quinoa, black beans, corn, and tomato sauce.',
-        '4. Stuff bell peppers with the mixture.',
-        '5. Bake until peppers are tender.'
-        ]
+            '1. Cook quinoa according to package instructions.',
+            '2. Cut bell peppers in half and remove seeds.',
+            '3. Mix quinoa, black beans, corn, and tomato sauce.',
+            '4. Stuff bell peppers with the mixture.',
+            '5. Bake until peppers are tender.'
+        ],
+        380,
+        20,
+        60,
+        10
     ),
+
     new meal(
         'm3',
         ['mc1'],
@@ -246,13 +260,18 @@ export const MEALS = [
         35,
         ['Salmon Fillet', 'Lemon', 'Dill', 'Olive Oil', 'Asparagus'],
         [
-        '1. Season salmon with salt, pepper, and olive oil.',
-        '2. Grill or bake salmon until it flakes easily.',
-        '3. Mix fresh lemon juice with chopped dill for sauce.',
-        '4. Serve salmon over a bed of asparagus.',
-        '5. Drizzle with lemon-dill sauce.'
-        ]
+            '1. Season salmon with salt, pepper, and olive oil.',
+            '2. Grill or bake salmon until it flakes easily.',
+            '3. Mix fresh lemon juice with chopped dill for sauce.',
+            '4. Serve salmon over a bed of asparagus.',
+            '5. Drizzle with lemon-dill sauce.'
+        ],
+        420,
+        30,
+        10,
+        30
     ),
+
     new meal(
         'm4',
         ['mc1'],
@@ -263,13 +282,18 @@ export const MEALS = [
         30,
         ['Quinoa', 'Chickpeas', 'Cucumber', 'Tomatoes', 'Feta Cheese'],
         [
-        '1. Cook quinoa and chickpeas.',
-        '2. Dice cucumber and tomatoes.',
-        '3. Mix quinoa, chickpeas, cucumber, tomatoes, and feta.',
-        '4. Drizzle with olive oil and toss.',
-        '5. Serve as a refreshing Mediterranean bowl.'
-        ]
+            '1. Cook quinoa and chickpeas.',
+            '2. Dice cucumber and tomatoes.',
+            '3. Mix quinoa, chickpeas, cucumber, tomatoes, and feta.',
+            '4. Drizzle with olive oil and toss.',
+            '5. Serve as a refreshing Mediterranean bowl.'
+        ],
+        320,
+        15,
+        45,
+        10
     ),
+
     new meal(
         'm5',
         ['mc1'],
@@ -280,13 +304,18 @@ export const MEALS = [
         40,
         ['Ground Turkey', 'Sweet Potatoes', 'Onions', 'Bell Peppers', 'Spinach'],
         [
-        '1. Brown ground turkey in a skillet.',
-        '2. Add diced sweet potatoes and cook until tender.',
-        '3. Sauté onions, bell peppers, and spinach.',
-        '4. Combine all ingredients in the skillet.',
-        '5. Season with desired spices and serve.'
-        ]
+            '1. Brown ground turkey in a skillet.',
+            '2. Add diced sweet potatoes and cook until tender.',
+            '3. Sauté onions, bell peppers, and spinach.',
+            '4. Combine all ingredients in the skillet.',
+            '5. Season with desired spices and serve.'
+        ],
+        380,
+        25,
+        35,
+        15
     ),
+
     new meal(
         'm6',
         ['mc1'],
@@ -297,13 +326,18 @@ export const MEALS = [
         35,
         ['Quinoa', 'Chickpeas', 'Avocado', 'Carrots', 'Tahini Dressing'],
         [
-        '1. Cook quinoa and roast chickpeas.',
-        '2. Slice avocado and shred carrots.',
-        '3. Assemble quinoa, chickpeas, avocado, and carrots in a bowl.',
-        '4. Drizzle with tahini dressing.',
-        '5. Garnish with sesame seeds.'
-        ]
+            '1. Cook quinoa and roast chickpeas.',
+            '2. Slice avocado and shred carrots.',
+            '3. Assemble quinoa, chickpeas, avocado, and carrots in a bowl.',
+            '4. Drizzle with tahini dressing.',
+            '5. Garnish with sesame seeds.'
+        ],
+        420,
+        20,
+        50,
+        20
     ),
+
     new meal(
         'm7',
         ['mc1'],
@@ -314,13 +348,18 @@ export const MEALS = [
         25,
         ['Shrimp', 'Broccoli', 'Bell Peppers', 'Snow Peas', 'Soy Sauce'],
         [
-        '1. Sauté shrimp in olive oil until pink.',
-        '2. Add broccoli, bell peppers, and snow peas.',
-        '3. Stir in minced garlic and lemon juice.',
-        '4. Season with soy sauce.',
-        '5. Serve over rice or noodles.'
-        ]
+            '1. Sauté shrimp in olive oil until pink.',
+            '2. Add broccoli, bell peppers, and snow peas.',
+            '3. Stir in minced garlic and lemon juice.',
+            '4. Season with soy sauce.',
+            '5. Serve over rice or noodles.'
+        ],
+        350,
+        30,
+        20,
+        15
     ),
+
     new meal(
         'm8',
         ['mc1'],
@@ -331,13 +370,18 @@ export const MEALS = [
         20,
         ['Avocado', 'Tomatoes', 'Mozzarella', 'Basil', 'Balsamic Glaze'],
         [
-        '1. Slice avocado, tomatoes, and mozzarella.',
-        '2. Arrange on a plate with fresh basil leaves.',
-        '3. Drizzle with balsamic glaze.',
-        '4. Season with salt and pepper.',
-        '5. Enjoy this refreshing Caprese salad.'
-        ]
+            '1. Slice avocado, tomatoes, and mozzarella.',
+            '2. Arrange on a plate with fresh basil leaves.',
+            '3. Drizzle with balsamic glaze.',
+            '4. Season with salt and pepper.',
+            '5. Enjoy this refreshing Caprese salad.'
+        ],
+        280,
+        15,
+        10,
+        20
     ),
+
     new meal(
         'm9',
         ['mc1'],
@@ -348,13 +392,18 @@ export const MEALS = [
         30,
         ['Chicken Thighs', 'Teriyaki Sauce', 'Broccoli', 'Carrots', 'White Rice'],
         [
-        '1. Grill or bake chicken thighs with teriyaki sauce.',
-        '2. Steam broccoli and carrots until tender.',
-        '3. Slice chicken and arrange with veggies over rice.',
-        '4. Drizzle with extra teriyaki sauce.',
-        '5. Garnish with sesame seeds.'
-        ]
+            '1. Grill or bake chicken thighs with teriyaki sauce.',
+            '2. Steam broccoli and carrots until tender.',
+            '3. Slice chicken and arrange with veggies over rice.',
+            '4. Drizzle with extra teriyaki sauce.',
+            '5. Garnish with sesame seeds.'
+        ],
+        420,
+        25,
+        40,
+        15
     ),
+
     new meal(
         'm10',
         ['mc1'],
@@ -365,12 +414,16 @@ export const MEALS = [
         40,
         ['Chicken Breast', 'Quinoa', 'Mango', 'Red Bell Pepper', 'Cilantro'],
         [
-        '1. Grill chicken until fully cooked.',
-        '2. Cook quinoa according to package instructions.',
-        '3. Dice mango and red bell pepper.',
-        '4. Mix quinoa, mango, bell pepper, and chopped cilantro.',
-        '5. Top with sliced grilled chicken.'
-        ]
+            '1. Grill chicken until fully cooked.',
+            '2. Cook quinoa according to package instructions.',
+            '3. Dice mango and red bell pepper.',
+            '4. Mix quinoa, mango, bell pepper, and chopped cilantro.',
+            '5. Top with sliced grilled chicken.'
+        ],
+        380,
+        30,
+        35,
+        15
     ),
 
     new meal(
@@ -383,12 +436,16 @@ export const MEALS = [
         25,
         ['Zucchini', 'Basil Pesto', 'Cherry Tomatoes', 'Parmesan Cheese'],
         [
-        '1. Spiralize zucchini into noodles.',
-        '2. Heat a pan and sauté zucchini until slightly tender.',
-        '3. Mix in basil pesto and cherry tomatoes.',
-        '4. Grate Parmesan cheese on top.',
-        '5. Serve warm.'
-        ]
+            '1. Spiralize zucchini into noodles.',
+            '2. Heat a pan and sauté zucchini until slightly tender.',
+            '3. Mix in basil pesto and cherry tomatoes.',
+            '4. Grate Parmesan cheese on top.',
+            '5. Serve warm.'
+        ],
+        280,
+        10,
+        20,
+        18
     ),
     new meal(
         'm12',
@@ -400,12 +457,16 @@ export const MEALS = [
         40,
         ['Cauliflower Rice', 'Mozzarella Cheese', 'Eggs', 'Tomato Sauce', 'Pepperoni'],
         [
-        '1. Mix cauliflower rice, mozzarella cheese, and eggs to form a dough.',
-        '2. Press the dough into a pizza shape on a baking sheet.',
-        '3. Bake until crust is golden brown.',
-        '4. Spread tomato sauce, cheese, and pepperoni on top.',
-        '5. Bake until cheese is melted and bubbly.'
-        ]
+            '1. Mix cauliflower rice, mozzarella cheese, and eggs to form a dough.',
+            '2. Press the dough into a pizza shape on a baking sheet.',
+            '3. Bake until crust is golden brown.',
+            '4. Spread tomato sauce, cheese, and pepperoni on top.',
+            '5. Bake until cheese is melted and bubbly.'
+        ],
+        380,
+        22,
+        15,
+        28
     ),
     new meal(
         'm13',
@@ -417,12 +478,16 @@ export const MEALS = [
         30,
         ['Salmon Fillet', 'Avocado', 'Tomato', 'Red Onion', 'Lime'],
         [
-        '1. Season salmon with salt, pepper, and olive oil.',
-        '2. Grill salmon until it flakes easily.',
-        '3. Dice avocado, tomato, and red onion for salsa.',
-        '4. Mix salsa ingredients and squeeze lime over.',
-        '5. Serve salmon topped with avocado salsa.'
-        ]
+            '1. Season salmon with salt, pepper, and olive oil.',
+            '2. Grill salmon until it flakes easily.',
+            '3. Dice avocado, tomato, and red onion for salsa.',
+            '4. Mix salsa ingredients and squeeze lime over.',
+            '5. Serve salmon topped with avocado salsa.'
+        ],
+        420,
+        30,
+        10,
+        30
     ),
     new meal(
         'm14',
@@ -434,12 +499,16 @@ export const MEALS = [
         45,
         ['Eggplant', 'Ground Beef', 'Ricotta Cheese', 'Mozzarella', 'Tomato Sauce'],
         [
-        '1. Slice eggplant into thin rounds.',
-        '2. Grill or roast eggplant until tender.',
-        '3. Brown ground beef in a skillet.',
-        '4. Layer eggplant, beef, ricotta, mozzarella, and tomato sauce.',
-        '5. Bake until cheese is melted and bubbly.'
-        ]
+            '1. Slice eggplant into thin rounds.',
+            '2. Grill or roast eggplant until tender.',
+            '3. Brown ground beef in a skillet.',
+            '4. Layer eggplant, beef, ricotta, mozzarella, and tomato sauce.',
+            '5. Bake until cheese is melted and bubbly.'
+        ],
+        380,
+        25,
+        20,
+        25
     ),
     new meal(
         'm15',
@@ -451,12 +520,16 @@ export const MEALS = [
         35,
         ['Shrimp', 'Cauliflower Rice', 'Bell Peppers', 'Onions', 'Cajun Seasoning'],
         [
-        '1. Sauté shrimp in Cajun seasoning until cooked.',
-        '2. Cook cauliflower rice in the same pan.',
-        '3. Sauté bell peppers and onions until tender.',
-        '4. Mix everything together in the pan.',
-        '5. Serve hot.'
-        ]
+            '1. Sauté shrimp in Cajun seasoning until cooked.',
+            '2. Cook cauliflower rice in the same pan.',
+            '3. Sauté bell peppers and onions until tender.',
+            '4. Mix everything together in the pan.',
+            '5. Serve hot.'
+        ],
+        320,
+        30,
+        15,
+        12
     ),
     new meal(
         'm16',
@@ -468,12 +541,16 @@ export const MEALS = [
         30,
         ['Mushrooms', 'Avocado', 'Bacon', 'Cream Cheese', 'Chives'],
         [
-        '1. Remove stems from mushrooms and hollow out the caps.',
-        '2. Mix cream cheese, avocado, bacon, and chives.',
-        '3. Stuff mushroom caps with the mixture.',
-        '4. Bake until mushrooms are tender.',
-        '5. Garnish with extra bacon and chives.'
-        ]
+            '1. Remove stems from mushrooms and hollow out the caps.',
+            '2. Mix cream cheese, avocado, bacon, and chives.',
+            '3. Stuff mushroom caps with the mixture.',
+            '4. Bake until mushrooms are tender.',
+            '5. Garnish with extra bacon and chives.'
+        ],
+        290,
+        8,
+        10,
+        22
     ),
     new meal(
         'm17',
@@ -485,12 +562,16 @@ export const MEALS = [
         25,
         ['Chicken Breast', 'Cucumber', 'Tomatoes', 'Feta Cheese', 'Kalamata Olives'],
         [
-        '1. Marinate chicken in Greek spices and grill until done.',
-        '2. Chop cucumber, tomatoes, and olives.',
-        '3. Assemble salad with feta cheese.',
-        '4. Slice chicken and place on top of the salad.',
-        '5. Drizzle with olive oil and serve.'
-        ]
+            '1. Marinate chicken in Greek spices and grill until done.',
+            '2. Chop cucumber, tomatoes, and olives.',
+            '3. Assemble salad with feta cheese.',
+            '4. Slice chicken and place on top of the salad.',
+            '5. Drizzle with olive oil and serve.'
+        ],
+        350,
+        25,
+        15,
+        20
     ),
     new meal(
         'm18',
@@ -502,12 +583,16 @@ export const MEALS = [
         40,
         ['Bell Peppers', 'Ground Turkey', 'Brown Rice', 'Black Beans', 'Tomato Sauce'],
         [
-        '1. Cut bell peppers in half and remove seeds.',
-        '2. Brown ground turkey and cook brown rice.',
-        '3. Mix turkey, rice, black beans, and tomato sauce.',
-        '4. Stuff bell peppers with the mixture.',
-        '5. Bake until peppers are tender.'
-        ]
+            '1. Cut bell peppers in half and remove seeds.',
+            '2. Brown ground turkey and cook brown rice.',
+            '3. Mix turkey, rice, black beans, and tomato sauce.',
+            '4. Stuff bell peppers with the mixture.',
+            '5. Bake until peppers are tender.'
+        ],
+        380,
+        25,
+        30,
+        15
     ),
     new meal(
         'm19',
@@ -519,12 +604,16 @@ export const MEALS = [
         30,
         ['Salmon Fillet', 'Asparagus', 'Lemon', 'Dill', 'Olive Oil'],
         [
-        '1. Place salmon fillet on a sheet of foil.',
-        '2. Arrange asparagus around the salmon.',
-        '3. Drizzle with olive oil and sprinkle with dill.',
-        '4. Squeeze lemon juice over the top.',
-        '5. Seal the foil and bake until salmon is cooked.'
-        ]
+            '1. Place salmon fillet on a sheet of foil.',
+            '2. Arrange asparagus around the salmon.',
+            '3. Drizzle with olive oil and sprinkle with dill.',
+            '4. Squeeze lemon juice over the top.',
+            '5. Seal the foil and bake until salmon is cooked.'
+        ],
+        320,
+        25,
+        10,
+        20
     ),
     new meal(
         'm20',
@@ -536,12 +625,16 @@ export const MEALS = [
         35,
         ['Cauliflower Rice', 'Shrimp', 'Peas', 'Carrots', 'Soy Sauce'],
         [
-        '1. Sauté shrimp until cooked.',
-        '2. Add cauliflower rice, peas, and carrots to the pan.',
-        '3. Stir in soy sauce and cook until vegetables are tender.',
-        '4. Mix in cooked shrimp.',
-        '5. Serve hot.'
-        ]
+            '1. Sauté shrimp until cooked.',
+            '2. Add cauliflower rice, peas, and carrots to the pan.',
+            '3. Stir in soy sauce and cook until vegetables are tender.',
+            '4. Mix in cooked shrimp.',
+            '5. Serve hot.'
+        ],
+        290,
+        25,
+        20,
+        10
     ),
 
     new meal(
@@ -554,12 +647,16 @@ export const MEALS = [
         40,
         ['Chickpeas', 'Spinach', 'Coconut Milk', 'Tomatoes', 'Curry Spices'],
         [
-        '1. Cook chickpeas until tender.',
-        '2. Sauté spinach in a pan until wilted.',
-        '3. Combine chickpeas, spinach, coconut milk, and diced tomatoes.',
-        '4. Add curry spices and simmer for 30 minutes.',
-        '5. Serve with rice.'
-        ]
+            '1. Cook chickpeas until tender.',
+            '2. Sauté spinach in a pan until wilted.',
+            '3. Combine chickpeas, spinach, coconut milk, and diced tomatoes.',
+            '4. Add curry spices and simmer for 30 minutes.',
+            '5. Serve with rice.'
+        ],
+        320,
+        12,
+        40,
+        15
     ),
     new meal(
         'm22',
@@ -571,12 +668,16 @@ export const MEALS = [
         30,
         ['Tofu', 'Broccoli', 'Bell Peppers', 'Carrots', 'Soy Sauce'],
         [
-        '1. Press tofu to remove excess water and cut into cubes.',
-        '2. Sauté tofu until golden brown.',
-        '3. Add broccoli, bell peppers, and carrots.',
-        '4. Stir in soy sauce and cook until vegetables are tender.',
-        '5. Serve over rice or noodles.'
-        ]
+            '1. Press tofu to remove excess water and cut into cubes.',
+            '2. Sauté tofu until golden brown.',
+            '3. Add broccoli, bell peppers, and carrots.',
+            '4. Stir in soy sauce and cook until vegetables are tender.',
+            '5. Serve over rice or noodles.'
+        ],
+        280,
+        20,
+        25,
+        10
     ),
     new meal(
         'm23',
@@ -588,12 +689,16 @@ export const MEALS = [
         35,
         ['Quinoa', 'Black Beans', 'Corn', 'Avocado', 'Lime'],
         [
-        '1. Cook quinoa according to package instructions.',
-        '2. Mix quinoa with black beans, corn, and diced avocado.',
-        '3. Squeeze lime juice over the top.',
-        '4. Toss everything together.',
-        '5. Enjoy a simple and nutritious bowl.'
-        ]
+            '1. Cook quinoa according to package instructions.',
+            '2. Mix quinoa with black beans, corn, and diced avocado.',
+            '3. Squeeze lime juice over the top.',
+            '4. Toss everything together.',
+            '5. Enjoy a simple and nutritious bowl.'
+        ],
+        320,
+        10,
+        45,
+        12
     ),
     new meal(
         'm24',
@@ -605,12 +710,16 @@ export const MEALS = [
         45,
         ['Sweet Potatoes', 'Chickpeas', 'Coconut Milk', 'Curry Spices', 'Cilantro'],
         [
-        '1. Roast sweet potatoes until tender.',
-        '2. Cook chickpeas until heated through.',
-        '3. Combine sweet potatoes, chickpeas, coconut milk, and curry spices.',
-        '4. Simmer for 30 minutes.',
-        '5. Garnish with fresh cilantro.'
-        ]
+            '1. Roast sweet potatoes until tender.',
+            '2. Cook chickpeas until heated through.',
+            '3. Combine sweet potatoes, chickpeas, coconut milk, and curry spices.',
+            '4. Simmer for 30 minutes.',
+            '5. Garnish with fresh cilantro.'
+        ],
+        380,
+        15,
+        50,
+        18
     ),
     new meal(
         'm25',
@@ -622,12 +731,16 @@ export const MEALS = [
         50,
         ['Lentils', 'Carrots', 'Celery', 'Tomatoes', 'Vegetable Broth'],
         [
-        '1. Sauté carrots, celery, and tomatoes in a pot.',
-        '2. Add lentils and vegetable broth.',
-        '3. Simmer until lentils are tender.',
-        '4. Season with herbs and spices.',
-        '5. Serve as a hearty vegetable stew.'
-        ]
+            '1. Sauté carrots, celery, and tomatoes in a pot.',
+            '2. Add lentils and vegetable broth.',
+            '3. Simmer until lentils are tender.',
+            '4. Season with herbs and spices.',
+            '5. Serve as a hearty vegetable stew.'
+        ],
+        280,
+        18,
+        35,
+        8
     ),
     new meal(
         'm26',
@@ -639,12 +752,16 @@ export const MEALS = [
         40,
         ['Rice Noodles', 'Tofu', 'Bean Sprouts', 'Peanuts', 'Soy Sauce'],
         [
-        '1. Cook rice noodles according to package instructions.',
-        '2. Sauté tofu until golden brown.',
-        '3. Add cooked noodles, bean sprouts, and peanuts.',
-        '4. Stir in soy sauce and cook until heated through.',
-        '5. Garnish with lime wedges.'
-        ]
+            '1. Cook rice noodles according to package instructions.',
+            '2. Sauté tofu until golden brown.',
+            '3. Add cooked noodles, bean sprouts, and peanuts.',
+            '4. Stir in soy sauce and cook until heated through.',
+            '5. Garnish with lime wedges.'
+        ],
+        320,
+        15,
+        40,
+        10
     ),
     new meal(
         'm27',
@@ -656,12 +773,16 @@ export const MEALS = [
         45,
         ['Portobello Mushrooms', 'Spinach', 'Brown Rice', 'Tomato Sauce', 'Vegan Cheese'],
         [
-        '1. Sauté mushrooms and spinach until cooked.',
-        '2. Mix in cooked brown rice and tomato sauce.',
-        '3. Stuff peppers with the mixture.',
-        '4. Top with vegan cheese.',
-        '5. Bake until peppers are tender.'
-        ]
+            '1. Sauté mushrooms and spinach until cooked.',
+            '2. Mix in cooked brown rice and tomato sauce.',
+            '3. Stuff peppers with the mixture.',
+            '4. Top with vegan cheese.',
+            '5. Bake until peppers are tender.'
+        ],
+        310,
+        20,
+        30,
+        12
     ),
     new meal(
         'm28',
@@ -673,12 +794,16 @@ export const MEALS = [
         20,
         ['Chickpeas', 'Avocado', 'Tomatoes', 'Lettuce', 'Whole Wheat Wrap'],
         [
-        '1. Mash chickpeas and mix with diced avocado.',
-        '2. Spread the mixture onto a whole wheat wrap.',
-        '3. Add sliced tomatoes and lettuce.',
-        '4. Roll up the wrap and cut in half.',
-        '5. Enjoy this quick and tasty chickpea and avocado wrap.'
-        ]
+            '1. Mash chickpeas and mix with diced avocado.',
+            '2. Spread the mixture onto a whole wheat wrap.',
+            '3. Add sliced tomatoes and lettuce.',
+            '4. Roll up the wrap and cut in half.',
+            '5. Enjoy this quick and tasty chickpea and avocado wrap.'
+        ],
+        280,
+        10,
+        30,
+        12
     ),
     new meal(
         'm29',
@@ -690,12 +815,16 @@ export const MEALS = [
         30,
         ['Whole Wheat Pasta', 'Cherry Tomatoes', 'Basil Pesto', 'Spinach', 'Nutritional Yeast'],
         [
-        '1. Cook whole wheat pasta according to package instructions.',
-        '2. Mix in cherry tomatoes, basil pesto, and spinach.',
-        '3. Sprinkle with nutritional yeast for added flavor.',
-        '4. Toss everything together.',
-        '5. Serve warm.'
-        ]
+            '1. Cook whole wheat pasta according to package instructions.',
+            '2. Mix in cherry tomatoes, basil pesto, and spinach.',
+            '3. Sprinkle with nutritional yeast for added flavor.',
+            '4. Toss everything together.',
+            '5. Serve warm.'
+        ],
+        340,
+        15,
+        40,
+        10
     ),
     new meal(
         'm30',
@@ -707,12 +836,16 @@ export const MEALS = [
         35,
         ['Quinoa', 'Chickpeas', 'Avocado', 'Carrots', 'Tahini Dressing'],
         [
-        '1. Cook quinoa and roast chickpeas.',
-        '2. Slice avocado and shred carrots.',
-        '3. Assemble quinoa, chickpeas, avocado, and carrots in a bowl.',
-        '4. Drizzle with tahini dressing.',
-        '5. Garnish with sesame seeds.'
-        ]
+            '1. Cook quinoa and roast chickpeas.',
+            '2. Slice avocado and shred carrots.',
+            '3. Assemble quinoa, chickpeas, avocado, and carrots in a bowl.',
+            '4. Drizzle with tahini dressing.',
+            '5. Garnish with sesame seeds.'
+        ],
+        380,
+        18,
+        40,
+        15
     ),
 
     new meal(
@@ -725,12 +858,16 @@ export const MEALS = [
         15,
         ['Protein Powder', 'Greek Yogurt', 'Mixed Berries', 'Almond Butter', 'Granola'],
         [
-        '1. Blend protein powder, Greek yogurt, and mixed berries until smooth.',
-        '2. Pour into a bowl.',
-        '3. Top with a spoonful of almond butter and granola.',
-        '4. Garnish with additional berries.',
-        '5. Enjoy as a hearty smoothie bowl.'
-        ]
+            '1. Blend protein powder, Greek yogurt, and mixed berries until smooth.',
+            '2. Pour into a bowl.',
+            '3. Top with a spoonful of almond butter and granola.',
+            '4. Garnish with additional berries.',
+            '5. Enjoy as a hearty smoothie bowl.'
+        ],
+        320,
+        25,
+        40,
+        10
     ),
     new meal(
         'm32',
@@ -742,12 +879,16 @@ export const MEALS = [
         20,
         ['Oats', 'Banana', 'Peanut Butter', 'Almond Milk', 'Chia Seeds'],
         [
-        '1. Cook oats with almond milk until creamy.',
-        '2. Slice banana and stir into the oatmeal.',
-        '3. Drizzle with peanut butter and sprinkle with chia seeds.',
-        '4. Mix everything together.',
-        '5. Enjoy a delicious and energizing bowl of oatmeal.'
-        ]
+            '1. Cook oats with almond milk until creamy.',
+            '2. Slice banana and stir into the oatmeal.',
+            '3. Drizzle with peanut butter and sprinkle with chia seeds.',
+            '4. Mix everything together.',
+            '5. Enjoy a delicious and energizing bowl of oatmeal.'
+        ],
+        340,
+        15,
+        40,
+        12
     ),
     new meal(
         'm33',
@@ -759,12 +900,16 @@ export const MEALS = [
         40,
         ['Chicken Breast', 'Quinoa', 'Sweet Potatoes', 'Broccoli', 'Cashews'],
         [
-        '1. Grill chicken until fully cooked.',
-        '2. Cook quinoa according to package instructions.',
-        '3. Roast sweet potatoes and broccoli.',
-        '4. Assemble quinoa, chicken, sweet potatoes, broccoli, and cashews in a bowl.',
-        '5. Drizzle with your favorite dressing.'
-        ]
+            '1. Grill chicken until fully cooked.',
+            '2. Cook quinoa according to package instructions.',
+            '3. Roast sweet potatoes and broccoli.',
+            '4. Assemble quinoa, chicken, sweet potatoes, broccoli, and cashews in a bowl.',
+            '5. Drizzle with your favorite dressing.'
+        ],
+        420,
+        35,
+        50,
+        18
     ),
     new meal(
         'm34',
@@ -776,29 +921,37 @@ export const MEALS = [
         30,
         ['Protein Powder', 'Oats', 'Banana', 'Peanut Butter', 'Almond Milk'],
         [
-        '1. Blend oats, protein powder, banana, and almond milk.',
-        '2. Cook pancakes on a griddle or skillet.',
-        '3. Stack pancakes and spread each layer with peanut butter.',
-        '4. Top with sliced banana.',
-        '5. Enjoy a protein-packed pancake stack.'
-        ]
+            '1. Blend oats, protein powder, banana, and almond milk.',
+            '2. Cook pancakes on a griddle or skillet.',
+            '3. Stack pancakes and spread each layer with peanut butter.',
+            '4. Top with sliced banana.',
+            '5. Enjoy a protein-packed pancake stack.'
+        ],
+        380,
+        20,
+        45,
+        15
     ),
     new meal(
         'm35',
         ['mc4'],
-    'Turkey and Quinoa Stuffed Peppers',
+        'Turkey and Quinoa Stuffed Peppers',
         'Moderate',
         'Intermediate',
         'imageUrl35',
         45,
         ['Bell Peppers', 'Ground Turkey', 'Quinoa', 'Black Beans', 'Tomato Sauce'],
         [
-        '1. Cut bell peppers in half and remove seeds.',
-        '2. Brown ground turkey and cook quinoa.',
-        '3. Mix turkey, quinoa, black beans, and tomato sauce.',
-        '4. Stuff bell peppers with the mixture.',
-        '5. Bake until peppers are tender.'
-        ]
+            '1. Cut bell peppers in half and remove seeds.',
+            '2. Brown ground turkey and cook quinoa.',
+            '3. Mix turkey, quinoa, black beans, and tomato sauce.',
+            '4. Stuff bell peppers with the mixture.',
+            '5. Bake until peppers are tender.'
+        ],
+        420,
+        25,
+        50,
+        20
     ),
     new meal(
         'm36',
@@ -810,12 +963,16 @@ export const MEALS = [
         35,
         ['Salmon Fillet', 'Sweet Potatoes', 'Coconut Oil', 'Green Beans', 'Lemon'],
         [
-        '1. Season salmon with salt, pepper, and lemon juice.',
-        '2. Bake salmon until it flakes easily.',
-        '3. Boil sweet potatoes until soft and mash with coconut oil.',
-        '4. Steam green beans until tender.',
-        '5. Serve salmon over sweet potato mash with green beans on the side.'
-        ]
+            '1. Season salmon with salt, pepper, and lemon juice.',
+            '2. Bake salmon until it flakes easily.',
+            '3. Boil sweet potatoes until soft and mash with coconut oil.',
+            '4. Steam green beans until tender.',
+            '5. Serve salmon over sweet potato mash with green beans on the side.'
+        ],
+        380,
+        22,
+        40,
+        18
     ),
     new meal(
         'm37',
@@ -827,12 +984,16 @@ export const MEALS = [
         25,
         ['Chickpeas', 'Spinach', 'Quinoa', 'Cherry Tomatoes', 'Olive Oil'],
         [
-        '1. Roast chickpeas until crispy.',
-        '2. Cook quinoa according to package instructions.',
-        '3. Chop spinach and tomatoes.',
-        '4. Mix chickpeas, quinoa, spinach, and tomatoes.',
-        '5. Drizzle with olive oil and toss.'
-        ]
+            '1. Roast chickpeas until crispy.',
+            '2. Cook quinoa according to package instructions.',
+            '3. Chop spinach and tomatoes.',
+            '4. Mix chickpeas, quinoa, spinach, and tomatoes.',
+            '5. Drizzle with olive oil and toss.'
+        ],
+        320,
+        18,
+        35,
+        10
     ),
     new meal(
         'm38',
@@ -844,12 +1005,16 @@ export const MEALS = [
         10,
         ['Oats', 'Almond Milk', 'Blueberries', 'Almonds', 'Maple Syrup'],
         [
-        '1. Mix oats and almond milk in a jar or container.',
-        '2. Add blueberries and chopped almonds.',
-        '3. Drizzle with maple syrup.',
-        '4. Stir well and refrigerate overnight.',
-        '5. Enjoy a quick and nutritious breakfast.'
-        ]
+            '1. Mix oats and almond milk in a jar or container.',
+            '2. Add blueberries and chopped almonds.',
+            '3. Drizzle with maple syrup.',
+            '4. Stir well and refrigerate overnight.',
+            '5. Enjoy a quick and nutritious breakfast.'
+        ],
+        290,
+        12,
+        30,
+        8
     ),
     new meal(
         'm39',
@@ -861,12 +1026,16 @@ export const MEALS = [
         30,
         ['Chicken Breast', 'Broccoli', 'Bell Peppers', 'Carrots', 'Soy Sauce'],
         [
-        '1. Slice chicken into strips and cook in a wok.',
-        '2. Add chopped broccoli, bell peppers, and carrots.',
-        '3. Stir in soy sauce and cook until vegetables are tender.',
-        '4. Serve over cooked rice.',
-        '5. Enjoy a delicious and nutritious chicken and vegetable stir-fry.'
-        ]
+            '1. Slice chicken into strips and cook in a wok.',
+            '2. Add chopped broccoli, bell peppers, and carrots.',
+            '3. Stir in soy sauce and cook until vegetables are tender.',
+            '4. Serve over cooked rice.',
+            '5. Enjoy a delicious and nutritious chicken and vegetable stir-fry.'
+        ],
+        380,
+        20,
+        45,
+        15
     ),
     new meal(
         'm40',
@@ -878,12 +1047,16 @@ export const MEALS = [
         20,
         ['Chickpeas', 'Avocado', 'Tomatoes', 'Lettuce', 'Whole Wheat Wrap'],
         [
-        '1. Mash chickpeas and mix with diced avocado.',
-        '2. Spread the mixture onto a whole wheat wrap.',
-        '3. Add sliced tomatoes and lettuce.',
-        '4. Roll up the wrap and cut in half.',
-        '5. Enjoy this quick and tasty avocado and chickpea wrap.'
-        ]
+            '1. Mash chickpeas and mix with diced avocado.',
+            '2. Spread the mixture onto a whole wheat wrap.',
+            '3. Add sliced tomatoes and lettuce.',
+            '4. Roll up the wrap and cut in half.',
+            '5. Enjoy this quick and tasty avocado and chickpea wrap.'
+        ],
+        320,
+        18,
+        35,
+        10
     )
 ]
 

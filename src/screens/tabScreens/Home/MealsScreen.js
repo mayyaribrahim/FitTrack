@@ -1,6 +1,7 @@
 import { useLayoutEffect } from "react";
 import { View, FlatList, StyleSheet, Text } from "react-native";
 import { MEALCATEGORIES, MEALS } from "../../../data/ExercisesData";
+import MealItem from "../../../components/MealItem";
 
 function MealsScreen({ route, navigation }) {
 
@@ -21,8 +22,24 @@ function MealsScreen({ route, navigation }) {
   function RenderExerciseItem(itemData) {
     const item = itemData.item;
 
+    const mealItemProps = {
+      id: item.id,
+      categoryIds: item.categoryIds,
+      title: item.title,
+      affordability: item.affordability,
+      complexity: item.complexity,
+      imageUrl: item.imageUrl,
+      duration: item.duration,
+      ingredients: item.ingredients,
+      steps: item.steps,
+      calories: item.calories,
+      protein: item.protein,
+      carb: item.carb,
+      fat: item.fat,
+    }
+
     return  (
-      <Text>{item.title}</Text>
+      <MealItem {...mealItemProps} />
     )
   }
 
@@ -34,6 +51,7 @@ function MealsScreen({ route, navigation }) {
       data={displayMeal}
       keyExtractor={(item) => item.id}
       renderItem={RenderExerciseItem}
+      showsVerticalScrollIndicator={false}
       />
 
     </View>
