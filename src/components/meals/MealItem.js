@@ -1,14 +1,15 @@
 import { View, Text, Pressable, Image, StyleSheet, Platform } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import MealDetail from "./MealDetail";
 
 function MealItem({ id, categoryIds, title, affordability, complexity, imageUrl, duration, ingredients, steps, calories, protein, carb, fat}) {
   const navigation = useNavigation();
 
 
   function selectMealItemHandler() {
-  //   navigation.navigate('MealDetail', {
-  //   mealId: id
-  // });
+    navigation.navigate('MealDetail', {
+   mealId: id
+   });
   }
   
 
@@ -25,9 +26,11 @@ function MealItem({ id, categoryIds, title, affordability, complexity, imageUrl,
           <View style={styles.innerContainer}>
           
             <View>
-              <Image source={require("../assets/images/default.jpg")} style={styles.image}/>
+              <Image source={require("../../assets/images/default.jpg")} style={styles.image}/>
               <Text style={styles.title}>{title}</Text>
             </View>
+
+            <MealDetail calroies={calories} protein={protein} carb={carb} fat={fat}/>
   
           </View>
 
@@ -63,7 +66,7 @@ const styles = StyleSheet.create({
     height: 200,
   }, 
   title: {
-    fontWeight: 'bold',
+    fontFamily: 'poppins',
     textAlign: 'center',
     fontSize: 18,
     margin: 8,

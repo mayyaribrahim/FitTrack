@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   imageContainer: {
-    marginBottom: 20,
+    bottom: 70,
   },
   profileImage: {
     width: 140,

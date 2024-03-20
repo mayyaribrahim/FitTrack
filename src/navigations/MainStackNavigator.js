@@ -13,6 +13,7 @@ import OnboardingTutorial from '../screens/authScreens/OnboardingTutorial';
 import HomeScreen from '../screens/tabScreens/Home/HomeScreen';
 import ExercisesScreen from '../screens/tabScreens/Home/ExercisesScreen';
 import MealsScreen from '../screens/tabScreens/Home/MealsScreen';
+import MlDetailScreen from '../screens/tabScreens/Home/MlDetailScreen';
 
 import FavExercise from '../screens/tabScreens/ToolsScreen/FavExercise';
 import FavMeals from '../screens/tabScreens/ToolsScreen/FavMeals';
@@ -35,7 +36,7 @@ const MainStackNavigator = () => {
       screenOptions={{ 
       headerShadowVisible: false,
       headerBackTitle: 'Back',
-      cardStyle: { backgroundColor: "#ffffffff" },
+      contentStyle: {backgroundColor: '#ffffff'},
       }}>
 
       {/*Authentication Stacks*/}
@@ -45,7 +46,9 @@ const MainStackNavigator = () => {
       <Stack.Screen name="SecondSignup" component={SecondSignupScreen} options={{headerTitleStyle: {color: 'white'},}}/>
       <Stack.Screen name="StartNow" component={StartNow} options={{headerTitleStyle: {color: 'white'},}}/>
       <Stack.Screen name="OnboardingTutorial" component={OnboardingTutorial} 
-      options={{headerBackVisible: false, gestureEnabled: false,}}/>
+        options={{headerBackVisible: false, gestureEnabled: false, 
+        headerTitleStyle: {color: 'white'}}}
+      />
       
     
       <Stack.Screen name="home" component={MyTabs}options={{gestureEnabled: false, headerShown: false}} />
@@ -53,8 +56,11 @@ const MainStackNavigator = () => {
 
       {/*Home Stacks*/}
       <Stack.Screen name="HomeScreen" component={HomeScreen} options={{headerShown: false,}} />
+      {/*exercise screens*/}
       <Stack.Screen name="ExercisesOverView" component={ExercisesScreen} />
+      {/*meals screens*/}
       <Stack.Screen name="MealOverView" component={MealsScreen} />
+      <Stack.Screen name="MealDetail" component={MlDetailScreen} />
 
 
       {/*Tools Stacks*/}

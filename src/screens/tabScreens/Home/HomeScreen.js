@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, ScrollView, FlatList, Image, Platform, TouchableOpacity, SafeAreaView } from "react-native";
 import ExCategoryGrid from "../../../components/ExCategoryGrid";
-import MlCategoryGrid from "../../../components/MlCategoryGrid";
-import { EXERCISESCATEGORIES, MEALCATEGORIES } from "../../../data/ExercisesData";
+import MlCategoryGrid from "../../../components/meals/MlCategoryGrid";
+import { EXERCISESCATEGORIES, MEALCATEGORIES } from "../../../data/Data";
 
 
 function HomeScreen({navigation}) {
@@ -67,9 +67,11 @@ function HomeScreen({navigation}) {
       <View style={styles.titleContainer}>
         <Text style={styles.PageTitle}>Hello Mayyar</Text>
       </View>
-        
-      <Image style={styles.userImage} source={require("../../../assets/images/user.png")}/>
 
+      <TouchableOpacity onPress={() => navigation.navigate('Personal Information')}>
+        <Image style={styles.userImage} source={require("../../../assets/images/user.png")}/>
+      </TouchableOpacity> 
+      
     </View>
 
 

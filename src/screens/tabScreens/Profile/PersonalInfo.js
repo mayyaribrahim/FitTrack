@@ -2,25 +2,14 @@ import { Text, View, StyleSheet, Image, KeyboardAvoidingView, Platform, Touchabl
 import PrimaryButton from "../../../components/PrimaryButton";
 import InputField from "../../../components/InputFeild";
 import ShortInput from "../../../components/ShortInput";
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Avatar from "../../../components/Avatar";
 
-function PersonalInfo () {
+function PersonalInfo ({ navigation }) {
 return (
 
   <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.container}>
     
-    <View style={styles.imageContainer}>
-
-      <TouchableOpacity style={styles.touchableContainer}>
-        <Image style={styles.image} source={require("../../../assets/images/user.png")}/>
-      </TouchableOpacity >
-
-      <TouchableOpacity style={styles.editButton}>
-        <MaterialCommunityIcons name="pencil" size={24} color="#b5b5b7" />
-      </TouchableOpacity>
-      
-    </View>
+    <Avatar />
 
     <View style={styles.inputContainer}>
       <View style={styles.ShortInputContainer}>
@@ -70,12 +59,10 @@ return (
         type="Age"
       />
 
-      
-
     </View>
 
     <View style={styles.primaryButton}>
-      <PrimaryButton>Confirm</PrimaryButton>
+      <PrimaryButton onPress={() => navigation.navigate('profile')}>Confirm</PrimaryButton>
     </View>
 
   </KeyboardAvoidingView>

@@ -1,6 +1,6 @@
 import { useLayoutEffect } from "react";
 import { View, FlatList, StyleSheet, Text } from "react-native";
-import { EXERCISESCATEGORIES, EXERCISES } from "../../../data/ExercisesData";
+import { EXERCISESCATEGORIES, EXERCISES } from "../../../data/Data";
 
 function ExercisesScreen({ route, navigation }) {
 

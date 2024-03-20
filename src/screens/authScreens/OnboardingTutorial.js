@@ -1,9 +1,9 @@
 import { React, useState, useRef } from "react";
-import { View, StyleSheet, FlatList, Animated } from "react-native";
+import { View, StyleSheet, FlatList, Animated, TouchableOpacity, Text} from "react-native";
 import Slides from '../../data/Slides'
-import OnboardingItem from '../../components/OnboardingItem'
-import Indicator from '../../components/Indicator';
-import NextButton from '../../components/NextButton';
+import OnboardingItem from '../../components/onboarding/OnboardingItem';
+import Indicator from '../../components/onboarding/Indicator';
+import NextButton from '../../components/onboarding/NextButton';
 
 const OnboardingTutorial = ({navigation}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -55,8 +55,16 @@ const OnboardingTutorial = ({navigation}) => {
         />
       </View>
 
-      <Indicator data={Slides} scrollX={scrollX} />
-      <NextButton scrollTo={scrollTo} title={handleTitle()} />
+      <View style={styles.secondContainer}>
+        <Indicator data={Slides} scrollX={scrollX} />
+        <NextButton scrollTo={scrollTo} title={handleTitle()} />
+      </View>
+
+      <View style={styles.skipContainer}>
+        <TouchableOpacity onPress={() => navigation.navigate('home')}>
+          <Text style={styles.skip}>Skip</Text>
+        </TouchableOpacity>
+      </View>
 
     </View>
   );
@@ -70,6 +78,26 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     // borderColor: "red",
     // borderWidth: 2,
+  },
+  secondContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 10,
+    width: "100%",
+  },
+  skipContainer: {
+    marginBottom: 50,
+    flexDirection: "row",
+    paddingHorizontal: 40,
+    alignItems: "center",
+    width: "100%",
+    justifyContent: "flex-end",
+  },
+  skip: {
+    color: "#625F60",
+    fontSize: 14,
+    fontFamily: "poppins-medium",
   },
 });
 
