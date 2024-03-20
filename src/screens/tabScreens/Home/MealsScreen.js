@@ -3,8 +3,9 @@ import { View, FlatList, StyleSheet, Text } from "react-native";
 import { MEALCATEGORIES, MEALS } from "../../../data/Data";
 import MealItem from "../../../components/meals/MealItem";
 
-function MealsScreen({ route, navigation }) {
 
+function MealsScreen({ route, navigation }) {
+  
   const catId = route.params.mealCategoryId;
 
   const displayMeal = MEALS.filter((mealItem => {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+
 import MyTabs from './TabNav';
 
 import IntroScreen from "../screens/authScreens/IntroScreen";
@@ -27,6 +28,9 @@ import About from '../screens/tabScreens/Profile/About';
 import TermsAndCond from '../screens/tabScreens/Profile/TermsAndCond';
 
 const Stack = createNativeStackNavigator();
+
+
+
 
 const MainStackNavigator = () => {
 

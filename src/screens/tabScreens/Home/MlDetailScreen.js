@@ -1,5 +1,5 @@
 import { useLayoutEffect } from "react";
-import { Text, Image, View, StyleSheet, ScrollView } from "react-native";
+import { Text, Image, View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import MealDetail from "../../../components/meals/MealDetail";
 import { MEALS } from "../../../data/Data";
 import MSubtitle from '../../../components/meals/MSubtitle';
@@ -19,7 +19,12 @@ function MlDetailScreen({route, navigation}) {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => {
-        return <FontAwesome6 name='star' color='white' onPress={headerButtonPressHandler}/>
+        return (
+          <TouchableOpacity onPress={headerButtonPressHandler}>
+            <FontAwesome6 name='star' color='black' size={24}  />
+          </TouchableOpacity>
+          
+        )
       }
     })
   }, [navigation, headerButtonPressHandler]);
