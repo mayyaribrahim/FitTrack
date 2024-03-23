@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import PrimaryButton from "../../../components/PrimaryButton";
 
-function FavExercise() {
+function FavExerciseScreen() {
   return (
     
     <SafeAreaView style={styles.container}>
@@ -12,7 +12,7 @@ function FavExercise() {
   )
 }
 
-export default FavExercise;
+export default FavExerciseScreen;
 
 const styles = StyleSheet.create({
 

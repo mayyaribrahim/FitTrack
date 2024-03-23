@@ -17,9 +17,7 @@ function LoginScreen ({navigation}) {
 
   console.log(email, password);
 
-  function handleLogin() {
-    navigation.navigate('home' )
-  }
+ 
   
   return (
     

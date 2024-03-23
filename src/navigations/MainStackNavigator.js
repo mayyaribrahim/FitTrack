@@ -1,6 +1,7 @@
 import React from 'react';
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Ionicons } from '@expo/vector-icons';
 
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import MyTabs from './TabNav';
 
@@ -12,12 +13,14 @@ import StartNow from '../screens/authScreens/StartNow';
 import OnboardingTutorial from '../screens/authScreens/OnboardingTutorial';
 
 import HomeScreen from '../screens/tabScreens/Home/HomeScreen';
-import ExercisesScreen from '../screens/tabScreens/Home/ExercisesScreen';
-import MealsScreen from '../screens/tabScreens/Home/MealsScreen';
-import MlDetailScreen from '../screens/tabScreens/Home/MlDetailScreen';
+import FavExercise from '../screens/tabScreens/Home/HomeScreen';
+import FavMeals from '../screens/tabScreens/Home/HomeScreen';
 
-import FavExercise from '../screens/tabScreens/ToolsScreen/FavExercise';
-import FavMeals from '../screens/tabScreens/ToolsScreen/FavMeals';
+import ExercisesScreen from '../screens/tabScreens/Home/ExercisesScreen';
+import MealsScreen from '../screens/tabScreens/Home/meals/MealsScreen';
+import FavMealsScreen from '../screens/tabScreens/Home/meals/FavMealsScreen';
+import MlDetailScreen from '../screens/tabScreens/Home/meals/MlDetailScreen';
+
 import Calculator from '../screens/tabScreens/ToolsScreen/Calculator';
 
 import ProfileScreen from '../screens/tabScreens/Profile/ProfileScreen';
@@ -28,8 +31,6 @@ import About from '../screens/tabScreens/Profile/About';
 import TermsAndCond from '../screens/tabScreens/Profile/TermsAndCond';
 
 const Stack = createNativeStackNavigator();
-
-
 
 
 const MainStackNavigator = () => {
@@ -53,23 +54,19 @@ const MainStackNavigator = () => {
         options={{headerBackVisible: false, gestureEnabled: false, 
         headerTitleStyle: {color: 'white'}}}
       />
-      
-    
+
       <Stack.Screen name="home" component={MyTabs}options={{gestureEnabled: false, headerShown: false}} />
 
-
-      {/*Home Stacks*/}
-      <Stack.Screen name="HomeScreen" component={HomeScreen} options={{headerShown: false,}} />
       {/*exercise screens*/}
-      <Stack.Screen name="ExercisesOverView" component={ExercisesScreen} />
+      <Stack.Screen name="ExercisesScreen" component={ExercisesScreen} />
       {/*meals screens*/}
-      <Stack.Screen name="MealOverView" component={MealsScreen} />
+      <Stack.Screen name="MealsScreen" component={MealsScreen} />
       <Stack.Screen name="MealDetail" component={MlDetailScreen} />
 
+      <Stack.Screen name="FavMealsScreen" component={FavMealsScreen} />
+      
 
       {/*Tools Stacks*/}
-      <Stack.Screen name="Favorite Exercises" component={FavExercise} />
-      <Stack.Screen name="Favorite Meals" component={FavMeals} />
       <Stack.Screen name="Macros Calculator" component={Calculator} />
    
 

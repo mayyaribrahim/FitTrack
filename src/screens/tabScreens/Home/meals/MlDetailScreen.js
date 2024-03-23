@@ -1,9 +1,9 @@
 import { useLayoutEffect } from "react";
 import { Text, Image, View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
-import MealDetail from "../../../components/meals/MealDetail";
-import { MEALS } from "../../../data/Data";
-import MSubtitle from '../../../components/meals/MSubtitle';
-import MList from '../../../components/meals/MList';
+import MealDetail from "../../../../components/meals/MealDetail";
+import { MEALS } from "../../../../data/Data";
+import MSubtitle from '../../../../components/meals/MSubtitle';
+import MList from '../../../../components/meals/MList';
 import { FontAwesome6 } from "@expo/vector-icons";
 
 
@@ -12,8 +12,15 @@ function MlDetailScreen({route, navigation}) {
 
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
 
+  //take the id from meal.id and make it equal to mealId and by doing that you can access all 'meal' props because 
+  //mealId has a route and mealId = selectedMeal so selectedMeal ==== 'meal' eventially 
+
   function headerButtonPressHandler() {
     console.log('Pressed!');
+    navigation.navigate('FavMealsScreen', {
+      meal: selectedMeal,
+      
+    });
   }
 
   useLayoutEffect(() => {
@@ -32,7 +39,7 @@ function MlDetailScreen({route, navigation}) {
   return (
     <ScrollView style={styles.rootContainer}>
 
-      <Image style={styles.image} source={require("../../../assets/images/default.jpg")} />
+      <Image style={styles.image} source={require("../../../../assets/images/default.jpg")} />
 
       <Text style={styles.title}>{selectedMeal.title}</Text>
 

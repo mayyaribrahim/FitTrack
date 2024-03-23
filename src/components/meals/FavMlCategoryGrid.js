@@ -1,7 +1,7 @@
 import { Pressable, View, Text, StyleSheet, Platform } from "react-native";
 import { Ionicons, FontAwesome6 } from "@expo/vector-icons";
 
-function MlCategoryGrid({ title, titleColor, buttonColor, iconContainer, iconColor, onPress }) {
+function FavMlCategoryGrid({ title, titleColor, buttonColor, iconContainer, iconColor, onPress }) {
   
   return (
    <View style={styles.gridItem}>
@@ -37,15 +37,14 @@ function MlCategoryGrid({ title, titleColor, buttonColor, iconContainer, iconCol
   );
 }
 
-export default MlCategoryGrid;
+export default FavMlCategoryGrid;
 
 const styles = StyleSheet.create({
   gridItem: {
     flex: 1,
-    margin: 5,
-    marginRight: 11,
-    height: 160,
-    width: 133,
+    margin: 10,
+    height: 120,
+    width: 340,
     elevation: 4,
     overflow: Platform.OS === "android" ? "hidden" : "visible",
     shadowColor: "#000000",
@@ -64,12 +63,8 @@ const styles = StyleSheet.create({
   },
 
   textContainer: {
-    flex: 1,
-    padding: 16,
-    justifyContent: "flex-end",
-    alignItems: "flex-start",
-    bottom: 10,
-    left: 2,
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   innerContainer: {
@@ -80,16 +75,16 @@ const styles = StyleSheet.create({
     width: 47,
     height: 47,
     borderRadius: 30,
-    alignSelf: 'center',
+    alignSelf: 'flex-end',
     alignItems: 'center',
     justifyContent: 'center',
-    top: 16,
-    left: 33,
+    top: 17,
+    right: 13,
   },
 
   title: {
     fontFamily: 'poppins-light',
-    fontSize: 20,
+    fontSize: 25,
     
   },
 });

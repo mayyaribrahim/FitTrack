@@ -8,11 +8,11 @@ function HomeScreen({navigation}) {
 
   
   
-
+  //for meals
   function renderMealCategoryItem(itemData) {
 
     function pressHandler() {
-      navigation.navigate('MealOverView', {
+      navigation.navigate('MealsScreen', {
         mealCategoryId: itemData.item.id, 
       });
     }
@@ -34,10 +34,11 @@ function HomeScreen({navigation}) {
     );
   }
   
+  //for exercises
   function renderCategoryItem(itemData) {
 
     function pressHandler() {
-      navigation.navigate('ExercisesOverView', {
+      navigation.navigate('ExercisesScreen', {
         exerciseCategoryId: itemData.item.id, 
       });
     }
@@ -59,23 +60,25 @@ function HomeScreen({navigation}) {
     );
   }
 
+  // main return 
   return (
+
   <SafeAreaView  style={styles.container} >
 
-    <View style={styles.headerContainer}>
-
-      <View style={styles.titleContainer}>
-        <Text style={styles.PageTitle}>Hello Mayyar</Text>
-      </View>
-
-      <TouchableOpacity onPress={() => navigation.navigate('Personal Information')}>
-        <Image style={styles.userImage} source={require("../../../assets/images/user.png")}/>
-      </TouchableOpacity> 
-      
-    </View>
-
-
+    
     <ScrollView style={styles.scrollcontainer} showsVerticalScrollIndicator={false}>
+
+      <View style={styles.headerContainer}>
+
+        <View style={styles.titleContainer}>
+          <Text style={styles.PageTitle}>Hello Mayyar</Text>
+        </View>
+
+        <TouchableOpacity onPress={() => navigation.navigate('Personal Information')}>
+          <Image style={styles.userImage} source={require("../../../assets/images/user.png")}/>
+        </TouchableOpacity> 
+        
+      </View>
 
       <View style={styles.box}>
         <Text style={styles.boxTitle}>Exercises</Text>
@@ -148,6 +151,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
+    bottom: 5,
   },
 
   scrollcontainer: {
@@ -159,8 +163,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: 'space-between',
     paddingRight: 25,
-    marginBottom: 10,
-    top: 4,
+    
   },
 
   PageTitle: {
@@ -249,20 +252,15 @@ const styles = StyleSheet.create({
   },
 
   viewAll:{
-    
     fontFamily: 'poppins-medium',
     fontSize: 14,
     right: 26,
     top: 3,
   },
 
-
-
-  
   categoryGrid: {
     left: 16,
     marginBottom: 5,
-    
   },
 
   flatListCon: {

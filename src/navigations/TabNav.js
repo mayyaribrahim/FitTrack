@@ -2,8 +2,8 @@ import { StyleSheet, Platform } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
+import { DrawerNavigator } from './DrawerNavigator';
 
-import HomeScreen from '../screens/tabScreens/Home/HomeScreen';
 import ProfileScreen from '../screens/tabScreens/Profile/ProfileScreen';
 import FeedScreen from '../screens/tabScreens/Feed/FeedScreen';
 import ToolsScreen from '../screens/tabScreens/ToolsScreen/ToolsScreen';
@@ -27,7 +27,7 @@ function MyTabs() {
 
       <Tab.Screen 
         name="Home" 
-        component={HomeScreen} 
+        component={DrawerNavigator} 
         options={{
           tabBarIcon: ({color, size}) => (
             <Ionicons name='home' color={color} size={30}/>
