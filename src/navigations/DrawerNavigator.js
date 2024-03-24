@@ -2,7 +2,7 @@ import React from 'react';
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from '../screens/tabScreens/Home/HomeScreen';
-import FavExerciseScreen from '../screens/tabScreens/Home/FavExerciseScreen'
+import FavExerciseScreen from '../screens/tabScreens/Home/exercises/FavExerciseScreen'
 import FavMlHome from '../screens/tabScreens/Home/meals/FavMlHome';
 
 const Drawer = createDrawerNavigator();

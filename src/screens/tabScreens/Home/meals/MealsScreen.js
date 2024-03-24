@@ -20,7 +20,7 @@ function MealsScreen({ route, navigation }) {
     }); 
   }, [catId, navigation])
 
-  function RenderExerciseItem(itemData) {
+  function RenderMealItem(itemData) {
     const item = itemData.item;
 
     const mealItemProps = {
@@ -51,7 +51,7 @@ function MealsScreen({ route, navigation }) {
       <FlatList 
       data={displayMeal}
       keyExtractor={(item) => item.id}
-      renderItem={RenderExerciseItem}
+      renderItem={RenderMealItem}
       showsVerticalScrollIndicator={false}
       />
 

@@ -16,7 +16,9 @@ import HomeScreen from '../screens/tabScreens/Home/HomeScreen';
 import FavExercise from '../screens/tabScreens/Home/HomeScreen';
 import FavMeals from '../screens/tabScreens/Home/HomeScreen';
 
-import ExercisesScreen from '../screens/tabScreens/Home/ExercisesScreen';
+import ExercisesScreen from '../screens/tabScreens/Home/exercises/ExercisesScreen';
+import ExDetailScreen from '../screens/tabScreens/Home/exercises/ExDetailScreen';
+
 import MealsScreen from '../screens/tabScreens/Home/meals/MealsScreen';
 import FavMealsScreen from '../screens/tabScreens/Home/meals/FavMealsScreen';
 import MlDetailScreen from '../screens/tabScreens/Home/meals/MlDetailScreen';
@@ -59,6 +61,7 @@ const MainStackNavigator = () => {
 
       {/*exercise screens*/}
       <Stack.Screen name="ExercisesScreen" component={ExercisesScreen} />
+      <Stack.Screen name="ExerciseDetail" component={ExDetailScreen} />
       {/*meals screens*/}
       <Stack.Screen name="MealsScreen" component={MealsScreen} />
       <Stack.Screen name="MealDetail" component={MlDetailScreen} />

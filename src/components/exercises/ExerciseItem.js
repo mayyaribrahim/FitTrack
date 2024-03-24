@@ -1,36 +1,31 @@
 import { View, Text, Pressable, Image, StyleSheet, Platform } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import MealDetail from "./MealDetail";
 
-function MealItem({ id, title, calories, protein, carb, fat}) {
+function ExerciseItem({id, name}) {
   const navigation = useNavigation();
 
-
-  function selectMealItemHandler() {
-    navigation.navigate('MealDetail', {
-   mealId: id
-   });
+  function selectExerciseItemHandler() {
+    navigation.navigate('ExerciseDetail', {
+    exerciseId: id
+    });
   }
-  
 
   return (
 
-    <View style={styles.mealItem}>
+    <View style={styles.exerciseItem}>
 
       <Pressable 
           android_ripple={{ color: "#ccc" }}
           style={({ pressed }) => [pressed ? styles.buttonPressed : null]}
-          onPress={selectMealItemHandler}
+          onPress={selectExerciseItemHandler}
         >
 
           <View style={styles.innerContainer}>
           
             <View>
               <Image source={require("../../assets/images/default.jpg")} style={styles.image}/>
-              <Text style={styles.title}>{title}</Text>
+              <Text style={styles.title}>{name}</Text>
             </View>
-
-            <MealDetail calroies={calories} protein={protein} carb={carb} fat={fat}/>
   
           </View>
 
@@ -38,12 +33,13 @@ function MealItem({ id, title, calories, protein, carb, fat}) {
 
     </View>
   )
-}
+  
+} 
 
-export default MealItem;
+export default  ExerciseItem;
 
 const styles = StyleSheet.create({
-  mealItem: {
+  exerciseItem: {
     margin: 16,
     borderRadius: 8,
     overflow: Platform.OS === "android" ? "hidden" : "visible",

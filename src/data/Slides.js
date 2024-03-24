@@ -19,8 +19,8 @@ const Slides = [
   },
   {
     id: "4",
-    title: "Macros and Calorie Calculator",
-    description: "Take control of your nutrition with our combined Calories and Macros Calculator!",
+    title: "Macros Calculator",
+    description: "Take control of your nutrition with our Macros Calculator!",
     image: require("../assets/images/macros.png"),
   },
   {

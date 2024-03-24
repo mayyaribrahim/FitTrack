@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, ScrollView, SafeAreaView } from "react-native";
-import PrimaryButton from "../../../components/PrimaryButton";
+import PrimaryButton from "../../../../components/PrimaryButton";
 
 function FavExerciseScreen() {
   return (

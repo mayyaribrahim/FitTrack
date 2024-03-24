@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
     width: 160,
     height: 160,
     top: 6,
+    resizeMode: "contain",
    
   },
   

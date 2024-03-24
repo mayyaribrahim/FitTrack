@@ -1,6 +1,7 @@
 import { useLayoutEffect } from "react";
 import { View, FlatList, StyleSheet, Text } from "react-native";
-import { EXERCISESCATEGORIES, EXERCISES } from "../../../data/Data";
+import { EXERCISESCATEGORIES, EXERCISES } from "../../../../data/Data";
+import ExerciseItem from "../../../../components/exercises/ExerciseItem";
 
 function ExercisesScreen({ route, navigation }) {
 
@@ -17,12 +18,22 @@ function ExercisesScreen({ route, navigation }) {
       title: exerciseCategoryTitle
     }); 
   }, [catId, navigation])
+  
 
   function RenderExerciseItem(itemData) {
     const item = itemData.item;
 
+    const exerciseItemProps = {
+      id: item.id,
+      categoryIds: item.categoryIds,
+      imageUrl: item.imageUrl,
+      name: item.name,
+      setsAndReps: item.setsAndReps,
+      equipment: item.equipment,
+    } 
+
     return  (
-      <Text>{item.name}</Text>
+      <ExerciseItem {...exerciseItemProps} />
     )
   }
 
@@ -34,6 +45,7 @@ function ExercisesScreen({ route, navigation }) {
       data={displayExercises}
       keyExtractor={(item) => item.id}
       renderItem={RenderExerciseItem}
+      showsVerticalScrollIndicator={false}
       />
 
       
