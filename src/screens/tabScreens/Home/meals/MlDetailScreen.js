@@ -14,10 +14,10 @@ function MlDetailScreen({route, navigation}) {
 
   function headerButtonPressHandler() {
     console.log('Pressed!');
-    navigation.navigate('FavMealsScreen', {
-      meal: selectedMeal,
+    // navigation.navigate('FavMealsScreen', {
+    //   meal: selectedMeal,
       
-    });
+    // });
   }
 
   useLayoutEffect(() => {
