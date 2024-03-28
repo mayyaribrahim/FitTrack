@@ -32,6 +32,8 @@ import ChangePassword from '../screens/tabScreens/Profile/ChangePassword';
 import About from '../screens/tabScreens/Profile/About';
 import TermsAndCond from '../screens/tabScreens/Profile/TermsAndCond';
 
+import FavoritesContextProvider from '../context/Favorites-context';
+
 const Stack = createNativeStackNavigator();
 
 
@@ -39,49 +41,53 @@ const MainStackNavigator = () => {
 
   return (
     
-    <Stack.Navigator 
-      screenOptions={{ 
-      headerShadowVisible: false,
-      headerBackTitle: 'Back',
-      contentStyle: {backgroundColor: '#ffffff'},
-      }}>
+    <FavoritesContextProvider>
 
-      {/*Authentication Stacks*/}
-      <Stack.Screen name="Intro" component={IntroScreen} options={{headerTitleStyle: {color: 'white'},}}/>
-      <Stack.Screen name="Login" component={LoginScreen} options={{headerTitleStyle: {color: 'white'},}}/>
-      <Stack.Screen name="Signup" component={SignupScreen} options={{headerTitleStyle: {color: 'white'},}}/>
-      <Stack.Screen name="SecondSignup" component={SecondSignupScreen} options={{headerTitleStyle: {color: 'white'},}}/>
-      <Stack.Screen name="StartNow" component={StartNow} options={{headerTitleStyle: {color: 'white'},}}/>
-      <Stack.Screen name="OnboardingTutorial" component={OnboardingTutorial} 
-        options={{headerBackVisible: false, gestureEnabled: false, 
-        headerTitleStyle: {color: 'white'}}}
-      />
+      <Stack.Navigator 
+        screenOptions={{ 
+        headerShadowVisible: false,
+        headerBackTitle: 'Back',
+        contentStyle: {backgroundColor: '#ffffff'},
+        }}>
 
-      <Stack.Screen name="home" component={MyTabs}options={{gestureEnabled: false, headerShown: false}} />
+        {/*Authentication Stacks*/}
+        <Stack.Screen name="Intro" component={IntroScreen} options={{headerTitleStyle: {color: 'white'},}}/>
+        <Stack.Screen name="Login" component={LoginScreen} options={{headerTitleStyle: {color: 'white'},}}/>
+        <Stack.Screen name="Signup" component={SignupScreen} options={{headerTitleStyle: {color: 'white'},}}/>
+        <Stack.Screen name="SecondSignup" component={SecondSignupScreen} options={{headerTitleStyle: {color: 'white'},}}/>
+        <Stack.Screen name="StartNow" component={StartNow} options={{headerTitleStyle: {color: 'white'},}}/>
+        <Stack.Screen name="OnboardingTutorial" component={OnboardingTutorial} 
+          options={{headerBackVisible: false, gestureEnabled: false, 
+          headerTitleStyle: {color: 'white'}}}
+        />
 
-      {/*exercise screens*/}
-      <Stack.Screen name="ExercisesScreen" component={ExercisesScreen} />
-      <Stack.Screen name="ExerciseDetail" component={ExDetailScreen} />
-      {/*meals screens*/}
-      <Stack.Screen name="MealsScreen" component={MealsScreen} />
-      <Stack.Screen name="MealDetail" component={MlDetailScreen} />
+        <Stack.Screen name="home" component={MyTabs}options={{gestureEnabled: false, headerShown: false}} />
 
-      <Stack.Screen name="FavMealsScreen" component={FavMealsScreen} />
-      
+        {/*exercise screens*/}
+        <Stack.Screen name="ExercisesScreen" component={ExercisesScreen} />
+        <Stack.Screen name="ExerciseDetail" component={ExDetailScreen} />
+        {/*meals screens*/}
+        <Stack.Screen name="MealsScreen" component={MealsScreen} />
+        <Stack.Screen name="MealDetail" component={MlDetailScreen} />
 
-      {/*Tools Stacks*/}
-      <Stack.Screen name="Macros Calculator" component={Calculator} />
-   
+        <Stack.Screen name="FavMealsScreen" component={FavMealsScreen} />
+        
 
-      {/*Profile Stacks*/}
-      <Stack.Screen name="ProfileStacks" component={ProfileScreen} options={{headerShown: false,}}/>
-      <Stack.Screen name="Personal Information" component={PersonalInfo} />
-      <Stack.Screen name="Settings" component={Settings} />
-      <Stack.Screen name="Change Password" component={ChangePassword} />
-      <Stack.Screen name="About" component={About} />
-      <Stack.Screen name="Terms And Conditions" component={TermsAndCond} />
-      
-    </Stack.Navigator>
+        {/*Tools Stacks*/}
+        <Stack.Screen name="Macros Calculator" component={Calculator} />
+    
+
+        {/*Profile Stacks*/}
+        <Stack.Screen name="ProfileStacks" component={ProfileScreen} options={{headerShown: false,}}/>
+        <Stack.Screen name="Personal Information" component={PersonalInfo} />
+        <Stack.Screen name="Settings" component={Settings} />
+        <Stack.Screen name="Change Password" component={ChangePassword} />
+        <Stack.Screen name="About" component={About} />
+        <Stack.Screen name="Terms And Conditions" component={TermsAndCond} />
+        
+      </Stack.Navigator>
+
+    </FavoritesContextProvider>
   );
 };
 

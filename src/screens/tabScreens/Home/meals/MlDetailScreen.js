@@ -1,37 +1,43 @@
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useContext } from "react";
 import { Text, Image, View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import MealDetail from "../../../../components/meals/MealDetail";
 import { MEALS } from "../../../../data/Data";
 import MSubtitle from '../../../../components/meals/MSubtitle';
 import MList from '../../../../components/meals/MList';
 import { AntDesign } from '@expo/vector-icons';
-
+import { FavoritesContext } from "../../../../context/Favorites-context";
 
 function MlDetailScreen({route, navigation}) {
+  const favoriteMealsCtx = useContext((FavoritesContext));
+
   const mealId = route.params.mealId;
 
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
 
-  function headerButtonPressHandler() {
-    console.log('Pressed!');
-    // navigation.navigate('FavMealsScreen', {
-    //   meal: selectedMeal,
-      
-    // });
+  const mealIsFavorite = favoriteMealsCtx.ids.includes(mealId);
+
+  function changeFavoritesStatusHandler() {
+    if (mealIsFavorite) {
+      favoriteMealsCtx.removeFavorite(mealId)    
+    } 
+    
+    else {
+      favoriteMealsCtx.addFavorite(mealId);
+    }
   }
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => {
         return (
-          <TouchableOpacity onPress={headerButtonPressHandler}>
-            <AntDesign name='star' color='black' size={24}  />
+          <TouchableOpacity onPress={changeFavoritesStatusHandler}>
+            <AntDesign name='star' color={mealIsFavorite ? '#ffb700': 'black'} size={24}  />
           </TouchableOpacity>
           
         )
       }
     })
-  }, [navigation, headerButtonPressHandler]);
+  }, [navigation, changeFavoritesStatusHandler]);
 
   return (
     <ScrollView style={styles.rootContainer}>

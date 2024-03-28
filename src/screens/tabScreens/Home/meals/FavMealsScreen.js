@@ -1,59 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
-import MealItem from '../../../../components/meals/MealItem';
-function FavMealsScreen({ route }) {
-  const [favoriteMeals, setFavoriteMeals] = useState([]);
+import React, {useContext } from 'react';
+import { View,Text, StyleSheet } from 'react-native';
+import { MEALS } from '../../../../data/Data';
+import MealsList from '../../../../components/meals/mealsList';
+import { FavoritesContext } from '../../../../context/Favorites-context';
 
-  useEffect(() => {
-    if (route.params && route.params.meal) {
-      // Add selected meal to favorites
-      setFavoriteMeals(prevMeals => [...prevMeals, route.params.meal]);
-    }
-  }, [route.params]);
+function FavMealsScreen({ route }) { 
+  const favoriteMealsCtx = useContext(FavoritesContext);
+  
+  const favoriteMeals = MEALS.filter((meal) => {
+    return favoriteMealsCtx.ids.includes(meal.id);
+  });
 
-  function RenderExerciseItem(itemData) {
-    const item = itemData.item;
-
-    const mealItemProps = {
-      id: item.id,
-      categoryIds: item.categoryIds,
-      title: item.title,
-      affordability: item.affordability,
-      complexity: item.complexity,
-      imageUrl: item.imageUrl,
-      duration: item.duration,
-      ingredients: item.ingredients,
-      steps: item.steps,
-      calories: item.calories,
-      protein: item.protein,
-      carb: item.carb,
-      fat: item.fat,
-    }
-
-    return  (
-      <MealItem {...mealItemProps} />
-    )
+  if (favoriteMeals.length === 0) {
+    return (
+      <View style={styles.rootContainer}>
+        <Text style={styles.text}>You have no favorite meals yet</Text>
+      </View>
+    );
   }
 
-  return (
-    <View style={styles.container}>
-      
-      <FlatList
-        data={favoriteMeals}
-        renderItem={RenderExerciseItem}
-        keyExtractor={(item) => item.id}
-      />
 
-    </View>
+  return (
+
+    <MealsList items={favoriteMeals}/>
   );
 }
 
+export default FavMealsScreen;
+
 const styles = StyleSheet.create({
-  container: {
+  rootContainer: {
     flex: 1,
-    padding: 16,
-    backgroundColor: "#fff",
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  text: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'white',
   },
 });
-
-export default FavMealsScreen;

@@ -1,18 +1,20 @@
 import { useLayoutEffect } from "react";
 import { View, FlatList, StyleSheet, Text } from "react-native";
 import { MEALCATEGORIES, MEALS } from "../../../../data/Data";
-import MealItem from "../../../../components/meals/MealItem";
+import MealsList from "../../../../components/meals/mealsList";
 
 
 function MealsScreen({ route, navigation }) {
   
   const catId = route.params.mealCategoryId;
 
-  const displayMeal = MEALS.filter((mealItem => {
-    return mealItem.categoryIds.indexOf(catId) >= 0;
+  const displayMeal = MEALS.filter((mealItem => { //malek
+    return mealItem.categoryIds[0] === catId
   }));
-
-  useLayoutEffect(()  => {
+  // const displayMeal = MEALS.filter((mealItem => { 
+  //   return mealItem.categoryIds.indexOf(catId) >= 0;
+  // }));
+  useLayoutEffect(()  => { 
     const mealCategoryTitle = MEALCATEGORIES.find((mealCategory) => mealCategory.id === catId).title;
 
     navigation.setOptions({
@@ -20,29 +22,29 @@ function MealsScreen({ route, navigation }) {
     }); 
   }, [catId, navigation])
 
-  function RenderMealItem(itemData) {
-    const item = itemData.item;
+  // function RenderMealItem(itemData) { //malek
+  //   const item = itemData.item;
 
-    const mealItemProps = {
-      id: item.id,
-      categoryIds: item.categoryIds,
-      title: item.title,
-      affordability: item.affordability,
-      complexity: item.complexity,
-      imageUrl: item.imageUrl,
-      duration: item.duration,
-      ingredients: item.ingredients,
-      steps: item.steps,
-      calories: item.calories,
-      protein: item.protein,
-      carb: item.carb,
-      fat: item.fat,
-    }
+  //   const mealItemProps = {
+  //     id: item.id,
+  //     categoryIds: item.categoryIds,
+  //     title: item.title,
+  //     affordability: item.affordability,
+  //     complexity: item.complexity,
+  //     imageUrl: item.imageUrl,
+  //     duration: item.duration,
+  //     ingredients: item.ingredients,
+  //     steps: item.steps,
+  //     calories: item.calories,
+  //     protein: item.protein,
+  //     carb: item.carb,
+  //     fat: item.fat,
+  //   }
 
-    return  (
-      <MealItem {...mealItemProps} />
-    )
-  }
+  //   return  (
+  //     <MealsList items={displayMeal}/>
+  //   )
+  // }
 
 
   return (
@@ -51,7 +53,7 @@ function MealsScreen({ route, navigation }) {
       <FlatList 
       data={displayMeal}
       keyExtractor={(item) => item.id}
-      renderItem={RenderMealItem}
+      renderItem={({ item }) => <MealsList items={[item]} />}
       showsVerticalScrollIndicator={false}
       />
 

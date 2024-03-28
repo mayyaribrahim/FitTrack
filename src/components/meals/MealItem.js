@@ -4,7 +4,10 @@ import MealDetail from "./MealDetail";
 
 function MealItem({ id, title, calories, protein, carb, fat}) {
   const navigation = useNavigation();
-
+  // console.log(calories,
+  //   protein,
+  //   carb,
+  //   fat);
 
   function selectMealItemHandler() {
     navigation.navigate('MealDetail', {
