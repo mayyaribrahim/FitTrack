@@ -12,6 +12,8 @@ function MlDetailScreen({route, navigation}) {
 
   const mealId = route.params.mealId;
 
+  
+
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
 
   const mealIsFavorite = favoriteMealsCtx.ids.includes(mealId);
@@ -23,6 +25,7 @@ function MlDetailScreen({route, navigation}) {
     
     else {
       favoriteMealsCtx.addFavorite(mealId);
+      
     }
   }
 

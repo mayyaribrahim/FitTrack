@@ -6,8 +6,6 @@ import { EXERCISESCATEGORIES, MEALCATEGORIES } from "../../../data/Data";
 
 function HomeScreen({navigation}) {
 
-  
-  
   //for meals
   function renderMealCategoryItem(itemData) {
 

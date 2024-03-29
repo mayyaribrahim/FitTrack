@@ -3,17 +3,17 @@ import { View, FlatList, StyleSheet, Text } from "react-native";
 import { MEALCATEGORIES, MEALS } from "../../../../data/Data";
 import MealsList from "../../../../components/meals/mealsList";
 
-
 function MealsScreen({ route, navigation }) {
   
   const catId = route.params.mealCategoryId;
 
-  const displayMeal = MEALS.filter((mealItem => { //malek
+  const displayMeal = MEALS.filter((mealItem => {
     return mealItem.categoryIds[0] === catId
   }));
-  // const displayMeal = MEALS.filter((mealItem => { 
-  //   return mealItem.categoryIds.indexOf(catId) >= 0;
-  // }));
+  //take the catId you got when pressing on a specific category and compare it to mealItem.categoryIds if they are = print the meals
+  //this function prints meals on their own categories
+  
+
   useLayoutEffect(()  => { 
     const mealCategoryTitle = MEALCATEGORIES.find((mealCategory) => mealCategory.id === catId).title;
 
@@ -22,43 +22,35 @@ function MealsScreen({ route, navigation }) {
     }); 
   }, [catId, navigation])
 
-  // function RenderMealItem(itemData) { //malek
-  //   const item = itemData.item;
 
-  //   const mealItemProps = {
-  //     id: item.id,
-  //     categoryIds: item.categoryIds,
-  //     title: item.title,
-  //     affordability: item.affordability,
-  //     complexity: item.complexity,
-  //     imageUrl: item.imageUrl,
-  //     duration: item.duration,
-  //     ingredients: item.ingredients,
-  //     steps: item.steps,
-  //     calories: item.calories,
-  //     protein: item.protein,
-  //     carb: item.carb,
-  //     fat: item.fat,
-  //   }
-
-  //   return  (
-  //     <MealsList items={displayMeal}/>
-  //   )
-  // }
+    return  (
+      <MealsList items={displayMeal} />
+    )
+  
 
 
-  return (
-    <View style={styles.container}>
+  // return (
+  //   <View style={styles.container}>
 
-      <FlatList 
-      data={displayMeal}
-      keyExtractor={(item) => item.id}
-      renderItem={({ item }) => <MealsList items={[item]} />}
-      showsVerticalScrollIndicator={false}
-      />
+  //     <FlatList 
+  //     data={displayMeal}
+  //     keyExtractor={(item) => item.id}
+  //     renderItem={({ item }) => (
+  //       <MealItem
+  //         id={item.id}
+  //         title={item.title}
+  //         calories={item.calories}
+  //         protein={item.protein}
+  //         carb={item.carb}
+  //         fat={item.fat}
+  //         categoryIds={item.categoryIds}
+  //       />
+  //     )}
+  //     showsVerticalScrollIndicator={false}
+  //     />
 
-    </View>
-  )
+  //   </View>
+  // )
 
 }
 

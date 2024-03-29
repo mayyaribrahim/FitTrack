@@ -18,6 +18,7 @@ function MealsList({items}) {
       protein: item.protein,
       carb: item.carb,
       fat: item.fat,
+      categoryIds: item.categoryIds,
     }
     return <MealItem {...mealItemProps} />
   }

@@ -2,7 +2,7 @@ import { View, Text, Pressable, Image, StyleSheet, Platform } from "react-native
 import { useNavigation } from "@react-navigation/native";
 import MealDetail from "./MealDetail";
 
-function MealItem({ id, title, calories, protein, carb, fat}) {
+function MealItem({ id, title, calories, protein, carb, fat, categoryIds}) {
   const navigation = useNavigation();
   // console.log(calories,
   //   protein,
@@ -11,7 +11,8 @@ function MealItem({ id, title, calories, protein, carb, fat}) {
 
   function selectMealItemHandler() {
     navigation.navigate('MealDetail', {
-   mealId: id
+    mealId: id,
+    
    });
   }
   

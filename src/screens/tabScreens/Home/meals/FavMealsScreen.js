@@ -6,10 +6,15 @@ import { FavoritesContext } from '../../../../context/Favorites-context';
 
 function FavMealsScreen({ route }) { 
   const favoriteMealsCtx = useContext(FavoritesContext);
-  
+
+  const catId = route.params.mealCategoryId;
   const favoriteMeals = MEALS.filter((meal) => {
-    return favoriteMealsCtx.ids.includes(meal.id);
+    return (
+      favoriteMealsCtx.ids.includes(meal.id) && 
+      meal.categoryIds.includes(catId) 
+    );
   });
+
 
   if (favoriteMeals.length === 0) {
     return (

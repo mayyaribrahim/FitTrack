@@ -35,7 +35,7 @@ export class MealCategory {
     }
 }
   
-  
+
 export class meal {
     constructor(id, categoryIds, title, affordability, complexity, imageUrl, duration, ingredients, steps, calories, protein, carb, fat) {
       this.id = id;

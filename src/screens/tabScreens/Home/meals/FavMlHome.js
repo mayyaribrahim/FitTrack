@@ -14,6 +14,7 @@ function FavMlHome({ navigation }) {
     function pressHandler() {
       navigation.navigate('FavMealsScreen', {
         mealCategoryId: itemData.item.id, 
+        categoryIds: itemData.item.id, 
       });
     }
 
