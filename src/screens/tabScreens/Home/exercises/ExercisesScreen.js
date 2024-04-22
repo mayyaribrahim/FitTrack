@@ -2,13 +2,14 @@ import { useLayoutEffect } from "react";
 import { View, FlatList, StyleSheet, Text } from "react-native";
 import { EXERCISESCATEGORIES, EXERCISES } from "../../../../data/Data";
 import ExerciseItem from "../../../../components/exercises/ExerciseItem";
+import ExercisesList from "../../../../components/exercises/ExercisesList";
 
 function ExercisesScreen({ route, navigation }) {
 
   const catId = route.params.exerciseCategoryId;
 
   const displayExercises = EXERCISES.filter((exerciseItem => {
-    return exerciseItem.categoryIds.indexOf(catId) >= 0;
+    return exerciseItem.categoryIds[0] === catId;
   }));
 
   useLayoutEffect(()  => {
@@ -20,38 +21,10 @@ function ExercisesScreen({ route, navigation }) {
   }, [catId, navigation])
   
 
-  function RenderExerciseItem(itemData) {
-    const item = itemData.item;
-
-    const exerciseItemProps = {
-      id: item.id,
-      categoryIds: item.categoryIds,
-      imageUrl: item.imageUrl,
-      name: item.name,
-      setsAndReps: item.setsAndReps,
-      equipment: item.equipment,
-    } 
-
-    return  (
-      <ExerciseItem {...exerciseItemProps} />
-    )
-  }
-
-
-  return (
-    <View style={styles.container}>
-
-      <FlatList 
-      data={displayExercises}
-      keyExtractor={(item) => item.id}
-      renderItem={RenderExerciseItem}
-      showsVerticalScrollIndicator={false}
-      />
-
-      
-
-    </View>
+  return  (
+    <ExercisesList items={displayExercises} />
   )
+
 
 }
 

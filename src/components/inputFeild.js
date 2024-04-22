@@ -4,13 +4,14 @@ import { Feather ,MaterialCommunityIcons, FontAwesome6 } from "@expo/vector-icon
 
 
 
-function InputField ({ placeholder, value, onChange, label, type, iconName, secondIconName, keyboardType }) {
+function InputField ({ placeholder, value, onChange, label, type, iconName, secondIconName, keyboardType, isInvalid }) {
   
   const [secureText, setSecureText] = useState(true);
+  const inputWidth = type === "password" ? "73%" : "83%";
 
   return (
     
-    <View style={styles.container}>
+    <View style={[styles.container, isInvalid && styles.inputInvalid]}>
 
       <View style={styles.secondIcon}>
         <FontAwesome6 name={secondIconName} size={20} color="#BEBEBE" /> 
@@ -27,7 +28,7 @@ function InputField ({ placeholder, value, onChange, label, type, iconName, seco
         placeholder={placeholder}
         keyboardType={keyboardType}
         secureTextEntry={type === "password" ? secureText : false}
-        style={styles.input}
+        style={[styles.input, { width: inputWidth }]}
       />
 
       {type === "password" && (
@@ -69,15 +70,23 @@ const styles = StyleSheet.create({
     borderColor: 'red',
     //borderWidth: 1,
     right: 14,
-    
   },
+
+  inputInvalid: {
+    backgroundColor: '#fcdcbf',
+    borderColor: 'red',
+    borderWidth: 1,
+  },
+
   label: {
     marginBottom: 5,
   },
+
   icon: {
     right:13,
     
   },
+
   secondIcon: {
     right:2,
     

@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, ScrollView, FlatList, Image, Platform, TouchableOpacity, SafeAreaView } from "react-native";
-import ExCategoryGrid from "../../../components/ExCategoryGrid";
+import ExCategoryGrid from "../../../components/exercises/ExCategoryGrid";
 import MlCategoryGrid from "../../../components/meals/MlCategoryGrid";
 import { EXERCISESCATEGORIES, MEALCATEGORIES } from "../../../data/Data";
 

@@ -1,26 +1,23 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Image, KeyboardAvoidingView, Platform, } from "react-native";
+import { View, StyleSheet,Image, KeyboardAvoidingView, Platform, } from "react-native";
 import PrimaryButton from "../../components/PrimaryButton";
 import InputField from "../../components/InputFeild";
 
-function SecondSignupScreen ({ navigation }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
-  const handleEmailChange = (enteredEmail) => {
-    setEmail(enteredEmail);
+function SignupScreen ({ navigation }) {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  
+  const handleFirstName = (enteredFirstName) => {
+    setFirstName(enteredFirstName);
   };
 
-  const handlePasswordChange = (enteredPassword) => {
-    setPassword(enteredPassword);
+  const handleLastName = (enteredLastName) => {
+    setLastName(enteredLastName);
   };
 
-  const handlePasswordConfirmation = (enteredPasswordConf) => {
-    setPasswordConfirmation(enteredPasswordConf);
-  };
 
-  console.log(email, password, passwordConfirmation);
+  console.log(firstName, lastName);
 
   return (
 
@@ -28,51 +25,41 @@ function SecondSignupScreen ({ navigation }) {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       style={styles.container}>
 
-      <Image
-        style={styles.image}
-        source={require("../../assets/images/logo.png")}
-      />
+      <View>    
+        <Image style={styles.image} source={require("../../assets/images/logo.png")}/> 
+      </View>
 
       <View style={styles.inputContainer}>
+
         <InputField
-          iconName={"mail"}
-          placeholder={"Email"}
-          value={email}
-          onChange={handleEmailChange}
-          type="email"
-          // label={"Email"}
+          iconName={"user"}
+          placeholder={"First Name"}
+          value={firstName}
+          onChange={handleFirstName}
+          type="firstName"
+          // label={"firstName"}
         />
 
         <InputField
-          iconName={"lock"}
-          placeholder={"Password"}
-          value={password}
-          onChange={handlePasswordChange}
-          type="password"
-          // label={"Password"}
-          secureTextEntry={true}
+          iconName={"user"}
+          placeholder={"Last Name"}
+          value={lastName}
+          onChange={handleLastName}
+          type="LastName"
+          // label={"lastName"}
         />
 
-        <InputField
-          iconName={"lock"}
-          placeholder={"Password Confirmation"}
-          value={passwordConfirmation}
-          onChange={handlePasswordConfirmation}
-          type="password"
-          // label={"PasswordConfirmation"}
-          secureTextEntry={true}
-        />
       </View>
 
       <View style={styles.buttonContainer}>
-        <PrimaryButton onPress={() => navigation.navigate("StartNow")}>Sign Up</PrimaryButton>
+        <PrimaryButton onPress={() => navigation.navigate("StartNow")}>Next</PrimaryButton>
       </View>
       
     </KeyboardAvoidingView>
-  )
-}
+  );
+};
 
-export default SecondSignupScreen;
+export default SignupScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -99,8 +86,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     fontSize: 18,
   },
-
-  
 
   buttonContainer: {
     marginTop: 30,

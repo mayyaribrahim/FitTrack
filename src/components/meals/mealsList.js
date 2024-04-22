@@ -1,5 +1,4 @@
 import { StyleSheet, View, FlatList } from "react-native";
-
 import MealItem from "./MealItem";
 
 function MealsList({items}) {
@@ -41,6 +40,5 @@ export default MealsList;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
   },
 });

@@ -17,6 +17,7 @@ import FavExercise from '../screens/tabScreens/Home/HomeScreen';
 import FavMeals from '../screens/tabScreens/Home/HomeScreen';
 
 import ExercisesScreen from '../screens/tabScreens/Home/exercises/ExercisesScreen';
+import FavExerciseScreen from '../screens/tabScreens/Home/exercises/FavExerciseScreen';
 import ExDetailScreen from '../screens/tabScreens/Home/exercises/ExDetailScreen';
 
 import MealsScreen from '../screens/tabScreens/Home/meals/MealsScreen';
@@ -50,27 +51,27 @@ const MainStackNavigator = () => {
         contentStyle: {backgroundColor: '#ffffff'},
         }}>
 
+
+
         {/*Authentication Stacks*/}
         <Stack.Screen name="Intro" component={IntroScreen} options={{headerTitleStyle: {color: 'white'},}}/>
         <Stack.Screen name="Login" component={LoginScreen} options={{headerTitleStyle: {color: 'white'},}}/>
         <Stack.Screen name="Signup" component={SignupScreen} options={{headerTitleStyle: {color: 'white'},}}/>
         <Stack.Screen name="SecondSignup" component={SecondSignupScreen} options={{headerTitleStyle: {color: 'white'},}}/>
         <Stack.Screen name="StartNow" component={StartNow} options={{headerTitleStyle: {color: 'white'},}}/>
-        <Stack.Screen name="OnboardingTutorial" component={OnboardingTutorial} 
-          options={{headerBackVisible: false, gestureEnabled: false, 
-          headerTitleStyle: {color: 'white'}}}
-        />
+        <Stack.Screen name="OnboardingTutorial" component={OnboardingTutorial} options={{headerBackVisible: false, gestureEnabled: false, headerTitleStyle: {color: 'white'}}}/>
 
         <Stack.Screen name="home" component={MyTabs}options={{gestureEnabled: false, headerShown: false}} />
 
         {/*exercise screens*/}
         <Stack.Screen name="ExercisesScreen" component={ExercisesScreen} />
         <Stack.Screen name="ExerciseDetail" component={ExDetailScreen} />
+        <Stack.Screen name="FavExerciseScreen" component={FavExerciseScreen} options={{ title: 'Favorite Exercises'}}/>
+
         {/*meals screens*/}
         <Stack.Screen name="MealsScreen" component={MealsScreen} />
         <Stack.Screen name="MealDetail" component={MlDetailScreen} />
-
-        <Stack.Screen name="FavMealsScreen" component={FavMealsScreen} />
+        <Stack.Screen name="FavMealsScreen" component={FavMealsScreen} options={{ title: 'Favorite Meals'}} />
         
 
         {/*Tools Stacks*/}

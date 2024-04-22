@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from '../screens/tabScreens/Home/HomeScreen';
 import FavExerciseScreen from '../screens/tabScreens/Home/exercises/FavExerciseScreen'
 import FavMlHome from '../screens/tabScreens/Home/meals/FavMlHome';
+import FavExHome from '../screens/tabScreens/Home/exercises/FavExHome';
 
 const Drawer = createDrawerNavigator();
 
@@ -26,11 +27,11 @@ export function DrawerNavigator() {
         options={{ headerTitleStyle: {color: 'white'}, title: 'Home', drawerIcon: ({color, size}) => (<Ionicons name="list" color={color} size={size} />)}}
       />
 
-      <Drawer.Screen name="Favorite Exercises" component={FavExerciseScreen} 
+      <Drawer.Screen name="FavoriteExerciseCategories" component={FavExHome} 
         options={{ title: 'Favorite Exercises', drawerIcon: ({color, size}) => (<Ionicons name="star" color={color} size={size} />)}}
       />
 
-      <Drawer.Screen name="Favorite Meals" component={FavMlHome}
+      <Drawer.Screen name="FavoriteMealCategories" component={FavMlHome}
         options={{ title: 'Favorite Meals', drawerIcon: ({color, size}) => (<Ionicons name="star" color={color} size={size} /> )}}
       />
 

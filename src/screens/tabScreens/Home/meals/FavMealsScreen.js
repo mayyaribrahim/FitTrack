@@ -1,7 +1,7 @@
 import React, {useContext } from 'react';
 import { View,Text, StyleSheet } from 'react-native';
 import { MEALS } from '../../../../data/Data';
-import MealsList from '../../../../components/meals/mealsList';
+import MealsList from '../../../../components/meals/MealsList';
 import { FavoritesContext } from '../../../../context/Favorites-context';
 
 function FavMealsScreen({ route }) { 

@@ -1,16 +1,28 @@
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useContext } from "react";
 import { Text, Image, View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import { EXERCISES } from "../../../../data/Data";
 import MSubtitle from '../../../../components/meals/MSubtitle';
 import { AntDesign } from '@expo/vector-icons';
+import { FavoritesContext } from "../../../../context/Favorites-context";
 
 function ExDetailScreen({route, navigation}) {
+  const favoriteExercisesCtx = useContext((FavoritesContext));
+
   const exerciseId = route.params.exerciseId;
 
   const selectedExercise = EXERCISES.find((exercise) => exercise.id === exerciseId);
 
-  function headerButtonPressHandler() {
-    console.log('Pressed!');
+  const exerciseIsFavorite = favoriteExercisesCtx.ids.includes(exerciseId);
+
+  function changeFavoritesStatusHandler() {
+    if (exerciseIsFavorite) {
+      favoriteExercisesCtx.removeFavorite(exerciseId)    
+    } 
+    
+    else {
+      favoriteExercisesCtx.addFavorite(exerciseId);
+      
+    }
     
   }
 
@@ -18,14 +30,14 @@ function ExDetailScreen({route, navigation}) {
     navigation.setOptions({
       headerRight: () => {
         return (
-          <TouchableOpacity onPress={headerButtonPressHandler}>
-            <AntDesign name='star' color='#272D34' size={24}  />
+          <TouchableOpacity onPress={changeFavoritesStatusHandler}>
+            <AntDesign name='star' color={exerciseIsFavorite ? '#ffb700': 'black'} size={24}  />
           </TouchableOpacity>
           
         )
       }
     })
-  }, [navigation, headerButtonPressHandler]);
+  }, [navigation, changeFavoritesStatusHandler]);
 
   return (
 
