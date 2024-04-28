@@ -1,5 +1,6 @@
-import React from 'react';
-import { Ionicons } from '@expo/vector-icons';
+import React, {useContext} from 'react';
+import { AuthContext } from '../context/auth-context';
+import { createUser, login } from '../util/auth';
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -12,9 +13,6 @@ import SecondSignupScreen from '../screens/authScreens/SecondSignupScreen';
 import StartNow from '../screens/authScreens/StartNow';
 import OnboardingTutorial from '../screens/authScreens/OnboardingTutorial';
 
-import HomeScreen from '../screens/tabScreens/Home/HomeScreen';
-import FavExercise from '../screens/tabScreens/Home/HomeScreen';
-import FavMeals from '../screens/tabScreens/Home/HomeScreen';
 
 import ExercisesScreen from '../screens/tabScreens/Home/exercises/ExercisesScreen';
 import FavExerciseScreen from '../screens/tabScreens/Home/exercises/FavExerciseScreen';
@@ -35,13 +33,15 @@ import TermsAndCond from '../screens/tabScreens/Profile/TermsAndCond';
 
 import FavoritesContextProvider from '../context/Favorites-context';
 
+
 const Stack = createNativeStackNavigator();
 
-
-const MainStackNavigator = () => {
-
+ function MainStackNavigator() {
+  const authCtx = useContext(AuthContext);
+  console.log(authCtx.isAuthenticated);
   return (
     
+
     <FavoritesContextProvider>
 
       <Stack.Navigator 
@@ -54,13 +54,20 @@ const MainStackNavigator = () => {
 
 
         {/*Authentication Stacks*/}
+        {/* {!authCtx.isAuthenticated ? () : ()} */}
+
+        <>
         <Stack.Screen name="Intro" component={IntroScreen} options={{headerTitleStyle: {color: 'white'},}}/>
+
         <Stack.Screen name="Login" component={LoginScreen} options={{headerTitleStyle: {color: 'white'},}}/>
         <Stack.Screen name="Signup" component={SignupScreen} options={{headerTitleStyle: {color: 'white'},}}/>
+
         <Stack.Screen name="SecondSignup" component={SecondSignupScreen} options={{headerTitleStyle: {color: 'white'},}}/>
         <Stack.Screen name="StartNow" component={StartNow} options={{headerTitleStyle: {color: 'white'},}}/>
-        <Stack.Screen name="OnboardingTutorial" component={OnboardingTutorial} options={{headerBackVisible: false, gestureEnabled: false, headerTitleStyle: {color: 'white'}}}/>
-
+        </>
+        
+          <>
+        <Stack.Screen name="OnboardingTutorial" component={OnboardingTutorial} options={{headerBackVisible: false, gestureEnabled: false, headerTitleStyle: {color: 'white'}}}/>  
         <Stack.Screen name="home" component={MyTabs}options={{gestureEnabled: false, headerShown: false}} />
 
         {/*exercise screens*/}
@@ -85,11 +92,15 @@ const MainStackNavigator = () => {
         <Stack.Screen name="Change Password" component={ChangePassword} />
         <Stack.Screen name="About" component={About} />
         <Stack.Screen name="Terms And Conditions" component={TermsAndCond} />
+        </>
         
       </Stack.Navigator>
 
     </FavoritesContextProvider>
+
   );
 };
+
+
 
 export default MainStackNavigator;

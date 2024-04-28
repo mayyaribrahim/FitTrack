@@ -3,6 +3,7 @@ import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import PrimaryButton from '../PrimaryButton';
 import InputField from '../InputFeild';
+import { AuthContext } from '../../context/auth-context';
 
 function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
   const navigation = useNavigation();

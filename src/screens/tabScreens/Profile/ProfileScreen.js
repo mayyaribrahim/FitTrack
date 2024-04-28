@@ -1,8 +1,12 @@
 import { View, Text, StyleSheet, Image, Alert, SafeAreaView } from "react-native";
 import TabScreenTitle from "../../../components/TabScreenTitle";
 import PrimaryButton from "../../../components/PrimaryButton";
+import { AuthContext } from "../../../context/auth-context";
+import { useContext } from "react";
+
 
 function ProfileScreen({navigation}) {
+  const authCtx = useContext(AuthContext);
 
   const handleLogout = () => {
     Alert.alert(
@@ -16,6 +20,7 @@ function ProfileScreen({navigation}) {
         {
           text: "Logout",
           onPress: () => {
+            authCtx.logout()
             navigation.navigate("Intro");
           },
         },

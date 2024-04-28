@@ -1,17 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useContext } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { useEffect } from 'react';
+
 import MainStackNavigator from './src/navigations/MainStackNavigator';
+import AuthContextProvider from './src/context/auth-context';
+import { AuthContext } from './src/context/auth-context';
+
 import { useFonts } from 'expo-font';
 
-const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
 
 
 
 export default function App() {
-
+  
 
   const [Loaded] = useFonts({
     'poppins': require('./src/assets/fonts/Poppins-Regular.ttf'),
@@ -31,19 +34,37 @@ export default function App() {
     return null;
   }
 
+  
+
   return (
+
     <>
       <StatusBar style='dark'/>
-      
-      <NavigationContainer>
-
-        <MainStackNavigator />
-
-      </NavigationContainer>
-
+      <Navigation />
     </>
     
   );
+
+
+
+function Navigation() {
+    const authCtx = useContext(AuthContext);
+  
+    return (
+      
+      <NavigationContainer>
+    
+        <AuthContextProvider>
+
+          <MainStackNavigator />
+
+        </AuthContextProvider>
+      
+      </NavigationContainer>
+      
+    );
+  }
+
 }
 
 
