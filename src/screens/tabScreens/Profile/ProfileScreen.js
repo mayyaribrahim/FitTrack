@@ -3,10 +3,13 @@ import TabScreenTitle from "../../../components/TabScreenTitle";
 import PrimaryButton from "../../../components/PrimaryButton";
 import { AuthContext } from "../../../context/auth-context";
 import { useContext } from "react";
+import { FIREBASE_AUTH } from "../../../../FirebaseConfig";
+
 
 
 function ProfileScreen({navigation}) {
   const authCtx = useContext(AuthContext);
+  
 
   const handleLogout = () => {
     Alert.alert(
@@ -20,7 +23,8 @@ function ProfileScreen({navigation}) {
         {
           text: "Logout",
           onPress: () => {
-            authCtx.logout()
+            FIREBASE_AUTH.signOut();
+            //authCtx.logout()
             navigation.navigate("Intro");
           },
         },

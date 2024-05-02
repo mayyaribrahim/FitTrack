@@ -49,12 +49,6 @@ function AuthContent({ isLogin, onAuthenticate }) {
         confirmPassword: !passwordIsValid || !passwordsAreEqual,
       });
       return;
-    // } else {
-    //   if (!isLogin) {
-    //     navigation.navigate("SecondSignup");
-    //   } else {
-    //     navigation.navigate("home");
-    //   }
     }
     onAuthenticate({ email, password })
   }

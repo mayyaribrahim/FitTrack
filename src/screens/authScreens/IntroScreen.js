@@ -2,32 +2,58 @@ import { StyleSheet, Text, View, Image, Platform } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import PrimaryButton from "../../components/PrimaryButton";
 import PrimaryBlack from "../../components/PrimaryBlack";
-
+import { useState, useEffect } from "react";
+import { onAuthStateChanged } from 'firebase/auth';
+import { FIREBASE_AUTH } from "../../../FirebaseConfig";
+import LoadingOverlay from "../../components/LoadingOverlay";
 function IntroScreen({ navigation }) {
-  return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
 
-      <Image
-        style={styles.image}
-        source={require("../../assets/images/logo2.png")}
-      />
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (userData) => {
+      console.log(userData);
+      setUser(userData);
+      setLoading(false);
+    });
 
-      <View style={styles.twoButtonsContainer}>
 
-        <View style={styles.buttonContainer}>
-          <PrimaryButton onPress={() => navigation.navigate("Signup")}>Sign up</PrimaryButton>
+    return unsubscribe;
+  }, []);
+
+
+  useEffect(() => {
+    
+    if (user) {
+      navigation.navigate('home');
+    }
+  }, [user, navigation]);
+
+  if(loading) {
+    return <LoadingOverlay message="Welcome to FitTrack" />;
+  }
+
+
+ 
+  if (!user) {
+    return (
+      <View style={styles.container}>
+        <StatusBar style="auto" />
+        <Image
+          style={styles.image}
+          source={require("../../assets/images/logo2.png")}
+        />
+        <View style={styles.twoButtonsContainer}>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={() => navigation.navigate("Signup")}>Sign up</PrimaryButton>
+          </View>
+          <View style={styles.buttonContainer}>
+            <PrimaryBlack onPress={() => navigation.navigate("Login")}>Login</PrimaryBlack>
+          </View>
         </View>
-
-        <View style={styles.buttonContainer}>
-          
-          <PrimaryBlack onPress={() => navigation.navigate("Login")}>Login</PrimaryBlack>
-        </View>
-
       </View>
-      
-    </View>
-  );
+    );
+  }
 }
 
 export default IntroScreen;
