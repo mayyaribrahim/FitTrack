@@ -9,13 +9,13 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
   const navigation = useNavigation();
 
   const [enteredEmail, setEnteredEmail] = useState('');
-  const [enteredConfirmEmail, setEnteredConfirmEmail] = useState('');
+  //const [enteredConfirmEmail, setEnteredConfirmEmail] = useState('');
   const [enteredPassword, setEnteredPassword] = useState('');
   const [enteredConfirmPassword, setEnteredConfirmPassword] = useState('');
 
   const {
     email: emailIsInvalid,
-    confirmEmail: emailsDontMatch,
+    //confirmEmail: emailsDontMatch,
     password: passwordIsInvalid,
     confirmPassword: passwordsDontMatch,
   } = credentialsInvalid;
@@ -25,8 +25,8 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
       case 'email':
         setEnteredEmail(enteredValue);
         break;
-      case 'confirmEmail':
-        setEnteredConfirmEmail(enteredValue);
+      // case 'confirmEmail':
+      //   setEnteredConfirmEmail(enteredValue);
         break;
       case 'password':
         setEnteredPassword(enteredValue);
@@ -40,7 +40,7 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
   function submitHandler() {
     onSubmit({
       email: enteredEmail,
-      confirmEmail: enteredConfirmEmail,
+      //confirmEmail: enteredConfirmEmail,
       password: enteredPassword,
       confirmPassword: enteredConfirmPassword,
       
@@ -63,7 +63,7 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
           isInvalid={emailIsInvalid}
         />
 
-        {!isLogin && (
+        {/* {!isLogin && (
           <InputField
           iconName={"mail"}
           label="Confirm Email Address"
@@ -74,7 +74,7 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
           isInvalid={emailsDontMatch}
           type="email"
         />
-        )}
+        )} */}
 
         <InputField
           iconName={"lock"}

@@ -17,7 +17,7 @@ function SecondSignupScreen ({navigation}) {
     try{
       const response = await createUserWithEmailAndPassword(auth, email, password);
       console.log(response);
-      navigation.navigate("SecondSignup");
+      navigation.replace("SecondSignup");
     } catch (error) {
       Alert.alert('Authentication failed', 'Could not create user. Please check your input and try again later')
   } finally {

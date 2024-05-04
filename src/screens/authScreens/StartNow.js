@@ -1,8 +1,10 @@
+import { collection, addDoc, doc, setDoc, updateDoc } from 'firebase/firestore'; 
 import React, { useState } from "react";
 import { View, StyleSheet,Image, KeyboardAvoidingView, Platform, } from "react-native";
 import PrimaryButton from "../../components/PrimaryButton";
 import InputField from "../../components/InputFeild";
-
+import { FIRESTORE_DB } from "../../../FirebaseConfig";
+import { getAuth } from 'firebase/auth';
 
 
 function StartNow ({ navigation }) {
@@ -23,7 +25,32 @@ function StartNow ({ navigation }) {
   };
 
 
-  console.log(age, height, weight);
+  const saveUserData = async () => {
+    try {
+      const auth = getAuth(); // Get the auth instance
+      const user = auth.currentUser; // Get the current user
+      
+      if (user) {
+        const uid = user.uid;
+
+        // Add first name and last name to the user document
+        const userDocRef = doc(collection(FIRESTORE_DB, 'users'), uid);
+        await updateDoc(userDocRef, {
+          age: age,
+          height: height,
+          weight: weight,
+        });
+
+        console.log("User data saved successfully for UID: ", uid);
+        navigation.navigate("OnboardingTutorial");
+      } else {
+        console.error("No user is currently signed in.");
+      }
+    } catch (error) {
+      console.error("Error saving user data: ", error);
+    }
+  };
+
 
   return (
 
@@ -69,7 +96,7 @@ function StartNow ({ navigation }) {
       </View>
 
       <View style={styles.buttonContainer}>
-        <PrimaryButton onPress={() => navigation.navigate("OnboardingTutorial")}>Start Now!</PrimaryButton>
+        <PrimaryButton onPress={saveUserData}>Start Now!</PrimaryButton>
       </View>
 
     </KeyboardAvoidingView>

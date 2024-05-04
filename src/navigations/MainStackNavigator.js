@@ -65,8 +65,8 @@ const Stack = createNativeStackNavigator();
         <Stack.Screen name="Login" component={LoginScreen} options={{headerTitleStyle: {color: 'white'},}}/>
         <Stack.Screen name="Signup" component={SignupScreen} options={{headerTitleStyle: {color: 'white'},}}/>
 
-        <Stack.Screen name="SecondSignup" component={SecondSignupScreen} options={{headerTitleStyle: {color: 'white'},}}/>
-        <Stack.Screen name="StartNow" component={StartNow} options={{headerTitleStyle: {color: 'white'},}}/>
+        <Stack.Screen name="SecondSignup" component={SecondSignupScreen} options={{headerTitleStyle: {color: 'white'}, headerBackVisible: false, gestureEnabled: false,}}/>
+        <Stack.Screen name="StartNow" component={StartNow} options={{headerTitleStyle: {color: 'white'}, headerBackVisible: false, gestureEnabled: false}}/>
         
         
          

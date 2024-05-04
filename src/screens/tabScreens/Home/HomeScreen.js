@@ -1,10 +1,44 @@
+import { doc, getDoc } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+import { FIRESTORE_DB } from '../../../../FirebaseConfig';
 import { View, Text, StyleSheet, ScrollView, FlatList, Image, Platform, TouchableOpacity, SafeAreaView } from "react-native";
 import ExCategoryGrid from "../../../components/exercises/ExCategoryGrid";
 import MlCategoryGrid from "../../../components/meals/MlCategoryGrid";
 import { EXERCISESCATEGORIES, MEALCATEGORIES } from "../../../data/Data";
-
+import React, { useState, useEffect } from "react";
 
 function HomeScreen({navigation}) {
+  const [firstName, setFirstName] = useState(""); // State variable to store the user's first name
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const auth = getAuth();
+        const user = auth.currentUser;
+        
+        if (user) {
+          const uid = user.uid;
+          
+          const userDocRef = doc(FIRESTORE_DB, 'users', uid);
+          const userDocSnap = await getDoc(userDocRef);
+          
+          if (userDocSnap.exists()) {
+            const userData = userDocSnap.data();
+            setFirstName(userData.firstName); // Set the user's first name in state
+          } else {
+            console.error("User document does not exist.");
+          }
+        } else {
+          console.error("No user is currently signed in.");
+        }
+      } catch (error) {
+        console.error("Error fetching user data: ", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
 
   //for meals
   function renderMealCategoryItem(itemData) {
@@ -69,7 +103,7 @@ function HomeScreen({navigation}) {
       <View style={styles.headerContainer}>
 
         <View style={styles.titleContainer}>
-          <Text style={styles.PageTitle}>Hello Mayyar</Text>
+          <Text style={styles.PageTitle}>Hello {firstName}</Text>
         </View>
 
         <TouchableOpacity onPress={() => navigation.navigate('Personal Information')}>

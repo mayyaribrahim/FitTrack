@@ -3,18 +3,17 @@ import { NavigationContainer } from "@react-navigation/native";
 import { useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect } from 'react';
-
 import MainStackNavigator from './src/navigations/MainStackNavigator';
 import AuthContextProvider from './src/context/auth-context';
 import { AuthContext } from './src/context/auth-context';
-
 import { useFonts } from 'expo-font';
-
+import React, { useState } from 'react';
+import { View, ActivityIndicator } from 'react-native';
 
 
 
 export default function App() {
-  
+  const [loading, setLoading] = useState(true);
 
   const [Loaded] = useFonts({
     'poppins': require('./src/assets/fonts/Poppins-Regular.ttf'),
@@ -35,23 +34,14 @@ export default function App() {
   }
 
   
+ // const authCtx = useContext(AuthContext);
+
+ 
 
   return (
 
     <>
       <StatusBar style='dark'/>
-      <Navigation />
-    </>
-    
-  );
-
-
-
-function Navigation() {
-    const authCtx = useContext(AuthContext);
-  
-    return (
-      
       <NavigationContainer>
     
         <AuthContextProvider>
@@ -61,9 +51,29 @@ function Navigation() {
         </AuthContextProvider>
       
       </NavigationContainer>
+    </>
+    
+  );
+
+
+
+// function Navigation() {
+//     const authCtx = useContext(AuthContext);
+  
+//     return (
       
-    );
-  }
+//       <NavigationContainer>
+    
+//         <AuthContextProvider>
+
+//           <MainStackNavigator />
+
+//         </AuthContextProvider>
+      
+//       </NavigationContainer>
+      
+//     );
+//   }
 
 }
 

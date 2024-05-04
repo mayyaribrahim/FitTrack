@@ -13,8 +13,9 @@ function IntroScreen({ navigation }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (userData) => {
       console.log(userData);
-      setUser(userData);
       setLoading(false);
+      setUser(userData);
+      
     });
 
 
@@ -25,7 +26,9 @@ function IntroScreen({ navigation }) {
   useEffect(() => {
     
     if (user) {
+      setLoading(true);
       navigation.navigate('home');
+      setLoading(false);
     }
   }, [user, navigation]);
 

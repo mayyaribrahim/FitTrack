@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import { collection, addDoc, doc, setDoc, updateDoc } from 'firebase/firestore'; 
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet,Image, KeyboardAvoidingView, Platform, } from "react-native";
 import PrimaryButton from "../../components/PrimaryButton";
 import InputField from "../../components/InputFeild";
-
+import { FIRESTORE_DB } from "../../../FirebaseConfig";
+import { getAuth } from 'firebase/auth';
 
 function SignupScreen ({ navigation }) {
   const [firstName, setFirstName] = useState("");
@@ -17,7 +19,33 @@ function SignupScreen ({ navigation }) {
   };
 
 
-  console.log(firstName, lastName);
+  const saveUserData = async () => {
+    try {
+      const auth = getAuth(); // Get the auth instance
+      const user = auth.currentUser; // Get the current user
+      
+      if (user) {
+        const uid = user.uid;
+
+        // Add first name and last name to the user document
+        const userDocRef = doc(collection(FIRESTORE_DB, 'users'), uid);
+        await setDoc(userDocRef, {
+          firstName: firstName,
+          lastName: lastName,
+        });
+
+        console.log("User data saved successfully for UID: ", uid);
+        navigation.navigate("StartNow");
+      } else {
+        console.error("No user is currently signed in.");
+      }
+    } catch (error) {
+      console.error("Error saving user data: ", error);
+    }
+  };
+  
+  
+  //console.log(firstName, lastName);
 
   return (
 
@@ -52,8 +80,9 @@ function SignupScreen ({ navigation }) {
       </View>
 
       <View style={styles.buttonContainer}>
-        <PrimaryButton onPress={() => navigation.navigate("StartNow")}>Next</PrimaryButton>
+        <PrimaryButton onPress={saveUserData}>Next</PrimaryButton>
       </View>
+      {/* () => navigation.navigate("StartNow") */}
       
     </KeyboardAvoidingView>
   );
