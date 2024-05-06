@@ -26,7 +26,7 @@ function IntroScreen({ navigation }) {
   useEffect(() => {
     
     if (user) {
-      setLoading(true);
+      //setLoading(true);
       navigation.navigate('home');
       setLoading(false);
     }

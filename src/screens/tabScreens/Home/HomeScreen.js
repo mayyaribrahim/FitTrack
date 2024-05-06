@@ -6,8 +6,10 @@ import ExCategoryGrid from "../../../components/exercises/ExCategoryGrid";
 import MlCategoryGrid from "../../../components/meals/MlCategoryGrid";
 import { EXERCISESCATEGORIES, MEALCATEGORIES } from "../../../data/Data";
 import React, { useState, useEffect } from "react";
+import LoadingOverlay from '../../../components/LoadingOverlay';
 
 function HomeScreen({navigation}) {
+  const [loading, setLoading] = useState(true);
   const [firstName, setFirstName] = useState(""); // State variable to store the user's first name
 
   useEffect(() => {
@@ -24,20 +26,27 @@ function HomeScreen({navigation}) {
           
           if (userDocSnap.exists()) {
             const userData = userDocSnap.data();
-            setFirstName(userData.firstName); // Set the user's first name in state
+            setFirstName(userData.firstName);
+            setLoading(false);
+            // Set the user's first name in state
           } else {
-            console.error("User document does not exist.");
+            console.log("User document does not exist.");
           }
         } else {
-          console.error("No user is currently signed in.");
+          console.log("No user is currently signed in.");
         }
       } catch (error) {
-        console.error("Error fetching user data: ", error);
+        console.log("Error fetching user data: ", error);
       }
     };
 
     fetchUserData();
   }, []);
+  
+
+  if(loading) {
+    return <LoadingOverlay message="Welcome to FitTrack" />;
+  }
 
 
   //for meals

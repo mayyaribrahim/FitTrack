@@ -1,13 +1,52 @@
+import { doc, getDoc } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+import { FIRESTORE_DB } from '../../../../FirebaseConfig';
 import { View, Text, StyleSheet, Image, Alert, SafeAreaView } from "react-native";
 import TabScreenTitle from "../../../components/TabScreenTitle";
 import PrimaryButton from "../../../components/PrimaryButton";
 import { AuthContext } from "../../../context/auth-context";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { FIREBASE_AUTH } from "../../../../FirebaseConfig";
 
 
 
+
 function ProfileScreen({navigation}) {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const auth = getAuth();
+        const user = auth.currentUser;
+        
+        if (user) {
+          const uid = user.uid;
+          
+          const userDocRef = doc(FIRESTORE_DB, 'users', uid);
+          const userDocSnap = await getDoc(userDocRef);
+          
+          if (userDocSnap.exists()) {
+            const userData = userDocSnap.data();
+            setFirstName(userData.firstName);
+            setLastName(userData.lastName);
+            //setLoading(false);
+            // Set the user's first name in state
+          } else {
+            console.log("User document does not exist.");
+          }
+        } else {
+          console.log("No user is currently signed in.");
+        }
+      } catch (error) {
+        console.log("Error fetching user data: ", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   const authCtx = useContext(AuthContext);
   
 
@@ -45,7 +84,7 @@ function ProfileScreen({navigation}) {
       </View>
 
       <View style={styles.nameContainer}>
-        <Text style={styles.profileName}>Mayyar Ibrahim</Text>
+        <Text style={styles.profileName}>{firstName} {lastName}</Text>
       </View>
 
       <View style={styles.buttonsContainer}>

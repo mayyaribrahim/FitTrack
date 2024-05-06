@@ -29,6 +29,7 @@ function SignupScreen ({ navigation }) {
 
         // Add first name and last name to the user document
         const userDocRef = doc(collection(FIRESTORE_DB, 'users'), uid);
+        
         await setDoc(userDocRef, {
           firstName: firstName,
           lastName: lastName,
