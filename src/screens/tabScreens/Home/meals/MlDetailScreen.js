@@ -1,4 +1,6 @@
-import { useLayoutEffect, useContext } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { FIRESTORE_DB } from "../../../../../FirebaseConfig";
+import { useLayoutEffect, useContext, useState, useEffect } from "react";
 import { Text, Image, View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import MealDetail from "../../../../components/meals/MealDetail";
 import { MEALS } from "../../../../data/Data";
@@ -6,53 +8,66 @@ import MSubtitle from '../../../../components/meals/MSubtitle';
 import MList from '../../../../components/meals/MList';
 import { AntDesign } from '@expo/vector-icons';
 import { FavoritesContext } from "../../../../context/Favorites-context";
-
+import { addToFavorites, removeFromFavorites } from "../../../../context/favoritesService";
 function MlDetailScreen({route, navigation}) {
-  const favoriteMealsCtx = useContext((FavoritesContext));
+  const mealDocId = route.params.mealDocId;
+  const [selectedMeal, setSelectedMeal] = useState(null);
+  const [isFavorite, setIsFavorite] = useState(false);
+  
+  useEffect(() => {
+    const fetchMeal = async () => {
+      try {
+      const mealDocRef = doc(FIRESTORE_DB, "Meals", mealDocId);
+      const mealDocSnapshot = await getDoc(mealDocRef);
+      setSelectedMeal({ id: mealDocSnapshot.data.id, ...mealDocSnapshot.data() });
 
-  const mealId = route.params.mealId;
+      } catch (error) {
+        console.error("Error fetching meal:", error);
+      }
+    };
 
-  const selectedMeal = MEALS.find((meal) => meal.id === mealId);
+    fetchMeal();
+  }, [mealDocId]);
+  
+  console.log(selectedMeal);
+  
 
-  const mealIsFavorite = favoriteMealsCtx.ids.includes(mealId);
-
-  function changeFavoritesStatusHandler() {
-    if (mealIsFavorite) {
-      favoriteMealsCtx.removeFavorite(mealId)    
-    } 
-    
-    else {
-      favoriteMealsCtx.addFavorite(mealId);
-      
+  const toggleFavorite = () => {
+    if (isFavorite) {
+      removeFromFavorites(mealDocId); // Remove from favorites
+    } else {
+      addToFavorites(mealDocId);
+      console.log(mealDocId)
+      // Add to favorites
     }
-  }
+    setIsFavorite(prevState => !prevState); // Toggle favorite state
+  };
+
+
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => {
         return (
-          <TouchableOpacity onPress={changeFavoritesStatusHandler}>
-            <AntDesign name='star' color={mealIsFavorite ? '#ffb700': 'black'} size={24}  />
+          <TouchableOpacity onPress={toggleFavorite}>
+            <AntDesign name='star' color={isFavorite ? '#ffb700': 'black'} size={24}  />
           </TouchableOpacity>
           
         )
       }
     })
-  }, [navigation, changeFavoritesStatusHandler]);
+  }, [navigation, toggleFavorite]);
 
   return (
     <ScrollView style={styles.rootContainer}>
 
       <Image style={styles.image} source={require("../../../../assets/images/default.jpg")} />
 
-      <Text style={styles.title}>{selectedMeal.title}</Text>
+      <Text style={styles.title}>{selectedMeal?.title || "no title"}</Text>
 
-      
-      <MealDetail 
-        calroies={selectedMeal.calories} 
-        protein={selectedMeal.protein} 
-        carb={selectedMeal.carb} 
-        fat={selectedMeal.fat}
+     
+        <MealDetail 
+        meal={selectedMeal ?? {}} 
         textStyle={styles.detailText}
       />
 
@@ -60,12 +75,12 @@ function MlDetailScreen({route, navigation}) {
 
         <View style={styles.listContainer}>
           <MSubtitle>Ingrediants</MSubtitle>
-          <MList data={selectedMeal.ingredients}/>
+          <MList data={selectedMeal?.ingredients ||[]}/>
           <MSubtitle>Steps</MSubtitle>
-          <MList data={selectedMeal.steps}/>
+          <MList data={selectedMeal?.steps ||[]}/>
         </View>
 
-      </View>
+      </View>  
       
 
     </ScrollView>

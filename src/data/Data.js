@@ -1,3 +1,5 @@
+import { FIRESTORE_DB } from "../../FirebaseConfig";
+import { collection, addDoc, doc, setDoc, updateDoc } from 'firebase/firestore'; 
 export class exerciseCategory {
     constructor(id, title, titleColor, buttonColor, iconContainer, iconColor) {
       this.id = id;
@@ -19,8 +21,6 @@ constructor(id, categoryIds, imageUrl, name, setsAndReps, equipment, ) {
       this.equipment = equipment;
     }
 }
-
-
 
 
 
@@ -53,15 +53,6 @@ export class meal {
       this.fat = fat
     }
 }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1066,6 +1057,52 @@ export const MEALS = [
         10
     )
 ]
+
+// MEALS.forEach(meal => {
+//     // Add a new document with a generated ID to the "meals" collection
+//     const mealsCollectionRef = collection(FIRESTORE_DB, 'Meals');
+//     addDoc(mealsCollectionRef, {
+//         maealId: meal.id,
+//         categoryIds: meal.categoryIds,
+//         title: meal.title,
+//         affordability: meal.affordability,
+//         complexity: meal.complexity,
+//         imageUrl: meal.imageUrl,
+//         duration: meal.duration,
+//         ingredients: meal.ingredients,
+//         steps: meal.steps,
+//         calories: meal.calories,
+//         protein: meal.protein,
+//         carb: meal.carb,
+//         fat: meal.fat
+//     }).then((docRef) => {
+//         console.log("Document written with ID: ", docRef.id);
+//     }).catch((error) => {
+//         console.error("Error adding document: ", error);
+//     });
+// });
+
+
+
+
+// EXERCISES.forEach(exercise => {
+//     // Reference to the "exercises" collection
+//     const exercisesCollectionRef = collection(FIRESTORE_DB, 'exercises');
+
+//     // Add a new document with a generated ID to the "exercises" collection
+//     addDoc(exercisesCollectionRef, {
+//         id: exercise.id,
+//         categoryIds: exercise.categoryIds,
+//         imageUrl: exercise.imageUrl,
+//         name: exercise.name,
+//         setsAndReps: exercise.setsAndReps,
+//         equipment: exercise.equipment
+//     }).then((docRef) => {
+//         console.log("Document written with ID: ", docRef.id);
+//     }).catch((error) => {
+//         console.error("Error adding document: ", error);
+//     });
+// });
 
 
 

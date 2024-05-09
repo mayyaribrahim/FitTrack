@@ -1,19 +1,21 @@
-import React, {useContext } from 'react';
-import { View,Text, StyleSheet } from 'react-native';
-import { MEALS } from '../../../../data/Data';
-import MealsList from '../../../../components/meals/MealsList';
+import React, { useContext, useEffect, useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import { FavoritesContext } from '../../../../context/Favorites-context';
-
-function FavMealsScreen({ route }) { 
+import MealsList from '../../../../components/meals/MealsList';
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { FIRESTORE_DB } from '../../../../../FirebaseConfig'; // Assuming you have configured your Firebase app
+import { fetchFavoriteMeals } from '../../../../context/favoritesService';
+function FavMealsScreen({ route }) {
   const favoriteMealsCtx = useContext(FavoritesContext);
+  const [favoriteMeals, setFavoriteMeals] = useState([]);
 
-  const catId = route.params.mealCategoryId;
-  const favoriteMeals = MEALS.filter((meal) => {
-    return (
-      favoriteMealsCtx.ids.includes(meal.id) && 
-      meal.categoryIds.includes(catId) 
-    );
-  });
+  useEffect(() => {
+    const fetchMeals = async () => {
+      const data = await fetchFavoriteMeals();
+      setFavoriteMeals(data);
+    };
+    fetchMeals();
+  }, []);
 
 
   if (favoriteMeals.length === 0) {
@@ -24,10 +26,10 @@ function FavMealsScreen({ route }) {
     );
   }
 
-
   return (
-
-    <MealsList items={favoriteMeals}/>
+    <View style={styles.container}>
+      <MealsList items={favoriteMeals} />
+    </View>
   );
 }
 
@@ -44,5 +46,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'poppins',
     color: 'black',
+  },
+
+  container: {
+    flex: 1,
   },
 });

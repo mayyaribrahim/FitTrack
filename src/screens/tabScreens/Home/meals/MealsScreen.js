@@ -1,31 +1,45 @@
-import { useLayoutEffect } from "react";
-import { View, FlatList, StyleSheet, Text } from "react-native";
-import { MEALCATEGORIES, MEALS } from "../../../../data/Data";
+import React, { useState, useEffect } from "react";
+import { View, StyleSheet, Text } from "react-native";
+import { collection, query, where, getDocs, snapshotEqual } from "firebase/firestore";
+import { FIRESTORE_DB } from "../../../../../FirebaseConfig"; // Assuming you have configured your Firebase app
 import MealsList from "../../../../components/meals/MealsList";
 
 function MealsScreen({ route, navigation }) {
-  
-  const catId = route.params.mealCategoryId;
+  const [meals, setMeals] = useState([]);
 
-  const displayMeal = MEALS.filter((mealItem => {
-    return mealItem.categoryIds[0] === catId;
-  })); //take the catId you got when pressing on a specific category and compare it to mealItem.categoryIds if they are = print the meals
-  //this function prints meals on their own categories
- 
-  
-  useLayoutEffect(()  => { 
-    const mealCategoryTitle = MEALCATEGORIES.find((mealCategory) => mealCategory.id === catId).title;
+  useEffect(() => {
+    fetchMeals(route.params.mealCategoryId);
+  }, [route.params.mealCategoryId]);
 
-    navigation.setOptions({
-      title: mealCategoryTitle
-    }); 
-  }, [catId, navigation])
+  const fetchMeals = async (categoryId) => {
+    try {
+      const mealsCollectionRef = collection(FIRESTORE_DB, "Meals");
+      const q = query(mealsCollectionRef, where("categoryIds", "array-contains", categoryId));
+      const querySnapshot = await getDocs(q);
+      const mealsData = [];
+      querySnapshot.forEach((doc) => {
+        mealsData.push({ id: doc.id, ...doc.data() });
+        
+      });
 
+      setMeals(mealsData);
+      
+    } catch (error) {
+      console.error("Error fetching meals:", error);
+    }
+  };console.log(meals[0])
 
-    return  (
-      <MealsList items={displayMeal} />
-    )
-  
+  return (
+    <View style={styles.container}>
+      <MealsList items={meals} />
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 
 export default MealsScreen;

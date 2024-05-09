@@ -1,12 +1,13 @@
 import { Text, View, StyleSheet } from "react-native";
 
 function MList({data}) {
+  console.log("mlist",data);
   return (
-    data.map((dataPoint) => (
+    data? data.map((dataPoint) => (
       <View key={dataPoint} style={styles.listItem}>
-        <Text style={styles.itemText}>{dataPoint}</Text>
+        <Text style={styles.itemText}>{dataPoint ?? "no points"}</Text>
       </View>
-    ))
+    )):[]
   )
 }
 

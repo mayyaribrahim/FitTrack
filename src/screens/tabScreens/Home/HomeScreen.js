@@ -31,6 +31,7 @@ function HomeScreen({navigation}) {
             // Set the user's first name in state
           } else {
             console.log("User document does not exist.");
+            navigation.replace("SecondSignup");
           }
         } else {
           console.log("No user is currently signed in.");

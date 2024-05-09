@@ -1,16 +1,16 @@
 import { Text, View, StyleSheet } from "react-native";
 
-function MealDetail({calroies, protein, carb, fat, style, textStyle}) {
+function MealDetail({ style, textStyle, meal}) {
   return (
     <>
     <View style={[styles.calorieDetails, style]}>
-    <Text style={[styles.detailItem, textStyle]}>Calories: {calroies} Kcal</Text>
+    <Text style={[styles.detailItem, textStyle]}>Calories: {meal.calories} Kcal</Text>
     </View>
     
     <View style={[styles.details, style]}>
-      <Text style={[styles.detailItem, textStyle]}>P: {protein}g</Text>
-      <Text style={[styles.detailItem, textStyle]}>C: {carb}g</Text>
-      <Text style={[styles.detailItem, textStyle]}>F: {fat}g</Text>
+      <Text style={[styles.detailItem, textStyle]}>P: {meal.protein}g</Text>
+      <Text style={[styles.detailItem, textStyle]}>C: {meal.carb}g</Text>
+      <Text style={[styles.detailItem, textStyle]}>F: {meal.fat}g</Text>
     </View>
     </>
     
