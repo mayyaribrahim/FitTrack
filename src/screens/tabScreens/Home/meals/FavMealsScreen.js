@@ -6,7 +6,6 @@ import { collection, query, where, getDocs } from 'firebase/firestore';
 import { FIRESTORE_DB } from '../../../../../FirebaseConfig'; // Assuming you have configured your Firebase app
 import { fetchFavoriteMeals } from '../../../../context/favoritesService';
 function FavMealsScreen({ route }) {
-  const favoriteMealsCtx = useContext(FavoritesContext);
   const [favoriteMeals, setFavoriteMeals] = useState([]);
 
   useEffect(() => {

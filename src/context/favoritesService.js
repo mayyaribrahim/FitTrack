@@ -12,10 +12,10 @@ export const addToFavorites = async (userId, meal) => {
   }
 };
 
-export const removeFromFavorites = async (userId, mealId) => {
+export const removeFromFavorites = async (userId, mealDocId) => {
   try {
     // Construct document reference
-    const docRef = FIRESTORE_DB.collection('users').doc(userId).collection('favoriteMeals').doc(mealId);
+    const docRef = FIRESTORE_DB.collection('users').doc(userId).collection('favoriteMeals').doc(mealDocId);
     
     // Remove meal from favorites collection
     await docRef.delete();

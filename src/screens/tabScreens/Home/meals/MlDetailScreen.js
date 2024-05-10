@@ -32,17 +32,17 @@ function MlDetailScreen({route, navigation}) {
   console.log(selectedMeal);
   
 
-  const toggleFavorite = () => {
+  const toggleFavorite = async () => {
     if (isFavorite) {
-      removeFromFavorites(mealDocId); // Remove from favorites
+      // Remove from favorites
+      setIsFavorite(false);
+      // Implement removeFromFavorites if needed
     } else {
-      addToFavorites(mealDocId);
-      console.log(mealDocId)
       // Add to favorites
+      setIsFavorite(true);
+      await addToFavorites(uid, mealDocId, selectedMeal);
     }
-    setIsFavorite(prevState => !prevState); // Toggle favorite state
   };
-
 
 
   useLayoutEffect(() => {

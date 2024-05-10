@@ -3,9 +3,32 @@ import React from "react";
 import { View, Text, Pressable, Image, StyleSheet, Platform } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import MealDetail from "./MealDetail";
+import { imageDb } from "../../../FirebaseConfig";
+import { useState, useEffect } from "react";
+import { getStorage, getDownloadURL } from "firebase/storage";
+import { ref } from "firebase/storage";
 
 function MealItem({ meal }) {
   const navigation = useNavigation();
+  const [imageUrl, setImageUrl] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchImage = async () => {
+      try {
+        const storage = getStorage(); // Initialize Firebase Storage
+        const imageRef = ref(storage, meal.imageUrl); // Reference to your image in Firebase Storage
+        const url = await getDownloadURL(imageRef); // Get the download URL of the image
+        setImageUrl(url); // Set the download URL as the image URL
+        setLoading(false); // Set loading state to false
+      } catch (error) {
+        console.error('Error fetching image:', error);
+      }
+    };
+
+    fetchImage(); // Call the fetchImage function when the component mounts
+  }, []);
+
 
   const selectMealItemHandler = () => {
     navigation.navigate("MealDetail", {
@@ -23,7 +46,7 @@ function MealItem({ meal }) {
         <View style={styles.innerContainer}>
           <View>
             <Image
-              source={require("../../assets/images/default.jpg")}
+              source={{ uri: imageUrl }}
               style={styles.image}
             />
             <Text style={styles.title}>{meal.title}</Text>
