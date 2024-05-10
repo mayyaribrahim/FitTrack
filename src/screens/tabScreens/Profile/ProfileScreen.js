@@ -1,4 +1,4 @@
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, onSnapshot } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { FIRESTORE_DB } from '../../../../FirebaseConfig';
 import { View, Text, StyleSheet, Image, Alert, SafeAreaView } from "react-native";
@@ -16,35 +16,28 @@ function ProfileScreen({navigation}) {
   const [lastName, setLastName] = useState("");
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const auth = getAuth();
-        const user = auth.currentUser;
-        
-        if (user) {
-          const uid = user.uid;
+    const auth = getAuth();
+    const user = auth.currentUser;
+    
+    if (user) {
+      const uid = user.uid;
+      
+      const userDocRef = doc(FIRESTORE_DB, 'users', uid);
+      const unsubscribe = onSnapshot(userDocRef, (doc) => {
+        if (doc.exists()) {
+          const userData = doc.data();
+          setFirstName(userData.firstName);
+          setLastName(userData.lastName);
           
-          const userDocRef = doc(FIRESTORE_DB, 'users', uid);
-          const userDocSnap = await getDoc(userDocRef);
-          
-          if (userDocSnap.exists()) {
-            const userData = userDocSnap.data();
-            setFirstName(userData.firstName);
-            setLastName(userData.lastName);
-            //setLoading(false);
-            // Set the user's first name in state
-          } else {
-            console.log("User document does not exist.");
-          }
         } else {
-          console.log("No user is currently signed in.");
+          console.log("User document does not exist.");
         }
-      } catch (error) {
-        console.log("Error fetching user data: ", error);
-      }
-    };
+      });
 
-    fetchUserData();
+      return () => unsubscribe();
+    } else {
+      console.log("No user is currently signed in.");
+    }
   }, []);
 
   const authCtx = useContext(AuthContext);
@@ -147,9 +140,8 @@ const styles = StyleSheet.create({
   },
 
   profileName: {
-    fontFamily: "poppins-semibold",
+    fontFamily: "poppins-medium",
     fontSize: 27,
-    fontWeight: 'bold',
     color: "#000",
 
   },

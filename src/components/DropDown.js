@@ -51,7 +51,7 @@ const DropDown = ({onAddGoal}) => {
            <FontAwesome6 name='bullseye' size={20} color="#BEBEBE" />
         </View>
       
-        <Text style={{fontWeight:'600', color: selectedGoal !== '' ? 'black' : '#BEBEBE', fontFamily: 'poppins', fontSize: 15}}>
+        <Text style={{color: selectedGoal !== '' ? 'black' : '#BEBEBE', fontFamily: 'poppins', fontSize: 15}}>
           {selectedGoal == '' ? 'Goal' : selectedGoal}
         </Text>
         
@@ -94,7 +94,7 @@ const DropDown = ({onAddGoal}) => {
                     borderColor: '#8e8e8e',
                   }}
                   onPress={() => handleGoalSelection(item.goal)}>
-                  <Text style={{fontWeight: '600', color: '#7c7c7c', fontFamily: 'poppins'}}>{item.goal}</Text>
+                  <Text style={{color: '#7c7c7c', fontFamily: 'poppins'}}>{item.goal}</Text>
                 </TouchableOpacity>
               );
             }}

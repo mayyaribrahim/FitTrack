@@ -53,7 +53,7 @@ const TrainDropDown = ({onAddDay}) => {
            <FontAwesome6 name='bullseye' size={20} color="#BEBEBE" />
         </View>
       
-        <Text style={{fontWeight:'600', color: selectedDay !== '' ? 'black' : '#BEBEBE', fontFamily: 'poppins', fontSize: 15}}>
+        <Text style={{ color: selectedDay !== '' ? 'black' : '#BEBEBE', fontFamily: 'poppins', fontSize: 15}}>
           {selectedDay == '' ? 'Training Days' : selectedDay}
         </Text>
         
@@ -96,7 +96,7 @@ const TrainDropDown = ({onAddDay}) => {
                     borderColor: '#8e8e8e',
                   }}
                   onPress={() => handleDaysSelection(item.trainDay)}>
-                  <Text style={{fontWeight: '600', color: '#7c7c7c', fontFamily: 'poppins'}}>{item.trainDay}</Text>
+                  <Text style={{color: '#7c7c7c', fontFamily: 'poppins'}}>{item.trainDay}</Text>
                 </TouchableOpacity>
               );
             }}

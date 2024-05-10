@@ -1,14 +1,18 @@
 import { collection, addDoc, doc, setDoc, updateDoc } from 'firebase/firestore'; 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { View, StyleSheet,Image, KeyboardAvoidingView, Platform, } from "react-native";
 import PrimaryButton from "../../components/PrimaryButton";
 import InputField from "../../components/InputFeild";
 import { FIRESTORE_DB } from "../../../FirebaseConfig";
 import { getAuth } from 'firebase/auth';
 
+
+
 function SignupScreen ({ navigation }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+
+  
   
   const handleFirstName = (enteredFirstName) => {
     setFirstName(enteredFirstName);
@@ -29,12 +33,11 @@ function SignupScreen ({ navigation }) {
 
         // Add first name and last name to the user document
         const userDocRef = doc(collection(FIRESTORE_DB, 'users'), uid);
-        
         await setDoc(userDocRef, {
           firstName: firstName,
           lastName: lastName,
         });
-
+        
         console.log("User data saved successfully for UID: ", uid);
         navigation.navigate("StartNow");
       } else {
@@ -45,8 +48,6 @@ function SignupScreen ({ navigation }) {
     }
   };
   
-  
-  //console.log(firstName, lastName);
 
   return (
 

@@ -11,7 +11,8 @@ function StartNow ({ navigation }) {
   const [age, setAge] = useState("");
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
-  
+
+ 
   const handleAge = (enteredAge) => {
     setAge(enteredAge);
   };
@@ -40,6 +41,7 @@ function StartNow ({ navigation }) {
           height: height,
           weight: weight,
         });
+
 
         console.log("User data saved successfully for UID: ", uid);
         navigation.navigate("OnboardingTutorial");

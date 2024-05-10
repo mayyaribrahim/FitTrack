@@ -13,9 +13,9 @@ import { getAuth } from 'firebase/auth';
 
 
 function Calculator({navigation}) {
-  const [height, setHeight] = useState(null);
-  const [weight, setWeight] = useState(null);
-  const [age, setAge] = useState(null);
+  const [height, setHeight] = useState('');
+  const [weight, setWeight] = useState('');
+  const [age, setAge] = useState('');
   const [selectedGoal, setSelectedGoal] = useState(null);
   const [selectedDay, setSelectedDay] = useState(null);
   const [protein, setProtein] = useState(null);

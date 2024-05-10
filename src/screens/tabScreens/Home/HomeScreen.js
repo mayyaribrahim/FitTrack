@@ -1,52 +1,51 @@
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, onSnapshot } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { FIRESTORE_DB } from '../../../../FirebaseConfig';
 import { View, Text, StyleSheet, ScrollView, FlatList, Image, Platform, TouchableOpacity, SafeAreaView } from "react-native";
 import ExCategoryGrid from "../../../components/exercises/ExCategoryGrid";
 import MlCategoryGrid from "../../../components/meals/MlCategoryGrid";
 import { EXERCISESCATEGORIES, MEALCATEGORIES } from "../../../data/Data";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import LoadingOverlay from '../../../components/LoadingOverlay';
+
+
 
 function HomeScreen({navigation}) {
   const [loading, setLoading] = useState(true);
-  const [firstName, setFirstName] = useState(""); // State variable to store the user's first name
+  const [firstName, setFirstName] = useState(""); 
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const auth = getAuth();
-        const user = auth.currentUser;
-        
-        if (user) {
-          const uid = user.uid;
-          
-          const userDocRef = doc(FIRESTORE_DB, 'users', uid);
-          const userDocSnap = await getDoc(userDocRef);
-          
-          if (userDocSnap.exists()) {
-            const userData = userDocSnap.data();
-            setFirstName(userData.firstName);
-            setLoading(false);
-            // Set the user's first name in state
-          } else {
-            console.log("User document does not exist.");
-            navigation.replace("SecondSignup");
-          }
+    const auth = getAuth();
+    const user = auth.currentUser;
+    
+    if (user) {
+      const uid = user.uid;
+      
+      const userDocRef = doc(FIRESTORE_DB, 'users', uid);
+      const unsubscribe = onSnapshot(userDocRef, (doc) => {
+        if (doc.exists()) {
+          const userData = doc.data();
+          setFirstName(userData.firstName);
+          setLoading(false);
         } else {
-          console.log("No user is currently signed in.");
+          console.log("User document does not exist.");
         }
-      } catch (error) {
-        console.log("Error fetching user data: ", error);
-      }
-    };
+      });
 
-    fetchUserData();
+      return () => unsubscribe();
+    } else {
+      console.log("No user is currently signed in.");
+    }
   }, []);
+
+ 
+
   
 
   if(loading) {
+    
     return <LoadingOverlay message="Welcome to FitTrack" />;
+    
   }
 
 

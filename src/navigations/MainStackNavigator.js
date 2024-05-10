@@ -1,13 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import { AuthContext } from '../context/auth-context';
-import { createUser, login } from '../util/auth';
-
+import React, {useEffect, useContext} from 'react';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
 import FavoritesContextProvider from '../context/Favorites-context';
-
-
-
 import MyTabs from './TabNav';
 import IntroScreen from "../screens/authScreens/IntroScreen";
 import LoginScreen from '../screens/authScreens/LoginScreen';
@@ -29,8 +22,6 @@ import ChangePassword from '../screens/tabScreens/Profile/ChangePassword';
 import About from '../screens/tabScreens/Profile/About';
 import TermsAndCond from '../screens/tabScreens/Profile/TermsAndCond';
 
-import { FIREBASE_AUTH } from '../../FirebaseConfig';
-import { onAuthStateChanged } from 'firebase/auth';
 
 
 
@@ -40,8 +31,12 @@ const Stack = createNativeStackNavigator();
  function MainStackNavigator() {
   // const authCtx = useContext(AuthContext);
   // console.log(authCtx.isAuthenticated);
+
   
   return (
+    
+    
+
     
     <FavoritesContextProvider>
 
@@ -68,6 +63,8 @@ const Stack = createNativeStackNavigator();
         <Stack.Screen name="SecondSignup" component={SecondSignupScreen} options={{headerTitleStyle: {color: 'white'}, headerBackVisible: false, gestureEnabled: false,}}/>
         <Stack.Screen name="StartNow" component={StartNow} options={{headerTitleStyle: {color: 'white'}, headerBackVisible: false, gestureEnabled: false}}/>
         
+        
+
         
          
         <Stack.Screen name="OnboardingTutorial" component={OnboardingTutorial} options={{headerBackVisible: false, gestureEnabled: false, headerTitleStyle: {color: 'white'}}}/>  
@@ -100,6 +97,7 @@ const Stack = createNativeStackNavigator();
       </Stack.Navigator>
 
     </FavoritesContextProvider>
+   
 
   );
 };
