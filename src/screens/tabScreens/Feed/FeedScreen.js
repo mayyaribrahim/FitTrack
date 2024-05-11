@@ -1,13 +1,38 @@
-import { useState } from "react";
+import { collection, getDocs, doc } from "firebase/firestore";
+import { useState, useEffect } from "react";
 import { View, Text, StyleSheet, FlatList, Pressable, TouchableOpacity, SafeAreaView } from "react-native";
 import TabScreenTitle from "../../../components/TabScreenTitle";
+import { FIRESTORE_DB } from "../../../../FirebaseConfig";
 
 import FeedItem from "./FeedItem";
 import FeedInput from "./FeedInput";
 
+// export
 function FeedScreen() {
   const [modalVisible, setModalVisible]  = useState(false);
   const [courseTweets, setCourseTweets] = useState([]);
+  const [tweets, setTweets] = useState([]);
+
+  useEffect(() => {
+    async function fetchTweets() {
+      try {
+        const tweetsCollectionRef = collection(FIRESTORE_DB, "tweets");
+        
+      const querySnapshot = await getDocs(tweetsCollectionRef);
+      const tweetsData = [];
+      querySnapshot.forEach((doc) => {
+        tweetsData.push({ id: doc.id, ...doc.data() });
+      });
+    
+      setTweets(tweetsData)
+      } catch (error) {
+        console.error("Error fetching tweets:", error);
+      }
+    }
+    fetchTweets();
+  }, []);
+  console.log("tweets",tweets);
+  
 
   function startAddTweetHandler() {
     setModalVisible(true);
@@ -18,17 +43,14 @@ function FeedScreen() {
   }
 
   function addTweetHandler(enteredTweetText) {
-    setCourseTweets(currentCourseTweets => [
-      ...currentCourseTweets, 
-      { text: enteredTweetText, id: Math.random().toString() },
-    ]);
+    
     endAddTweetHandler();
   };
 
   function deleteGoalHandler(id) {
-    setCourseTweets(currentCourseTweets => {
-      return currentCourseTweets.filter((goal) => goal.id !== id);
-    });
+    // setCourseTweets(currentCourseTweets => {
+    //   return currentCourseTweets.filter((goal) => goal.id !== id);
+    // });
   }
 
 
@@ -50,26 +72,28 @@ function FeedScreen() {
 
       </View>
 
-      <FeedInput visible={modalVisible} onAddTweet={addTweetHandler} onCancel={endAddTweetHandler}/>
+      <FeedInput visible={modalVisible} onAddTweet={addTweetHandler} onCancel={endAddTweetHandler} setTweets={setTweets}/>
 
       <View style={styles.tweetsContainer}>
 
         <FlatList 
           style={styles.tweets}
-          data={courseTweets}
+          data={tweets}
           renderItem={(itemData) => {
+            console.log("itemData",itemData);
             return (
               <FeedItem 
-                text={itemData.item.text} 
-                id={itemData.item.id}
+                 id={itemData.item.id} 
+                 userId={itemData.item.userId} 
+                 userName={itemData.item.userName} 
+                 text={itemData.item.text} 
+                 setTweets={setTweets}
                 onDeleteItem={deleteGoalHandler} //inside the text is what should be rendered
               />
             ); 
           }}
 
-          keyExtractor={(item, index) => { //gives a key for each item in the object
-            return item.id;
-          }}
+          keyExtractor={(item, index) => item.userId + '_' + item.text}
 
           alwaysBounceVertical={false} 
         />
@@ -121,5 +145,57 @@ const styles = StyleSheet.create({
 
   tweets: {
    marginBottom: 120,
-  }
+  }, 
+
+  
+
+
+
+
+
+
+
+
+
+  tweetItem: {
+    alignSelf: 'center',
+    width: '89%',
+    margin: 8,
+    padding: 8,
+    borderRadius: 15,
+    backgroundColor: '#E9E9E9',
+    padding: 15,
+    
+  },
+
+  pressedItem: {
+    opacity: 0.5
+  },
+
+  Text:{
+    fontFamily: "poppins",
+    color: 'black',
+    padding: 8,
+  }, 
+
+  userContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+
+  userImage: {
+    width: 50,
+    height: 50,
+  },
+
+  userName: {
+    fontFamily: "poppins",
+    marginLeft: 10,
+  },
+
+  deleteButton: {
+    flex: 1,
+    alignItems: 'flex-end',
+  },
 })

@@ -1,18 +1,95 @@
+import { collection, addDoc, doc,  onSnapshot, getDocs } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 import { View, TextInput, Button, StyleSheet, Modal, Text, TouchableOpacity, Image, SafeAreaView, } from 'react-native';
+import { getAuth } from 'firebase/auth';
+import { FIRESTORE_DB } from '../../../../FirebaseConfig';
 
 function FeedInput(props) {
   const [enteredTweetText, setEnteredTweetText] = useState('');
+  const [userName, setUserName] = useState(""); 
+  const [firstName, setFirstName] = useState(""); 
+  const [lastName, setLastName] = useState("");
+
+  useEffect(() => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    
+    if (user) {
+      const uid = user.uid;
+      
+      const userDocRef = doc(FIRESTORE_DB, 'users', uid);
+      const unsubscribe = onSnapshot(userDocRef, (doc) => {
+        if (doc.exists()) {
+          const userData = doc.data();
+          setUserName(userData.firstName + ' ' + userData.lastName);
+        } else {
+          console.log("User document does not exist.");
+        }
+      });
+
+      return () => unsubscribe();
+    } else {
+      console.log("No user is currently signed in.");
+    }
+  }, []);
+
+  function addTweetHandler() {
+    const auth = getAuth();
+    const user = auth.currentUser;
+  
+    if (user) {
+      const uid = user.uid;
+  
+      // Add the tweet to Firestore
+      const tweetsRef = collection(FIRESTORE_DB, 'tweets');
+       addDoc(tweetsRef, {
+        userName: userName,
+        text: enteredTweetText,
+        userId: uid,
+      })
+
+      .then(() => {
+        console.log('Tweet added to Firestore!');
+        // Call the callback function to inform the parent component
+        async function fetchTweets() {
+          try {
+            const tweetsCollectionRef = collection(FIRESTORE_DB, "tweets");
+            
+          const querySnapshot = await getDocs(tweetsCollectionRef);
+          const tweetsData = [];
+          querySnapshot.forEach((doc) => {
+            tweetsData.push({ id: doc.id, ...doc.data() });
+          });
+        
+          props.setTweets(tweetsData)
+          } catch (error) {
+            console.error("Error fetching tweets:", error);
+          }
+        }
+        fetchTweets()
+        // props.setTweets(prevTweets => [...prevTweets, { userName: userName, text: enteredTweetText, userId: uid }]);
+        // fetchTweets();
+        props.onAddTweet(enteredTweetText);
+        // Reset the input field
+        setEnteredTweetText('');
+        
+        
+      })
+      .catch((error) => {
+        console.error('Error adding tweet to Firestore: ', error);
+      });
+    }
+  }
 
   
   function tweetInputHandler(enteredText) {
     setEnteredTweetText(enteredText);
   }
 
-  function addTweetHandler() {
-    props.onAddTweet(enteredTweetText);
-    setEnteredTweetText('')
-  }
+  // function addTweetHandler() {
+  //   props.onAddTweet(enteredTweetText);
+  //   setEnteredTweetText('')
+  // }
 
   return (
 
@@ -22,7 +99,7 @@ function FeedInput(props) {
 
         <View style={styles.userContainer}>
           <Image style={styles.userImage} source={require("../../../assets/images/user.png")}/>
-          <Text style={styles.userName}>Mayyar Ibrahim</Text>
+          <Text style={styles.userName}>{userName}</Text>
         </View>
       
 
