@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { collection, query, where, getDocs, snapshotEqual } from "firebase/firestore";
-import { FIRESTORE_DB } from "../../../../../FirebaseConfig"; // Assuming you have configured your Firebase app
+import { FIRESTORE_DB } from "../../../../../FirebaseConfig"; 
 import MealsList from "../../../../components/meals/MealsList";
 
 function MealsScreen({ route, navigation }) {

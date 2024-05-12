@@ -1,28 +1,52 @@
-import { useLayoutEffect } from "react";
+import { collection, query, where, getDocs, snapshotEqual } from "firebase/firestore";
+import { FIRESTORE_DB } from "../../../../../FirebaseConfig"; 
+import { useLayoutEffect, useState, useEffect } from "react";
 import { View, FlatList, StyleSheet, Text } from "react-native";
 import { EXERCISESCATEGORIES, EXERCISES } from "../../../../data/Data";
-import ExerciseItem from "../../../../components/exercises/ExerciseItem";
 import ExercisesList from "../../../../components/exercises/ExercisesList";
 
 function ExercisesScreen({ route, navigation }) {
+  const [exercises, setExercises] = useState([]);
 
-  const catId = route.params.exerciseCategoryId;
+  useEffect(() => {
+    fetchExercises(route.params.exerciseCategoryId);
+  }, [route.params.exerciseCategoryId]);
 
-  const displayExercises = EXERCISES.filter((exerciseItem => {
-    return exerciseItem.categoryIds[0] === catId;
-  }));
+  const fetchExercises = async (categoryId) => {
+    try {
+      const exercisesCollectionRef = collection(FIRESTORE_DB, "Exercises");
+      const q = query(exercisesCollectionRef, where("categoryIds", "array-contains", categoryId));
+      const querySnapshot = await getDocs(q);
+      const exercisesData = [];
+      querySnapshot.forEach((doc) => {
+        exercisesData.push({ id: doc.id, ...doc.data() });
+        
+      });
 
-  useLayoutEffect(()  => {
-    const exerciseCategoryTitle = EXERCISESCATEGORIES.find((exerciseCategory) => exerciseCategory.id === catId).title;
+      setExercises(exercisesData);
+      
+    } catch (error) {
+      console.error("Error fetching meals:", error);
+    }
+  };console.log(exercises[0])
 
-    navigation.setOptions({
-      title: exerciseCategoryTitle
-    }); 
-  }, [catId, navigation])
+  // const catId = route.params.exerciseCategoryId;
+
+  // const displayExercises = EXERCISES.filter((exerciseItem => {
+  //   return exerciseItem.categoryIds[0] === catId;
+  // }));
+
+  // useLayoutEffect(()  => {
+  //   const exerciseCategoryTitle = EXERCISESCATEGORIES.find((exerciseCategory) => exerciseCategory.id === catId).title;
+
+  //   navigation.setOptions({
+  //     title: exerciseCategoryTitle
+  //   }); 
+  // }, [catId, navigation])
   
 
   return  (
-    <ExercisesList items={displayExercises} />
+    <ExercisesList items={exercises} />
   )
 
 

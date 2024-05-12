@@ -1,12 +1,13 @@
 import { View, Text, Pressable, Image, StyleSheet, Platform } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-function ExerciseItem({id, name}) {
+function ExerciseItem({ exercise }) {
   const navigation = useNavigation();
 
   function selectExerciseItemHandler() {
     navigation.navigate('ExerciseDetail', {
-    exerciseId: id
+    exerciseDocId: exercise.id
+    
     });
   }
 
@@ -24,7 +25,7 @@ function ExerciseItem({id, name}) {
           
             <View>
               <Image source={require("../../assets/images/default.jpg")} style={styles.image}/>
-              <Text style={styles.title}>{name}</Text>
+              <Text style={styles.title}>{exercise.name}</Text>
             </View>
   
           </View>

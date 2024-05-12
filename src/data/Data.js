@@ -1087,11 +1087,11 @@ export const MEALS = [
 
 // EXERCISES.forEach(exercise => {
 //     // Reference to the "exercises" collection
-//     const exercisesCollectionRef = collection(FIRESTORE_DB, 'exercises');
+//     const exercisesCollectionRef = collection(FIRESTORE_DB, 'Exercises');
 
 //     // Add a new document with a generated ID to the "exercises" collection
 //     addDoc(exercisesCollectionRef, {
-//         id: exercise.id,
+//         exerciseId: exercise.id,
 //         categoryIds: exercise.categoryIds,
 //         imageUrl: exercise.imageUrl,
 //         name: exercise.name,
