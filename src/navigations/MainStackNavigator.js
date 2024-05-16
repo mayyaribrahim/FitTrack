@@ -76,8 +76,8 @@ const Stack = createNativeStackNavigator();
         <Stack.Screen name="FavExerciseScreen" component={FavExerciseScreen} options={{ title: 'Favorite Exercises'}}/>
 
         {/*meals screens*/}
-        <Stack.Screen name="MealsScreen" component={MealsScreen} />
-        <Stack.Screen name="MealDetail" component={MlDetailScreen} />
+        <Stack.Screen name="MealsScreen" component={MealsScreen} options={{ title: ' Meals' }}/>
+        <Stack.Screen name="MealDetail" component={MlDetailScreen} options={{ title: 'Meal Detail' }}/>
         <Stack.Screen name="FavMealsScreen" component={FavMealsScreen} options={{ title: 'Favorite Meals'}} />
         
 

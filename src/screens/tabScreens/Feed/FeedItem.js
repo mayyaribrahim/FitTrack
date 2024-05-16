@@ -4,7 +4,7 @@ import { View, Text, Pressable, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { getAuth } from "firebase/auth";
 import { FIRESTORE_DB } from "../../../../FirebaseConfig";
-function FeedItem (props ) {
+function FeedItem ( props ) {
   const { userName, text, userId, id, setTweets } = props;
 
   const auth = getAuth();
@@ -15,6 +15,7 @@ function FeedItem (props ) {
       try {
         const tweetDocRef = doc(FIRESTORE_DB, 'tweets', id);
         await deleteDoc(tweetDocRef);
+        
         async function fetchTweets() {
           try {
             const tweetsCollectionRef = collection(FIRESTORE_DB, "tweets");

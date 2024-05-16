@@ -25,7 +25,7 @@ const FIREBASE_AUTH = initializeAuth(FIREBASE_APP, {
 
 // export const FIRESTORE_DB = getFirestore(FIREBASE_APP,) // old
 
-const FIRESTORE_DB = initializeFirestore(FIREBASE_APP,
+export const FIRESTORE_DB = initializeFirestore(FIREBASE_APP,
   { 
     merge:true, 
     useFetchStreams: false,
@@ -34,7 +34,7 @@ const FIRESTORE_DB = initializeFirestore(FIREBASE_APP,
 
   const imageDb = getStorage(FIREBASE_APP);
 
-export { FIREBASE_APP, FIREBASE_AUTH, FIRESTORE_DB, imageDb};
+export { FIREBASE_APP, FIREBASE_AUTH, imageDb};
 
 
 

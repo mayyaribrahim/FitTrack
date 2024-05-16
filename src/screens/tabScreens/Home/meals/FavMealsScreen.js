@@ -1,20 +1,54 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { FavoritesContext } from '../../../../context/Favorites-context';
 import MealsList from '../../../../components/meals/MealsList';
 import { collection, query, where, getDocs } from 'firebase/firestore';
-import { FIRESTORE_DB } from '../../../../../FirebaseConfig'; // Assuming you have configured your Firebase app
-import { fetchFavoriteMeals } from '../../../../context/favoritesService';
+import { FIRESTORE_DB } from '../../../../../FirebaseConfig'; 
+import { fetchFavoriteMeals, removeFromFavorites } from '../../../../context/favoritesService';
+import { getAuth } from 'firebase/auth';
+import { useIsFocused } from '@react-navigation/native';
+
 function FavMealsScreen({ route }) {
   const [favoriteMeals, setFavoriteMeals] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const isFocused = useIsFocused();
+  
+  const fetchMeals = async () => {
+    try {
+      const auth = getAuth();
+      const user = auth.currentUser;
+      if (user) {
+        const userId = user.uid;
+        const data = await fetchFavoriteMeals(userId);
+        setFavoriteMeals(data);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error('Error fetching favorite meals:', error);
+    }
+  };
 
   useEffect(() => {
-    const fetchMeals = async () => {
-      const data = await fetchFavoriteMeals();
-      setFavoriteMeals(data);
-    };
+    if (isFocused && route.params?.mealRemoved) {
+     
+      fetchMeals();
+    }
+  }, [isFocused, route.params?.mealRemoved]);
+
+  useEffect(() => {
+   
     fetchMeals();
   }, []);
+
+  
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
 
 
   if (favoriteMeals.length === 0) {

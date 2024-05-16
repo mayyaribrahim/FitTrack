@@ -9,11 +9,19 @@ import MList from '../../../../components/meals/MList';
 import { AntDesign } from '@expo/vector-icons';
 import { FavoritesContext } from "../../../../context/Favorites-context";
 import { addToFavorites, removeFromFavorites } from "../../../../context/favoritesService";
+import { getStorage, getDownloadURL } from "firebase/storage";
+import { ref } from "firebase/storage";
+import { getAuth } from "firebase/auth";
+import { fetchFavoriteMeals } from "../../../../context/favoritesService";
 function MlDetailScreen({route, navigation}) {
   const mealDocId = route.params.mealDocId;
   const [selectedMeal, setSelectedMeal] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [imageUrl, setImageUrl] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   
+
   useEffect(() => {
     const fetchMeal = async () => {
       try {
@@ -30,17 +38,59 @@ function MlDetailScreen({route, navigation}) {
   }, [mealDocId]);
   
   console.log(selectedMeal);
-  
 
+  useEffect(() => {
+    const fetchImage = async () => {
+      try {
+        if (selectedMeal && selectedMeal.imageUrl) {
+          const storage = getStorage(); // Initialize Firebase Storage
+          const imageRef = ref(storage, selectedMeal.imageUrl); // Reference to your image in Firebase Storage
+          const url = await getDownloadURL(imageRef); // Get the download URL of the image
+          setImageUrl(url); // Set the download URL as the image URL
+          setLoading(false); // Set loading state to false
+        } else {
+          setLoading(false); // If imageUrl is not present, set loading state to false
+        }
+      } catch (error) {
+        console.error('Error fetching image:', error);
+      }
+    };
+  
+    fetchImage(); // Call the fetchImage function when the component mounts
+  }, [selectedMeal]);
+
+  const auth = getAuth();
+  const user = auth.currentUser;
+  const uid = user.uid;
+
+  useEffect(() => {
+    const checkFavoriteStatus = async () => {
+      try { 
+        if (!user) return;
+        const favoriteMeals = await fetchFavoriteMeals(uid);
+        setIsFavorite(favoriteMeals.some(meal => meal.id === mealDocId)); // Check if meal is in favorite meals
+      } catch (error) {
+        console.error('Error checking favorite status:', error);
+      }
+    };
+
+    checkFavoriteStatus();
+  }, [mealDocId]);
+
+
+  
   const toggleFavorite = async () => {
     if (isFavorite) {
       // Remove from favorites
+      await removeFromFavorites(uid, mealDocId);
       setIsFavorite(false);
-      // Implement removeFromFavorites if needed
+      navigation.navigate('FavMealsScreen', { mealRemoved: true });
+      
     } else {
       // Add to favorites
+      await addToFavorites(uid, mealDocId);
       setIsFavorite(true);
-      await addToFavorites(uid, mealDocId, selectedMeal);
+      
     }
   };
 
@@ -61,7 +111,7 @@ function MlDetailScreen({route, navigation}) {
   return (
     <ScrollView style={styles.rootContainer}>
 
-      <Image style={styles.image} source={require("../../../../assets/images/default.jpg")} />
+      <Image style={styles.image} source={{ uri: imageUrl }} />
 
       <Text style={styles.title}>{selectedMeal?.title || "no title"}</Text>
 
