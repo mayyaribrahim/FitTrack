@@ -12,14 +12,17 @@ function FavMealsScreen({ route }) {
   const [favoriteMeals, setFavoriteMeals] = useState([]);
   const [loading, setLoading] = useState(true);
   const isFocused = useIsFocused();
-  
-  const fetchMeals = async () => {
+
+  const categoryIds = route.params.categoryIds;
+  console.log(categoryIds)
+
+  const fetchMeals = async (categoryIds) => {
     try {
       const auth = getAuth();
       const user = auth.currentUser;
       if (user) {
         const userId = user.uid;
-        const data = await fetchFavoriteMeals(userId);
+        const data = await fetchFavoriteMeals(userId, categoryIds);
         setFavoriteMeals(data);
         setLoading(false);
       }
@@ -31,21 +34,21 @@ function FavMealsScreen({ route }) {
   useEffect(() => {
     if (isFocused && route.params?.mealRemoved) {
      
-      fetchMeals();
+      fetchMeals(route.params.categoryIds);
     }
   }, [isFocused, route.params?.mealRemoved]);
 
   useEffect(() => {
    
-    fetchMeals();
-  }, []);
+    fetchMeals(categoryIds);
+  }, [categoryIds]);
 
   
 
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" />
       </View>
     );
   }

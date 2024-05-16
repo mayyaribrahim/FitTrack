@@ -33,6 +33,7 @@ function MealItem({ meal }) {
   const selectMealItemHandler = () => {
     navigation.navigate("MealDetail", {
       mealDocId: meal.id,
+      categoryIds: meal.categoryIds,
     });
   };
 

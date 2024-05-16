@@ -20,7 +20,8 @@ function MlDetailScreen({route, navigation}) {
   const [imageUrl, setImageUrl] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  
+  const categoryIds = route.params.categoryIds;
+  console.log(categoryIds);
 
   useEffect(() => {
     const fetchMeal = async () => {
@@ -73,7 +74,6 @@ function MlDetailScreen({route, navigation}) {
         console.error('Error checking favorite status:', error);
       }
     };
-
     checkFavoriteStatus();
   }, [mealDocId]);
 
@@ -84,13 +84,12 @@ function MlDetailScreen({route, navigation}) {
       // Remove from favorites
       await removeFromFavorites(uid, mealDocId);
       setIsFavorite(false);
-      navigation.navigate('FavMealsScreen', { mealRemoved: true });
+      navigation.navigate('FavMealsScreen', { categoryIds, mealRemoved: true });
       
     } else {
       // Add to favorites
-      await addToFavorites(uid, mealDocId);
+      await addToFavorites(uid, mealDocId, categoryIds);
       setIsFavorite(true);
-      
     }
   };
 

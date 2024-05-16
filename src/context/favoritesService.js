@@ -3,13 +3,13 @@ import { doc, setDoc, deleteDoc, getDocs, collection,getDoc, query, where } from
 
 
 
-export const addToFavorites = async (userId, mealId) => {
+export const addToFavorites = async (userId, mealId, categoryIds) => {
   try {
     // Reference to the user document in Firestore
     const userRef = doc(FIRESTORE_DB, 'users', userId);
 
     // Add the meal ID to the favoriteMeals subcollection
-    await setDoc(doc(userRef, 'favoriteMeals', mealId), { mealId });
+    await setDoc(doc(userRef, 'favoriteMeals', mealId), { mealId, categoryIds });
 
     console.log('Meal added to favorites successfully');
   } catch (error) {
@@ -32,7 +32,7 @@ export const removeFromFavorites = async (userId, mealId) => {
   }
 };
 
-export const fetchFavoriteMeals = async (userId) => {
+export const fetchFavoriteMeals = async (userId, categoryIds) => {
   try {
     const favoriteMealsRef = collection(FIRESTORE_DB, 'users', userId, 'favoriteMeals');
     const querySnapshot = await getDocs(favoriteMealsRef);
@@ -46,7 +46,15 @@ export const fetchFavoriteMeals = async (userId) => {
 
       // Check if the meal exists and add it to the list
       if (mealDoc.exists()) {
-        favoriteMeals.push({ id: mealId, ...mealDoc.data() });
+        const mealData = mealDoc.data();
+        if (categoryIds) { // If categoryIds is provided, filter by category
+          if (mealData.categoryIds && mealData.categoryIds.some(id => categoryIds.includes(id))) {
+            favoriteMeals.push({ id: mealId, ...mealData });
+          }
+        } 
+        else { // If no categoryIds provided, fetch all favorite meals
+          favoriteMeals.push({ id: mealId, ...mealData });
+        }
       } else {
         console.warn(`Meal with ID ${mealId} not found`);
       }
