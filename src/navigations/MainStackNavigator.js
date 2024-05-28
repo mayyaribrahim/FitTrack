@@ -71,8 +71,8 @@ const Stack = createNativeStackNavigator();
         <Stack.Screen name="home" component={MyTabs} options={{ gestureEnabled: false, headerShown: false }} />
 
         {/*exercise screens*/}
-        <Stack.Screen name="ExercisesScreen" component={ExercisesScreen} />
-        <Stack.Screen name="ExerciseDetail" component={ExDetailScreen} />
+        <Stack.Screen name="ExercisesScreen" component={ExercisesScreen} options={{ title: 'Exercises'}}/>
+        <Stack.Screen name="ExerciseDetail" component={ExDetailScreen} options={{ title: 'Exercise Details'}}/>
         <Stack.Screen name="FavExerciseScreen" component={FavExerciseScreen} options={{ title: 'Favorite Exercises'}}/>
 
         {/*meals screens*/}

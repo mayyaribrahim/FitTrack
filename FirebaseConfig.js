@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
-import { Firestore, getFirestore ,initializeFirestore} from 'firebase/firestore';
+import { Firestore, getFirestore ,initializeFirestore, setLogLevel} from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -31,6 +31,8 @@ export const FIRESTORE_DB = initializeFirestore(FIREBASE_APP,
     useFetchStreams: false,
     experimentalAutoDetectLongPolling: true
   });
+
+  setLogLevel('debug');
 
   const imageDb = getStorage(FIREBASE_APP);
 

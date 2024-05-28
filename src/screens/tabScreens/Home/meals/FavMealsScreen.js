@@ -2,18 +2,19 @@ import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { FavoritesContext } from '../../../../context/Favorites-context';
 import MealsList from '../../../../components/meals/MealsList';
-import { collection, query, where, getDocs } from 'firebase/firestore';
+import { collection, query, where, getDocs, doc, getDoc } from 'firebase/firestore';
 import { FIRESTORE_DB } from '../../../../../FirebaseConfig'; 
 import { fetchFavoriteMeals, removeFromFavorites } from '../../../../context/favoritesService';
 import { getAuth } from 'firebase/auth';
 import { useIsFocused } from '@react-navigation/native';
+import LoadingOverlay from '../../../../components/LoadingOverlay';
 
 function FavMealsScreen({ route }) {
   const [favoriteMeals, setFavoriteMeals] = useState([]);
   const [loading, setLoading] = useState(true);
   const isFocused = useIsFocused();
 
-  const categoryIds = route.params.categoryIds;
+  const categoryIds = route.params?.categoryIds || [];
   console.log(categoryIds)
 
   const fetchMeals = async (categoryIds) => {
@@ -33,26 +34,17 @@ function FavMealsScreen({ route }) {
 
   useEffect(() => {
     if (isFocused && route.params?.mealRemoved) {
-     
-      fetchMeals(route.params.categoryIds);
+      fetchMeals(categoryIds);
     }
   }, [isFocused, route.params?.mealRemoved]);
 
   useEffect(() => {
-   
     fetchMeals(categoryIds);
   }, [categoryIds]);
 
-  
-
   if (loading) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
+    return <LoadingOverlay message="Loading..." />;
   }
-
 
   if (favoriteMeals.length === 0) {
     return (

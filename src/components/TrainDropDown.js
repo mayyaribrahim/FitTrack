@@ -1,6 +1,6 @@
 import {View, Text, TouchableOpacity, Image, TextInput, FlatList, Platform} from 'react-native';
 import React, {useRef, useState} from 'react';
-import { Ionicons, FontAwesome6 } from '@expo/vector-icons';
+import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 
 
 const trainingDays = [
@@ -50,7 +50,7 @@ const TrainDropDown = ({onAddDay}) => {
       >
         
         <View style={{ right:3}}>
-           <FontAwesome6 name='bullseye' size={20} color="#BEBEBE" />
+        <FontAwesome5 name='calendar-day' size={20} color="#BEBEBE" />
         </View>
       
         <Text style={{ color: selectedDay !== '' ? 'black' : '#BEBEBE', fontFamily: 'poppins', fontSize: 15}}>

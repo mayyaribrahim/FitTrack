@@ -1,13 +1,12 @@
 import { StyleSheet, Platform } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-
 import { DrawerNavigator } from './DrawerNavigator';
 
 import ProfileScreen from '../screens/tabScreens/Profile/ProfileScreen';
 import FeedScreen from '../screens/tabScreens/Feed/FeedScreen';
 import ToolsScreen from '../screens/tabScreens/ToolsScreen/ToolsScreen';
-
+import TrackScreen from '../screens/tabScreens/Track/TrackScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -51,6 +50,16 @@ function MyTabs() {
         options={{
           tabBarIcon: ({color, size}) => (
             <Ionicons name='calculator' color={color} size={30}/>
+          )
+        }}
+      />
+
+      <Tab.Screen 
+        name="track" 
+        component={TrackScreen} 
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <Ionicons name='bar-chart' color={color} size={30}/>
           )
         }}
       />
