@@ -5,6 +5,7 @@ import HomeScreen from '../screens/tabScreens/Home/HomeScreen';
 import FavExerciseScreen from '../screens/tabScreens/Home/exercises/FavExerciseScreen'
 import FavMlHome from '../screens/tabScreens/Home/meals/FavMlHome';
 import FavExHome from '../screens/tabScreens/Home/exercises/FavExHome';
+import TimerScreen from '../screens/tabScreens/Home/TimerScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -33,6 +34,10 @@ export function DrawerNavigator() {
 
       <Drawer.Screen name="FavoriteMealCategories" component={FavMlHome}
         options={{ title: 'Favorite Meals', drawerIcon: ({color, size}) => (<Ionicons name="star" color={color} size={size} /> )}}
+      />
+
+      <Drawer.Screen name="TimerScreen" component={TimerScreen}
+        options={{ title: 'Timer', drawerIcon: ({color, size}) => (<Ionicons name="timer" color={color} size={size} /> )}}
       />
 
     </Drawer.Navigator>

@@ -1,6 +1,6 @@
-import { collection, getDocs } from "firebase/firestore";
+import React, { useState, useEffect } from 'react';
+import { collection, onSnapshot } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { useState, useEffect } from "react";
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, SafeAreaView } from "react-native";
 import TabScreenTitle from "../../../components/TabScreenTitle";
 import { FIRESTORE_DB } from "../../../../FirebaseConfig";
@@ -10,7 +10,7 @@ import TrackInput from "./TrackInput";
 
 function TrackScreen() {
   const [modalVisible, setModalVisible] = useState(false);
-  const [tweets, setTweets] = useState([]);
+  const [progress, setProgress] = useState([]);
 
   useEffect(() => {
     const auth = getAuth();
@@ -19,32 +19,30 @@ function TrackScreen() {
     if (user) {
       const uid = user.uid;
       const progressCollectionRef = collection(FIRESTORE_DB, `users/${uid}/progress`);
-
-      getDocs(progressCollectionRef)
-        .then((querySnapshot) => {
-          const loadedTweets = [];
-          querySnapshot.forEach((doc) => {
-            loadedTweets.push({ id: doc.id, ...doc.data() });
-          });
-          setTweets(loadedTweets);
-        })
-        .catch((error) => {
-          console.error('Error fetching documents: ', error);
+      
+      const unsubscribe = onSnapshot(progressCollectionRef, (querySnapshot) => {
+        const progressData = [];
+        querySnapshot.forEach((doc) => {
+          progressData.push({ id: doc.id, ...doc.data() });
         });
+        setProgress(progressData);
+      });
+
+      return () => unsubscribe();
     }
   }, []);
 
-  function startAddTweetHandler() {
+  function startAddExerciseHandler() {
     setModalVisible(true);
   }
 
-  function endAddTweetHandler() {
+  function endAddExerciseHandler() {
     setModalVisible(false);
   }
 
-  function addTweetHandler(newTweet) {
-    setTweets((currentTweets) => [...currentTweets, newTweet]);
-    endAddTweetHandler();
+  function addExerciseHandler(newExercise) {
+    // No need to update state manually, onSnapshot will handle it
+    endAddExerciseHandler();
   }
 
   return (
@@ -52,25 +50,24 @@ function TrackScreen() {
       <TabScreenTitle title="Tracking" />
       <View style={styles.titleContainer}></View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={startAddTweetHandler}>
+        <TouchableOpacity style={styles.button} onPress={startAddExerciseHandler}>
           <Text style={styles.plus}>Add</Text>
         </TouchableOpacity>
       </View>
-      <TrackInput visible={modalVisible} onAddTweet={addTweetHandler} onCancel={endAddTweetHandler} />
-      <View style={styles.tweetsContainer}>
+      <TrackInput visible={modalVisible} onAddExercise={addExerciseHandler} onCancel={endAddExerciseHandler} />
+      <View style={styles.progressContainer}>
         <FlatList
-          style={styles.tweets}
-          data={tweets}
-          renderItem={(itemData) => (
+          style={styles.progress}
+          data={progress}
+          renderItem={({ item }) => (
             <TrackItem
-              id={itemData.item.id}
-              name={itemData.item.name}
-              reps={itemData.item.reps}
-              weight={itemData.item.weight}
-              setTweets={setTweets}  // Pass the setTweets function
+              id={item.id}
+              name={item.name}
+              reps={item.reps}
+              weight={item.weight}
             />
           )}
-          keyExtractor={(item, index) => item.name + '_' + item.reps + '_' + item.weight}
+          keyExtractor={(item) => item.id}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
           alwaysBounceVertical={false}
@@ -108,10 +105,10 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 15,
   },
-  tweetsContainer: {
+  progressContainer: {
     marginTop: 15,
   },
-  tweets: {
+  progress: {
     marginBottom: 120,
   },
 });

@@ -5,7 +5,8 @@ import { getAuth } from 'firebase/auth';
 import { FIRESTORE_DB } from '../../../../FirebaseConfig';
 import ExCategoryGrid from "../../../components/exercises/ExCategoryGrid";
 import MlCategoryGrid from "../../../components/meals/MlCategoryGrid";
-import { EXERCISESCATEGORIES, MEALCATEGORIES } from "../../../data/Data";
+import AcCategoryGrid from "../../../components/AcCategoryGrid";
+import { EXERCISESCATEGORIES, MEALCATEGORIES, ACTIVITIESCATEGORIES } from "../../../data/Data";
 import LoadingOverlay from '../../../components/LoadingOverlay';
 
 function HomeScreen({ navigation }) {
@@ -42,7 +43,9 @@ function HomeScreen({ navigation }) {
     return <LoadingOverlay message="Welcome to FitTrack" />;
   }
 
-  //for meals
+
+
+//===================== for Meals =================================================
   function renderMealCategoryItem(itemData) {
     function pressHandler() {
       navigation.navigate('MealsScreen', {
@@ -66,7 +69,9 @@ function HomeScreen({ navigation }) {
     );
   }
 
-  //for exercises
+
+
+  //===================== for exercises =================================================
   function renderCategoryItem(itemData) {
     function pressHandler() {
       navigation.navigate('ExercisesScreen', {
@@ -90,7 +95,31 @@ function HomeScreen({ navigation }) {
     );
   }
 
-  // main return
+  //===================== for Activities =================================================
+  function renderActivityCategoryItem(itemData) {
+    function pressHandler() {
+      navigation.navigate('MealsScreen', {
+        mealCategoryId: itemData.item.id,
+      });
+    }
+
+    const item = itemData.item;
+
+    return (
+      <View style={styles.categoryGrid}>
+        <AcCategoryGrid
+          title={item.title}
+          titleColor={item.titleColor}
+          buttonColor={item.buttonColor}
+          iconContainer={item.iconContainer}
+          iconColor={item.iconColor}
+          image={item.image}
+          onPress={pressHandler}
+        />
+      </View>
+    );
+  }
+  //===================== Main return =================================================
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollcontainer} showsVerticalScrollIndicator={false}>
@@ -155,6 +184,30 @@ function HomeScreen({ navigation }) {
           contentContainerStyle={styles.flatListCon}
         />
 
+        <View style={styles.box}>
+        <Text style={[styles.boxTitle, { color: 'black' }]}>Activites</Text>
+          <Text style={[styles.boxDescription, { color: 'black' }]}>Discover new {'\n'}activities</Text>
+          <Image style={styles.train} source={require("../../../assets/images/train.png")} />
+        </View>
+
+        <View style={styles.categoriesContainer}>
+          <Text style={styles.categories}>categories</Text>
+          <TouchableOpacity>
+            <Text style={styles.viewAll}>View All</Text>
+          </TouchableOpacity>
+        </View>
+
+        <FlatList
+          data={ACTIVITIESCATEGORIES}
+          keyExtractor={(item) => item.id}
+          renderItem={renderActivityCategoryItem}
+          numColumns={1}
+          horizontal
+          scrollEnabled={true}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.flatListCon}
+        />
+
         <View style={{ marginBottom: 100 }}></View>
       </ScrollView>
     </SafeAreaView>
@@ -209,6 +262,15 @@ const styles = StyleSheet.create({
     left: 7,
     bottom: 80,
   },
+
+  train: {
+    width: 220,
+    height: 220,
+    alignSelf: 'flex-end',
+    resizeMode: "contain",
+    left: 7,
+    bottom: 110,
+  },
   box: {
     width: 335,
     height: 160,
@@ -227,6 +289,17 @@ const styles = StyleSheet.create({
     marginTop: 45,
     bottom: 6,
   },
+
+  thirdBox: {
+    width: 335,
+    height: 160,
+    borderRadius: 27,
+    backgroundColor: "#272D34",
+    alignSelf: "center",
+    marginTop: 45,
+    bottom: 6,
+  },
+
   boxTitle: {
     fontFamily: 'poppins-medium',
     fontSize: 40,

@@ -11,18 +11,6 @@ export class exerciseCategory {
     }
 }
   
-export class exercise {
-constructor(id, categoryIds, imageUrl, name, setsAndReps, equipment, ) {
-      this.id = id;
-      this.categoryIds = categoryIds;
-      this.imageUrl = imageUrl;
-      this.name = name;
-      this.setsAndReps = setsAndReps;
-      this.equipment = equipment;
-    }
-}
-
-
 
 export class MealCategory {
     constructor(id, title, titleColor, buttonColor, iconContainer, iconColor) {
@@ -34,7 +22,30 @@ export class MealCategory {
       this.iconColor = iconColor;
     }
 }
-  
+
+export class ActivitiesCategory {
+    constructor(id, title, titleColor, buttonColor, iconContainer, iconColor, image) {
+      this.id = id;
+      this.title = title;
+      this.titleColor = titleColor;
+      this.buttonColor = buttonColor;
+      this.iconContainer = iconContainer;
+      this.iconColor = iconColor;
+      this.image = image;
+    }
+}
+
+export class exercise {
+constructor(id, categoryIds, imageUrl, name, setsAndReps, equipment, ) {
+      this.id = id;
+      this.categoryIds = categoryIds;
+      this.imageUrl = imageUrl;
+      this.name = name;
+      this.setsAndReps = setsAndReps;
+      this.equipment = equipment;
+    }
+}
+
 
 export class meal {
     constructor(id, categoryIds, title, affordability, complexity, imageUrl, duration, ingredients, steps, calories, protein, carb, fat) {
@@ -67,6 +78,23 @@ export const EXERCISESCATEGORIES = [
   new exerciseCategory('c7', 'Cardio',      '#FFFFFF', '#272D34', '#303740', '#FFFFFF'),
   new exerciseCategory('c8', 'Body Weight', '#272D34', '#E1F0F4', '#D2E9EF', '#272D34')
 ];
+
+
+export const MEALCATEGORIES = [                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+  new MealCategory('mc1', 'Balanced',  '#FFFFFF', '#272D34', '#303740', '#FFFFFF'),
+  new MealCategory('mc2', 'Low Carb', '#272D34', '#E1F0F4', '#D2E9EF', '#272D34'),
+  new MealCategory('mc3', 'Vegan',     '#272D34', '#fef1e0', '#fde9c8', '#272D34'),
+  new MealCategory('mc4', 'Bulking',   '#FFFFFF', '#272D34', '#303740', '#FFFFFF'),
+];
+
+export const ACTIVITIESCATEGORIES = [
+    { id: 'mc1', title: 'CrossFit', titleColor: '#FFFFFF', buttonColor: '#272D34', iconContainer: '#303740', iconColor: '#FFFFFF', image: require('../assets/images/crossfit.jpg') },
+    { id: 'mc2', title: 'Kickboxing', titleColor: '#ffffff', buttonColor: '#E1F0F4', iconContainer: '#D2E9EF', iconColor: '#272D34', image: require('../assets/images/kickboxing.jpg') },
+    { id: 'mc3', title: 'Yoga', titleColor: '#ffffff', buttonColor: '#fef1e0', iconContainer: '#fde9c8', iconColor: '#272D34', image: require('../assets/images/yoga.jpg') },
+    { id: 'mc4', title: 'Swimming', titleColor: '#FFFFFF', buttonColor: '#272D34', iconContainer: '#303740', iconColor: '#FFFFFF', image: require('../assets/images/swimming.jpg') },
+];
+
+
 
 
 export const EXERCISES = [
@@ -182,20 +210,6 @@ export const EXERCISES = [
     new exercise('e95', ['c8'], 'imageUrl1', 'L-Sit', '3 sets of 15 seconds', 'Parallel Bars'),
     new exercise('e96', ['c8'], 'imageUrl1', 'Pistol Squats', '3 sets of 10 reps', 'Body Weight'),
 ]
-
-
-
-
-
-
-export const MEALCATEGORIES = [                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
-  new MealCategory('mc1', 'Balanced',  '#FFFFFF', '#272D34', '#303740', '#FFFFFF'),
-  new MealCategory('mc2', 'Low Carb', '#272D34', '#E1F0F4', '#D2E9EF', '#272D34'),
-  new MealCategory('mc3', 'Vegan',     '#272D34', '#fef1e0', '#fde9c8', '#272D34'),
-  new MealCategory('mc4', 'Bulking',   '#FFFFFF', '#272D34', '#303740', '#FFFFFF'),
-];
-
-
 
 export const MEALS = [
  

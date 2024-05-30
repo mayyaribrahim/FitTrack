@@ -6,56 +6,40 @@ import { FIRESTORE_DB } from '../../../../FirebaseConfig';
 import TabScreenTitle from '../../../components/TabScreenTitle';
 
 function TrackInput(props) {
-  const [enteredTweetText, setEnteredTweetText] = useState('');
-  const [userName, setUserName] = useState(""); 
-  const [firstName, setFirstName] = useState(""); 
-  const [lastName, setLastName] = useState("");
+  const [enteredExerciseName, setEnteredExerciseName] = useState('');
+  const [enteredReps, setEnteredReps] = useState('');
+  const [enteredWeight, setEnteredWeight] = useState('');
 
-  const [exName, setExName] = useState('');
-  const [exReps, setExReps] = useState('');
-  const [exWeight, setExWeight] = useState('');
-
- 
-
-  function addTweetHandler() {
+  const addExerciseHandler = async () => {
     const auth = getAuth();
     const user = auth.currentUser;
-  
+
     if (user) {
       const uid = user.uid;
-  
-      // Create a new exercise object
-      const newExercise = {
-        name: exName,
-        reps: exReps,
-        weight: exWeight,
-      };
-  
-      // Save the new exercise to the "progress" subcollection of the user
-      addDoc(collection(FIRESTORE_DB, `users/${uid}/progress`), newExercise)
-        .then(() => {
-          props.onAddTweet(newExercise);
-          setExName('');
-          setExReps('');
-          setExWeight('');
-        })
-        .catch((error) => {
-          console.error('Error adding document: ', error);
+      const progressRef = collection(FIRESTORE_DB, `users/${uid}/progress`);
+      try {
+        const docRef = await addDoc(progressRef, {
+          name: enteredExerciseName,
+          reps: (enteredReps),
+          weight: (enteredWeight),
         });
+
+        props.onAddExercise({
+          id: docRef.id,
+          name: enteredExerciseName,
+          reps: (enteredReps),
+          weight: (enteredWeight)
+        });
+
+        setEnteredExerciseName('');
+        setEnteredReps('');
+        setEnteredWeight('');
+        props.onCancel(); // Close the modal after adding the exercise
+      } catch (error) {
+        console.error('Error adding exercise to Firestore: ', error);
+      }
     }
-  }
-
-  function nameInput(enteredText) {
-    setExName(enteredText);
-  }
-
-  function repsInput(enteredText) {
-    setExReps(enteredText);
-  }
-
-  function weightsInput(enteredText) {
-    setExWeight(enteredText);
-  }
+  };
 
   return (
 
@@ -67,58 +51,43 @@ function TrackInput(props) {
         <Text style={styles.PageTitle}>Add exercise</Text>
       </View>
 
-        <View style={styles.userContainer}>
-          
-          {/* <Text style={styles.userName}>{userName}</Text> */}
+        <View style={styles.userContainer}> 
           <Text style={styles.userName}>Exercise name</Text>
         </View>
-        
         <TextInput style={styles.textInput} 
           placeholder='write something'
-          onChangeText={nameInput} 
-          value={exName}
+          onChangeText={setEnteredExerciseName} 
+          value={enteredExerciseName}
     
         /> 
 
-        <View style={styles.Container}>
-          
-          {/* <Text style={styles.userName}>{userName}</Text> */}
+        <View style={styles.Container}>  
           <Text style={styles.userName}>Sets & Reps</Text>
-
         </View>
-
         <TextInput style={styles.textInput} 
           placeholder='write something'
-          onChangeText={repsInput} 
-          value={exReps}
-          
+          onChangeText={setEnteredReps} 
+          value={enteredReps}   
         /> 
         
         
-        <View style={styles.Container}>
-          
-          {/* <Text style={styles.userName}>{userName}</Text> */}
+        <View style={styles.Container}> 
           <Text style={styles.userName}>Max wieght </Text>
-
         </View>
-
         <TextInput style={styles.textInput} 
           placeholder='write something'
-          onChangeText={weightsInput} 
-          value={exWeight}
+          onChangeText={setEnteredWeight} 
+          value={enteredWeight}
           multiline={true} 
         /> 
 
         <View style={styles.bContainer}>
-
           <TouchableOpacity style={styles.cancelButton} onPress={props.onCancel}>
            <Text style={styles.cancel}>Cancel</Text>
           </TouchableOpacity>
-
-          <TouchableOpacity style={styles.button} onPress={addTweetHandler}>
+          <TouchableOpacity style={styles.button} onPress={addExerciseHandler}>
             <Text style={styles.post}>Add</Text>
           </TouchableOpacity>
-
         </View>
         
 
@@ -211,6 +180,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#272D34",
     alignItems: "center",
     justifyContent: "center",
+    marginTop: 8,
   },
 
   cancelButton: {
@@ -219,12 +189,14 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     alignItems: "center",
     justifyContent: "center",
+    marginTop: 10,
   },
 
   post: {
     fontFamily: "poppins",
     color: "white",
     fontSize: 14,
+    
   },
 
   cancel: {

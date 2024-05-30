@@ -5,18 +5,17 @@ import { getAuth } from "firebase/auth";
 import { FIRESTORE_DB } from "../../../../FirebaseConfig";
 import { deleteDoc, doc } from "firebase/firestore";
 
-function TrackItem(props) {
-  const { id, name, reps, weight, setTweets } = props;
-
+function TrackItem({ id, name, reps, weight }) {
   const auth = getAuth();
   const currentUser = auth.currentUser;
 
   const handleDelete = async () => {
     if (currentUser) {
       const uid = currentUser.uid;
+      const docRef = doc(FIRESTORE_DB, `users/${uid}/progress`, id);
       try {
-        await deleteDoc(doc(FIRESTORE_DB, `users/${uid}/progress`, id));
-        setTweets((currentTweets) => currentTweets.filter((tweet) => tweet.id !== id));
+        await deleteDoc(docRef);
+        // No need to manually update the state here, onSnapshot in TrackScreen will handle it.
       } catch (error) {
         console.error('Error deleting document: ', error);
       }
