@@ -21,7 +21,7 @@ import Settings from '../screens/tabScreens/Profile/Settings';
 import ChangePassword from '../screens/tabScreens/Profile/ChangePassword';
 import About from '../screens/tabScreens/Profile/About';
 import TermsAndCond from '../screens/tabScreens/Profile/TermsAndCond';
-
+import ActivitesScreen from '../screens/tabScreens/Home/activities/ActivitiesScreen';
 
 
 
@@ -80,6 +80,8 @@ const Stack = createNativeStackNavigator();
         <Stack.Screen name="MealDetail" component={MlDetailScreen} options={{ title: 'Meal Detail' }}/>
         <Stack.Screen name="FavMealsScreen" component={FavMealsScreen} options={{ title: 'Favorite Meals'}} />
         
+        {/*Activites screens*/}
+        <Stack.Screen name="ActivitesScreen" component={ActivitesScreen} options={{ title: ' ' }}/>
 
         {/*Tools Stacks*/}
         <Stack.Screen name="Macros Calculator" component={Calculator} />

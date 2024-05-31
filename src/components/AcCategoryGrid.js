@@ -3,7 +3,7 @@ import { Pressable, View, Text, StyleSheet, Platform, ImageBackground } from "re
 import { Ionicons } from "@expo/vector-icons";
 
 function AcCategoryGrid({ title, titleColor, buttonColor, iconContainer, iconColor, onPress, image }) {
-  console.log('Image prop:', image); // Debugging log
+  //console.log('Image prop:', image); // Debugging log
 
   return (
     <View style={styles.gridItem}>

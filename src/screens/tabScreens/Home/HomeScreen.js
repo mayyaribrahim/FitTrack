@@ -6,9 +6,9 @@ import { FIRESTORE_DB } from '../../../../FirebaseConfig';
 import ExCategoryGrid from "../../../components/exercises/ExCategoryGrid";
 import MlCategoryGrid from "../../../components/meals/MlCategoryGrid";
 import AcCategoryGrid from "../../../components/AcCategoryGrid";
-import { EXERCISESCATEGORIES, MEALCATEGORIES, ACTIVITIESCATEGORIES } from "../../../data/Data";
+import { EXERCISESCATEGORIES, MEALCATEGORIES, ACTIVITIESCATEGORIES, ACTIVITIES } from "../../../data/Data";
 import LoadingOverlay from '../../../components/LoadingOverlay';
-
+import ActivitesScreen from "./activities/ActivitiesScreen";
 function HomeScreen({ navigation }) {
   const [loading, setLoading] = useState(true);
   const [firstName, setFirstName] = useState("");
@@ -98,13 +98,14 @@ function HomeScreen({ navigation }) {
   //===================== for Activities =================================================
   function renderActivityCategoryItem(itemData) {
     function pressHandler() {
-      navigation.navigate('MealsScreen', {
-        mealCategoryId: itemData.item.id,
+      const selectedActivity = ACTIVITIES.find(activity => activity.id === itemData.item.id);
+      navigation.navigate('ActivitesScreen', {
+        activity: selectedActivity,
       });
     }
-
+  
     const item = itemData.item;
-
+  
     return (
       <View style={styles.categoryGrid}>
         <AcCategoryGrid

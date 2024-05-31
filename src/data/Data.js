@@ -35,6 +35,16 @@ export class ActivitiesCategory {
     }
 }
 
+export class Activities {
+    constructor(id, title, videoId, explanation, benefits) {
+      this.id = id;
+      this.title = title;
+      this.videoId = videoId;
+      this.explanation = explanation;
+      this.benefits = benefits;
+    }
+}
+
 export class exercise {
 constructor(id, categoryIds, imageUrl, name, setsAndReps, equipment, ) {
       this.id = id;
@@ -91,8 +101,73 @@ export const ACTIVITIESCATEGORIES = [
     { id: 'mc1', title: 'CrossFit', titleColor: '#FFFFFF', buttonColor: '#272D34', iconContainer: '#303740', iconColor: '#FFFFFF', image: require('../assets/images/crossfit.jpg') },
     { id: 'mc2', title: 'Kickboxing', titleColor: '#ffffff', buttonColor: '#E1F0F4', iconContainer: '#D2E9EF', iconColor: '#272D34', image: require('../assets/images/kickboxing.jpg') },
     { id: 'mc3', title: 'Yoga', titleColor: '#ffffff', buttonColor: '#fef1e0', iconContainer: '#fde9c8', iconColor: '#272D34', image: require('../assets/images/yoga.jpg') },
-    { id: 'mc4', title: 'Swimming', titleColor: '#FFFFFF', buttonColor: '#272D34', iconContainer: '#303740', iconColor: '#FFFFFF', image: require('../assets/images/swimming.jpg') },
+    { id: 'mc4', title: 'Calisthenics', titleColor: '#FFFFFF', buttonColor: '#272D34', iconContainer: '#303740', iconColor: '#FFFFFF', image: require('../assets/images/Calisthenics.jpg') },
 ];
+
+export const ACTIVITIES = [
+
+    new Activities(
+        'mc1', 
+        'CrossFit', 
+        '5IYOeFYbS2Y', 
+        "CrossFit is a high-intensity fitness program that combines weightlifting, cardio, and gymnastics. Each workout is different, challenging, and designed to improve overall fitness. It's suitable for all fitness levels and fosters a supportive community.",
+        "Improved Overall Fitness: Enhances strength, endurance, flexibility, and agility\n\n" +
+        "Variety in Workouts: Keeps exercise interesting with constantly changing routines\n\n" +
+        "Community Support: Provides a motivating and encouraging environment\n\n" +
+        "Scalability: Suitable for all fitness levels, from beginners to advanced athletes\n\n" +
+        "Functional Movements: Focuses on exercises that improve everyday activities\n\n" +
+        "Increased Motivation: Group settings and varied workouts keep you engaged and motivated"
+    ),
+
+    new Activities(
+        'mc2', 
+        'Kickboxing',
+        'bs7X3F-XYTc',
+        "Kickboxing is a high-energy martial art that combines elements of traditional boxing with kicks from karate. It is performed in both a competitive sport setting and as a general fitness routine. Kickboxing workouts typically involve a mix of punching, kicking, and defensive moves, often set to fast-paced music, making it an engaging and dynamic exercise option.",
+        "Improved Cardiovascular Health: Kickboxing provides an intense cardio workout, which can help improve heart health and endurance.\n\n" +
+        "Full-Body Workout: Engages multiple muscle groups, leading to improved overall strength and conditioning.\n\n" +
+        "Increased Flexibility: Regular practice of kicks and stretches enhances flexibility.\n\n" +
+        "Stress Relief: The high-intensity nature of kickboxing can be a great way to release stress and boost mood.\n\n" +
+        "Enhanced Coordination and Balance: The combination of punches and kicks improves hand-eye coordination and overall balance.\n\n" +
+        "Self-Defense Skills: Teaches practical self-defense techniques that can be useful in real-life situations.",
+    ),
+
+    new Activities(
+        'mc3', 
+        'Yoga', 
+        'B4kNiCWTl7M',
+        "Yoga is a mind-body practice that combines physical postures, breathing exercises, and meditation to enhance overall well-being. Originating from ancient India, yoga aims to improve flexibility, strength, and mental clarity while promoting relaxation and stress relief.",
+        "Increased Flexibility: Regular practice of yoga postures helps to improve flexibility and range of motion.\n\n" +
+        "Enhanced Strength: Yoga poses strengthen various muscle groups, leading to improved overall body strength.\n\n" +
+        "Better Posture: Yoga promotes better alignment and posture, reducing the risk of back and neck pain.\n\n" +
+        "Stress Reduction: The combination of breathing exercises and meditation helps to reduce stress and promote relaxation.\n\n" +
+        "Improved Mental Clarity: Yoga encourages mindfulness and focus, enhancing mental clarity and concentration.\n\n" +
+        "Overall Well-being: The holistic approach of yoga supports physical, mental, and emotional health.",
+    ),
+
+    new Activities(
+        'mc4',
+        'Calisthenics',
+        'kuUZYUBHryw',
+        "Calisthenics is a form of exercise that uses bodyweight movements to build strength, flexibility, and endurance. These exercises, which include push-ups, pull-ups, squats, and lunges, can be performed anywhere without the need for specialized equipment. Calisthenics focuses on functional movements and overall body control.",
+        "Improved Strength: Bodyweight exercises build strength and muscle tone across the entire body.\n\n" +
+        "Enhanced Flexibility: Many calisthenics exercises involve a full range of motion, improving flexibility.\n\n" +
+        "Better Balance and Coordination: Calisthenics enhances body control, balance, and coordination.\n\n" +
+        "Increased Endurance: High-repetition workouts boost cardiovascular and muscular endurance.\n\n" +
+        "Functional Fitness: Exercises mimic natural movements, improving daily physical activities and performance.\n\n" +
+        "Convenience: No equipment needed, making it easy to work out anywhere, anytime.",
+    ),
+];
+
+
+
+
+
+
+
+
+
+
 
 
 
