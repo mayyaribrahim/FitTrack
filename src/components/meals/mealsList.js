@@ -14,6 +14,7 @@ function MealsList({ items }) {
         data={items}
         keyExtractor={(item) => item.id}
         renderItem={renderMealItem}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );
@@ -22,6 +23,7 @@ function MealsList({ items }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#272D34',
   },
 });
 

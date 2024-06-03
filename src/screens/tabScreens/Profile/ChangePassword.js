@@ -1,14 +1,19 @@
 import { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, SafeAreaView, Alert } from "react-native";
+import { View, Text, StyleSheet, ScrollView, SafeAreaView, Alert, ActivityIndicator } from "react-native";
 import { getAuth, EmailAuthProvider, reauthenticateWithCredential, updatePassword } from 'firebase/auth';
 import PrimaryButton from "../../../components/PrimaryButton";
 import InputField from "../../../components/InputFeild";
+import { useNavigation } from '@react-navigation/native';
+import LoadingOverlay from '../../../components/LoadingOverlay'
 
 function ChangePassword() {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigation = useNavigation();
 
   const handlePasswordChange = async () => {
+    setLoading(true);
     const auth = getAuth();
     const user = auth.currentUser;
 
@@ -18,13 +23,17 @@ function ChangePassword() {
         await reauthenticateWithCredential(user, credential);
         await updatePassword(user, newPassword);
         Alert.alert("Success", "Password updated successfully.");
+        navigation.goBack();  // Navigate back to the previous screen (Settings page)
       } catch (error) {
         console.log("Error updating password: ", error);
         Alert.alert("Error", "Failed to update password. Please check your old password and try again.");
+      } finally {
+        setLoading(false);
       }
     } else {
       console.log("No user is currently signed in.");
       Alert.alert("Error", "No user is currently signed in.");
+      setLoading(false);
     }
   };
 
@@ -49,7 +58,11 @@ function ChangePassword() {
       />
 
       <View style={styles.primaryButton}>
-        <PrimaryButton onPress={handlePasswordChange}>Confirm</PrimaryButton>
+        {loading ? (
+          <ActivityIndicator size="large" color="#000000" />
+        ) : (
+          <PrimaryButton onPress={handlePasswordChange}>Confirm</PrimaryButton>
+        )}
       </View>
     </SafeAreaView>
   );

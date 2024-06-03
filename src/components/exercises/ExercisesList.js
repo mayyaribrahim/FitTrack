@@ -29,5 +29,6 @@ export default ExercisesList;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#272D34',
   },
 });

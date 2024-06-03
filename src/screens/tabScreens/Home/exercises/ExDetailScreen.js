@@ -1,15 +1,20 @@
 import { doc, getDoc } from "firebase/firestore";
 import { FIRESTORE_DB } from "../../../../../FirebaseConfig";
 import { useLayoutEffect, useState, useEffect } from "react";
-import { Text, Image, View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import { Text, Image, View, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from "react-native";
 import MSubtitle from '../../../../components/meals/MSubtitle';
 import { AntDesign } from '@expo/vector-icons';
 import { getAuth } from "firebase/auth";
 import { fetchFavoriteExercises, addToFavorites, removeFromFavorites } from "../../../../context/ExerciseFavoriteService";
+import { getStorage, getDownloadURL } from "firebase/storage";
+import { ref } from "firebase/storage";
+import LoadingOverlay from "../../../../components/LoadingOverlay";
 
 function ExDetailScreen({ route, navigation }) {
   const exerciseDocId = route.params.exerciseDocId;
   const [selectedExercise, setSelectedExercise] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
@@ -58,9 +63,34 @@ function ExDetailScreen({ route, navigation }) {
     });
   }, [navigation, toggleFavorite]);
 
+  useEffect(() => {
+    const fetchImage = async () => {
+      try {
+        if (selectedExercise && selectedExercise.imageUrl) {
+          const storage = getStorage(); // Initialize Firebase Storage
+          const imageRef = ref(storage, selectedExercise.imageUrl); // Reference to your image in Firebase Storage
+          const url = await getDownloadURL(imageRef); // Get the download URL of the image
+          setImageUrl(url); // Set the download URL as the image URL
+        }
+      } catch (error) {
+        console.error('Error fetching image:', error);
+      } finally {
+        setLoading(false); // Set loading state to false
+      }
+    };
+
+    fetchImage(); // Call the fetchImage function when the component mounts
+  }, [selectedExercise]);
+
   return (
     <ScrollView style={styles.rootContainer}>
-      <Image style={styles.image} source={require("../../../../assets/images/default.jpg")} />
+      <View style={styles.imageContainer}>
+        {loading ? (
+          <ActivityIndicator size="large" color="#0000ff" style={styles.loadingOverlay} />
+        ) : (
+          <Image style={styles.image} source={{ uri: imageUrl }} />
+        )}
+      </View>
       <Text style={styles.title}>{selectedExercise?.name || "loading"}</Text>
       <View style={styles.listOuterContainer}>
         <View style={styles.listContainer}>
@@ -85,9 +115,20 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     marginBottom: 35,
   },
-  image: {
+  imageContainer: {
     width: '100%',
     height: 350,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f0f0f0', // Background color while loading
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+  },
+  loadingOverlay: {
+    position: 'absolute',
+    zIndex: 1,
   },
   title: {
     fontFamily: 'poppins-medium',

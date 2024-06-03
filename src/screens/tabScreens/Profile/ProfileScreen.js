@@ -18,12 +18,14 @@ function ProfileScreen({ navigation }) {
     const auth = getAuth();
     const user = auth.currentUser;
 
+    let unsubscribe;
+
     if (user) {
       const uid = user.uid;
       setIsEmailVerified(user.emailVerified);
 
       const userDocRef = doc(FIRESTORE_DB, 'users', uid);
-      const unsubscribe = onSnapshot(userDocRef, (doc) => {
+      unsubscribe = onSnapshot(userDocRef, (doc) => {
         if (doc.exists()) {
           const userData = doc.data();
           setFirstName(userData.firstName);
@@ -33,11 +35,15 @@ function ProfileScreen({ navigation }) {
           console.log("User document does not exist.");
         }
       });
-
-      return () => unsubscribe();
     } else {
       console.log("No user is currently signed in.");
     }
+
+    return () => {
+      if (unsubscribe) {
+        unsubscribe();
+      }
+    };
   }, []);
 
   const authCtx = useContext(AuthContext);

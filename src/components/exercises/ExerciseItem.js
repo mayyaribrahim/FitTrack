@@ -3,10 +3,30 @@ import { useNavigation } from "@react-navigation/native";
 import { useState, useEffect } from "react";
 import { getAuth } from "firebase/auth";
 import { fetchFavoriteExercises, addToFavorites, removeFromFavorites } from "../../context/ExerciseFavoriteService";
+import { getStorage, getDownloadURL } from "firebase/storage";
+import { ref } from "firebase/storage";
 
 function ExerciseItem({ exercise }) {
   const navigation = useNavigation();
   const [isFavorite, setIsFavorite] = useState(false);
+  const [imageUrl, setImageUrl] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchImage = async () => {
+      try {
+        const storage = getStorage(); // Initialize Firebase Storage
+        const imageRef = ref(storage, exercise.imageUrl); // Reference to your image in Firebase Storage
+        const url = await getDownloadURL(imageRef); // Get the download URL of the image
+        setImageUrl(url); // Set the download URL as the image URL
+        setLoading(false); // Set loading state to false
+      } catch (error) {
+        console.error('Error fetching image:', error);
+      }
+    };
+
+    fetchImage(); // Call the fetchImage function when the component mounts
+  }, []);
 
   useEffect(() => {
     const checkFavoriteStatus = async () => {
@@ -46,7 +66,7 @@ function ExerciseItem({ exercise }) {
       >
         <View style={styles.innerContainer}>
           <View>
-            <Image source={require("../../assets/images/default.jpg")} style={styles.image} />
+            <Image source={{ uri: imageUrl }} style={styles.image} />
             <Text style={styles.title}>{exercise.name}</Text>
           </View>
           <Pressable onPress={toggleFavorite}>
@@ -65,7 +85,7 @@ const styles = StyleSheet.create({
     margin: 16,
     borderRadius: 8,
     overflow: Platform.OS === "android" ? "hidden" : "visible",
-    backgroundColor: 'white',
+    backgroundColor: '#ffffff',
     elevation: 4,
     shadowColor: "black",
     shadowOpacity: 0.25,
@@ -86,7 +106,9 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: 'poppins',
     textAlign: 'center',
+    color: '#000000',
     fontSize: 18,
     margin: 8,
+    top: 5,
   },
 });

@@ -1,4 +1,3 @@
-// MealItem.js
 import React from "react";
 import { View, Text, Pressable, Image, StyleSheet, Platform } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -7,6 +6,7 @@ import { imageDb } from "../../../FirebaseConfig";
 import { useState, useEffect } from "react";
 import { getStorage, getDownloadURL } from "firebase/storage";
 import { ref } from "firebase/storage";
+import LoadingOverlay from "../LoadingOverlay";
 
 function MealItem({ meal }) {
   const navigation = useNavigation();
@@ -36,6 +36,8 @@ function MealItem({ meal }) {
       categoryIds: meal.categoryIds,
     });
   };
+
+  
 
   return (
     <View style={styles.mealItem}>

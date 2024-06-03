@@ -58,10 +58,10 @@ function ToolsScreen({ navigation }) {
 
   const renderMacroItem = (label, value, color, icon) => (
     <View style={[styles.macrosContainer, { backgroundColor: color }]}>
-      <Text style={[styles.label, label === 'Calories' || label === 'Fat' ? styles.whiteText : styles.darkText]}>
+      <Text style={styles.label}>
         {label}: {value}
       </Text>
-      <FontAwesome5 name={icon} size={24} color={label === 'Calories' || label === 'Fat' ? 'white' : '#272D34'} style={styles.icon} />
+      <FontAwesome5 name={icon} size={24} color={'#272D34'} style={styles.icon} />
     </View>
   );
 
@@ -71,10 +71,10 @@ function ToolsScreen({ navigation }) {
       <ScrollView contentContainerStyle={styles.contentContainer}>
         {macrosData.map((macrosItem, index) => (
           <View key={index} style={styles.macrosItemContainer}>
-            {renderMacroItem('Calories', macrosItem.calories, '#272D34', 'fire')}
-            {renderMacroItem('Protein', macrosItem.protein, '#E1F0F4', 'drumstick-bite')}
-            {renderMacroItem('Carbs', macrosItem.carbs, '#FFE9CA', 'bread-slice')}
-            {renderMacroItem('Fat', macrosItem.fat, '#272D34', 'bacon')}
+            {renderMacroItem('Calories', macrosItem.calories, '#E1F0F4', 'fire')}
+            {renderMacroItem('Protein', macrosItem.protein, '#FFE9CA', 'drumstick-bite')}
+            {renderMacroItem('Carbs', macrosItem.carbs, '#E1F0F4', 'bread-slice')}
+            {renderMacroItem('Fat', macrosItem.fat, '#FFE9CA', 'bacon')}
           </View>
         ))}
 
@@ -122,13 +122,9 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 22,
     fontFamily: 'poppins',
-  },
-  whiteText: {
-    color: '#FFFFFF',
-  },
-  darkText: {
     color: '#272D34',
   },
+  
   buttonContainer: {
     marginTop: 40,
     marginBottom: 20,

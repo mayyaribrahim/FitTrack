@@ -209,8 +209,9 @@ function HomeScreen({ navigation }) {
           contentContainerStyle={styles.flatListCon}
         />
 
-        <View style={{ marginBottom: 100 }}></View>
+        <View style={{ marginBottom: 78 }}></View>
       </ScrollView>
+      
     </SafeAreaView>
   );
 }
@@ -221,7 +222,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
-    bottom: 5,
+    bottom:6,
+    
   },
   scrollcontainer: {
     backgroundColor: "#fff",
@@ -242,8 +244,8 @@ const styles = StyleSheet.create({
     left: 4,
   },
   userImage: {
-    width: 45,
-    height: 45,
+    width: 40,
+    height: 40,
     borderRadius: 100,
   },
   dumble: {
@@ -287,7 +289,7 @@ const styles = StyleSheet.create({
     borderRadius: 27,
     backgroundColor: "#fef1e0",
     alignSelf: "center",
-    marginTop: 45,
+    marginTop: 28,
     bottom: 6,
   },
 

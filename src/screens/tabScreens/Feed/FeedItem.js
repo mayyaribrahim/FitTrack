@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { doc, deleteDoc, collection, getDocs, getDoc } from "firebase/firestore";
+import { doc, deleteDoc, getDoc, collection, getDocs } from "firebase/firestore";
 import { StyleSheet, View, Text, Pressable, Image } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 import { getAuth } from "firebase/auth";
+import { getStorage, ref, deleteObject } from "firebase/storage";
 import { FIRESTORE_DB } from "../../../../FirebaseConfig";
+import moment from 'moment'; // Import moment.js to format dates
 
 function FeedItem(props) {
-  const { userName, text, userId, id, setTweets } = props;
+  const { userName, text, userId, id, image, setTweets, createdAt } = props;
   const [profileImage, setProfileImage] = useState(null);
 
   const auth = getAuth();
@@ -32,21 +34,17 @@ function FeedItem(props) {
         const tweetDocRef = doc(FIRESTORE_DB, 'tweets', id);
         await deleteDoc(tweetDocRef);
 
-        async function fetchTweets() {
-          try {
-            const tweetsCollectionRef = collection(FIRESTORE_DB, "tweets");
-            const querySnapshot = await getDocs(tweetsCollectionRef);
-            const tweetsData = [];
-            querySnapshot.forEach((doc) => {
-              tweetsData.push({ id: doc.id, ...doc.data() });
-            });
-
-            setTweets(tweetsData);
-          } catch (error) {
-            console.error("Error fetching tweets:", error);
-          }
+        if (image) {
+          const storage = getStorage();
+          const imageRef = ref(storage, image);
+          await deleteObject(imageRef);
+          console.log('Image deleted successfully from storage');
         }
-        fetchTweets();
+
+        setTweets((prevTweets) => {
+          const updatedTweets = prevTweets.filter(tweet => tweet.id !== id);
+          return updatedTweets.sort((a, b) => b.createdAt.toDate() - a.createdAt.toDate());
+        });
 
         console.log('Tweet deleted successfully!');
       } catch (error) {
@@ -56,6 +54,8 @@ function FeedItem(props) {
       console.log('You are not authorized to delete this tweet.');
     }
   };
+
+  const formattedDate = createdAt ? moment(createdAt.toDate()).format('MMMM Do YYYY, h:mm:ss a') : '';
 
   return (
     <View style={styles.tweetItem}>
@@ -79,6 +79,8 @@ function FeedItem(props) {
         )}
       </View>
       <Text style={styles.Text}>{text}</Text>
+      {image && <Image source={{ uri: image }} style={styles.tweetImage} />}
+      <Text style={styles.dateText}>{formattedDate}</Text>
     </View>
   );
 }
@@ -92,7 +94,7 @@ const styles = StyleSheet.create({
     margin: 8,
     padding: 8,
     borderRadius: 15,
-    backgroundColor: '#E9E9E9',
+    backgroundColor: '#efefef',
     padding: 15,
   },
   pressedItem: {
@@ -101,7 +103,8 @@ const styles = StyleSheet.create({
   Text: {
     fontFamily: "poppins",
     color: 'black',
-    padding: 8,
+    paddingVertical: 8,
+    paddingLeft: 4,
   },
   userContainer: {
     flexDirection: 'row',
@@ -120,5 +123,18 @@ const styles = StyleSheet.create({
   deleteButton: {
     flex: 1,
     alignItems: 'flex-end',
+  },
+  tweetImage: {
+    width: '100%',
+    height: 200,
+    borderRadius: 10,
+    marginTop: 3,
+  },
+  dateText: {
+    fontFamily: "poppins",
+    color: 'gray',
+    fontSize: 12,
+    marginTop: 10,
+    textAlign: 'right',
   },
 });
