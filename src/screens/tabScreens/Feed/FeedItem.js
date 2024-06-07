@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { doc, deleteDoc, getDoc, collection, getDocs } from "firebase/firestore";
+import { doc, deleteDoc, onSnapshot } from "firebase/firestore";
 import { StyleSheet, View, Text, Pressable, Image } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 import { getAuth } from "firebase/auth";
@@ -8,24 +8,28 @@ import { FIRESTORE_DB } from "../../../../FirebaseConfig";
 import moment from 'moment'; // Import moment.js to format dates
 
 function FeedItem(props) {
-  const { userName, text, userId, id, image, setTweets, createdAt } = props;
+  const { text, userId, id, image, setTweets, createdAt } = props;
+  const [userName, setUserName] = useState('');
   const [profileImage, setProfileImage] = useState(null);
 
   const auth = getAuth();
   const currentUser = auth.currentUser;
 
   useEffect(() => {
-    const fetchUserProfileImage = async () => {
+    const fetchUserProfile = () => {
       const userDocRef = doc(FIRESTORE_DB, 'users', userId);
-      const userDoc = await getDoc(userDocRef);
-      if (userDoc.exists()) {
-        const userData = userDoc.data();
-        if (userData.profileImage) {
+      const unsubscribe = onSnapshot(userDocRef, (doc) => {
+        if (doc.exists()) {
+          const userData = doc.data();
+          setUserName(`${userData.firstName} ${userData.lastName}`);
           setProfileImage(userData.profileImage);
         }
-      }
+      });
+
+      return () => unsubscribe();
     };
-    fetchUserProfileImage();
+
+    fetchUserProfile();
   }, [userId]);
 
   const handleDelete = async () => {
@@ -78,7 +82,7 @@ function FeedItem(props) {
           </View>
         )}
       </View>
-      <Text style={styles.Text}>{text}</Text>
+      <Text style={styles.text}>{text}</Text>
       {image && <Image source={{ uri: image }} style={styles.tweetImage} />}
       <Text style={styles.dateText}>{formattedDate}</Text>
     </View>
@@ -90,21 +94,26 @@ export default FeedItem;
 const styles = StyleSheet.create({
   tweetItem: {
     alignSelf: 'center',
-    width: '89%',
-    margin: 8,
-    padding: 8,
-    borderRadius: 15,
-    backgroundColor: '#efefef',
+    width: '90%',
+    marginVertical: 10,
     padding: 15,
+    borderRadius: 15,
+    backgroundColor: '#EFEFEF',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 5,
   },
   pressedItem: {
     opacity: 0.5,
   },
-  Text: {
+  text: {
     fontFamily: "poppins",
     color: 'black',
     paddingVertical: 8,
     paddingLeft: 4,
+    fontSize: 16,
   },
   userContainer: {
     flexDirection: 'row',
@@ -117,8 +126,9 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   userName: {
-    fontFamily: "poppins",
+    fontFamily: "poppins-semibold",
     marginLeft: 10,
+    fontSize: 16,
   },
   deleteButton: {
     flex: 1,
@@ -128,7 +138,8 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 200,
     borderRadius: 10,
-    marginTop: 3,
+    marginTop: 10,
+    marginBottom: 10,
   },
   dateText: {
     fontFamily: "poppins",

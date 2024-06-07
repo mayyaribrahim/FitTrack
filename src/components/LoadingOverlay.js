@@ -4,7 +4,7 @@ export function LoadingOverlay({ message }) {
   return (
     <View style={styles.rootContainer}>
       <Text style={styles.message}>{message}</Text>
-      <ActivityIndicator size="large" color={'black'} />
+      <ActivityIndicator size='small' color={'black'} />
     </View>
   );
 }

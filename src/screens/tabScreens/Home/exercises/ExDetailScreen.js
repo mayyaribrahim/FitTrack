@@ -8,7 +8,6 @@ import { getAuth } from "firebase/auth";
 import { fetchFavoriteExercises, addToFavorites, removeFromFavorites } from "../../../../context/ExerciseFavoriteService";
 import { getStorage, getDownloadURL } from "firebase/storage";
 import { ref } from "firebase/storage";
-import LoadingOverlay from "../../../../components/LoadingOverlay";
 
 function ExDetailScreen({ route, navigation }) {
   const exerciseDocId = route.params.exerciseDocId;
@@ -46,7 +45,6 @@ function ExDetailScreen({ route, navigation }) {
     if (isFavorite) {
       await removeFromFavorites(exerciseDocId);
       setIsFavorite(false);
-      navigation.navigate('FavExerciseScreen', { exerciseRemoved: true });
     } else {
       await addToFavorites(exerciseDocId, selectedExercise);
       setIsFavorite(true);

@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   },
 
   tweets: {
-    marginBottom: 120,
+    marginBottom: 107,
   },
 
   tweetItem: {

@@ -1,18 +1,23 @@
 import { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, SafeAreaView, Alert, ActivityIndicator } from "react-native";
+import { View, Text, StyleSheet, SafeAreaView, Alert, ActivityIndicator } from "react-native";
 import { getAuth, EmailAuthProvider, reauthenticateWithCredential, updatePassword } from 'firebase/auth';
 import PrimaryButton from "../../../components/PrimaryButton";
 import InputField from "../../../components/InputFeild";
 import { useNavigation } from '@react-navigation/native';
-import LoadingOverlay from '../../../components/LoadingOverlay'
 
 function ChangePassword() {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
 
   const handlePasswordChange = async () => {
+    if (newPassword !== confirmNewPassword) {
+      Alert.alert("Error", "New passwords do not match. Please try again.");
+      return;
+    }
+
     setLoading(true);
     const auth = getAuth();
     const user = auth.currentUser;
@@ -54,6 +59,15 @@ function ChangePassword() {
         secureTextEntry
         value={newPassword}
         onChange={setNewPassword}
+        type="password"
+      />
+
+      <InputField
+        iconName={"lock"}
+        placeholder="Confirm new password"
+        secureTextEntry
+        value={confirmNewPassword}
+        onChange={setConfirmNewPassword}
         type="password"
       />
 

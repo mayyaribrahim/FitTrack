@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { View, StyleSheet, SafeAreaView, FlatList } from "react-native";
 import FavMlCategoryGrid from "../../../../components/meals/FavMlCategoryGrid";
+import FavExCategoryGrid from "../../../../components/exercises/FavExCategoryGrid";
 import { EXERCISESCATEGORIES } from "../../../../data/Data";
 
 function FavExHome({ navigation }) {
@@ -15,7 +16,7 @@ function FavExHome({ navigation }) {
 
     return (
       <View style={styles.categoryGrid}>
-        <FavMlCategoryGrid
+        <FavExCategoryGrid
           title={item.title}
           titleColor={item.titleColor}
           buttonColor={item.buttonColor}
@@ -52,9 +53,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 20,
-    marginBottom: 100,
   },
   categoryGrid: {
     marginBottom: 5,
+  },
+
+  flatListCon: {
+    paddingBottom: 50, // Adjust the padding here
   },
 });

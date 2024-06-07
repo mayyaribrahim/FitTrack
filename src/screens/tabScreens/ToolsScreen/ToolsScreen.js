@@ -10,7 +10,9 @@ import LoadingOverlay from '../../../components/LoadingOverlay';
 
 function ToolsScreen({ navigation }) {
   const [loading, setLoading] = useState(true);
-  const [macrosData, setMacrosData] = useState([]); // State variable to store macros data
+  const [macrosData, setMacrosData] = useState([
+    { calories: '', protein: '', carbs: '', fat: '' } // Initial empty placeholder
+  ]);
 
   useEffect(() => {
     const fetchMacrosData = async () => {
@@ -33,7 +35,14 @@ function ToolsScreen({ navigation }) {
             querySnapshot.forEach((doc) => {
               macrosDataArray.push(doc.data());
             });
-            setMacrosData(macrosDataArray);
+
+            // If there is no data, keep the placeholder
+            if (macrosDataArray.length === 0) {
+              setMacrosData([{ calories: '', protein: '', carbs: '', fat: '' }]);
+            } else {
+              setMacrosData(macrosDataArray);
+            }
+
             setLoading(false);
           });
 
@@ -110,7 +119,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.08,
     shadowRadius: 5,
     elevation: 3,
     flexDirection: 'row',
@@ -124,7 +133,6 @@ const styles = StyleSheet.create({
     fontFamily: 'poppins',
     color: '#272D34',
   },
-  
   buttonContainer: {
     marginTop: 40,
     marginBottom: 20,

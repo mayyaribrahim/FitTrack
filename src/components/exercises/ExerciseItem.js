@@ -69,9 +69,6 @@ function ExerciseItem({ exercise }) {
             <Image source={{ uri: imageUrl }} style={styles.image} />
             <Text style={styles.title}>{exercise.name}</Text>
           </View>
-          <Pressable onPress={toggleFavorite}>
-            <Text style={{ color: isFavorite ? 'gold' : 'gray' }}>★</Text>
-          </Pressable>
         </View>
       </Pressable>
     </View>
@@ -107,8 +104,8 @@ const styles = StyleSheet.create({
     fontFamily: 'poppins',
     textAlign: 'center',
     color: '#000000',
-    fontSize: 18,
-    margin: 8,
-    top: 5,
+    fontSize: 20,
+    margin: 12,
+    
   },
 });

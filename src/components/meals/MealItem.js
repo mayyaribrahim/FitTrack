@@ -1,13 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Pressable, Image, StyleSheet, Platform } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { getStorage, getDownloadURL, ref } from "firebase/storage";
 import MealDetail from "./MealDetail";
-import { imageDb } from "../../../FirebaseConfig";
-import { useState, useEffect } from "react";
-import { getStorage, getDownloadURL } from "firebase/storage";
-import { ref } from "firebase/storage";
-import LoadingOverlay from "../LoadingOverlay";
-
 function MealItem({ meal }) {
   const navigation = useNavigation();
   const [imageUrl, setImageUrl] = useState(null);
@@ -16,19 +11,18 @@ function MealItem({ meal }) {
   useEffect(() => {
     const fetchImage = async () => {
       try {
-        const storage = getStorage(); // Initialize Firebase Storage
-        const imageRef = ref(storage, meal.imageUrl); // Reference to your image in Firebase Storage
-        const url = await getDownloadURL(imageRef); // Get the download URL of the image
-        setImageUrl(url); // Set the download URL as the image URL
-        setLoading(false); // Set loading state to false
+        const storage = getStorage();
+        const imageRef = ref(storage, meal.imageUrl);
+        const url = await getDownloadURL(imageRef);
+        setImageUrl(url);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching image:', error);
       }
     };
 
-    fetchImage(); // Call the fetchImage function when the component mounts
-  }, []);
-
+    fetchImage();
+  }, [meal.imageUrl]);
 
   const selectMealItemHandler = () => {
     navigation.navigate("MealDetail", {
@@ -36,8 +30,6 @@ function MealItem({ meal }) {
       categoryIds: meal.categoryIds,
     });
   };
-
-  
 
   return (
     <View style={styles.mealItem}>
@@ -47,15 +39,10 @@ function MealItem({ meal }) {
         onPress={selectMealItemHandler}
       >
         <View style={styles.innerContainer}>
-          <View>
-            <Image
-              source={{ uri: imageUrl }}
-              style={styles.image}
-            />
-            <Text style={styles.title}>{meal.title}</Text>
-          </View>
-          <MealDetail meal={meal} />
+          <Image source={{ uri: imageUrl }} style={styles.image} />
+          <Text style={styles.title}>{meal.title}</Text>
         </View>
+        <MealDetail meal={meal} />
       </Pressable>
     </View>
   );
@@ -70,8 +57,8 @@ const styles = StyleSheet.create({
     elevation: 4,
     shadowColor: "black",
     shadowOpacity: 0.25,
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 8,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 8,
   },
   buttonPressed: {
     opacity: 0.7,

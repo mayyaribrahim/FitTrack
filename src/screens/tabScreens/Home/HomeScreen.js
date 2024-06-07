@@ -8,7 +8,7 @@ import MlCategoryGrid from "../../../components/meals/MlCategoryGrid";
 import AcCategoryGrid from "../../../components/AcCategoryGrid";
 import { EXERCISESCATEGORIES, MEALCATEGORIES, ACTIVITIESCATEGORIES, ACTIVITIES } from "../../../data/Data";
 import LoadingOverlay from '../../../components/LoadingOverlay';
-import ActivitesScreen from "./activities/ActivitiesScreen";
+
 function HomeScreen({ navigation }) {
   const [loading, setLoading] = useState(true);
   const [firstName, setFirstName] = useState("");
@@ -43,9 +43,7 @@ function HomeScreen({ navigation }) {
     return <LoadingOverlay message="Welcome to FitTrack" />;
   }
 
-
-
-//===================== for Meals =================================================
+  //===================== for Meals =================================================
   function renderMealCategoryItem(itemData) {
     function pressHandler() {
       navigation.navigate('MealsScreen', {
@@ -68,8 +66,6 @@ function HomeScreen({ navigation }) {
       </View>
     );
   }
-
-
 
   //===================== for exercises =================================================
   function renderCategoryItem(itemData) {
@@ -103,9 +99,9 @@ function HomeScreen({ navigation }) {
         activity: selectedActivity,
       });
     }
-  
+
     const item = itemData.item;
-  
+
     return (
       <View style={styles.categoryGrid}>
         <AcCategoryGrid
@@ -120,10 +116,11 @@ function HomeScreen({ navigation }) {
       </View>
     );
   }
+
   //===================== Main return =================================================
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollcontainer} showsVerticalScrollIndicator={false}>
+      <ScrollView style={styles.scrollcontainer} contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         <View style={styles.headerContainer}>
           <View style={styles.titleContainer}>
             <Text style={styles.PageTitle}>Hello {firstName}</Text>
@@ -145,9 +142,6 @@ function HomeScreen({ navigation }) {
 
         <View style={styles.categoriesContainer}>
           <Text style={styles.categories}>categories</Text>
-          <TouchableOpacity>
-            <Text style={styles.viewAll}>View All</Text>
-          </TouchableOpacity>
         </View>
 
         <FlatList
@@ -169,9 +163,6 @@ function HomeScreen({ navigation }) {
 
         <View style={styles.categoriesContainer}>
           <Text style={styles.categories}>categories</Text>
-          <TouchableOpacity>
-            <Text style={styles.viewAll}>View All</Text>
-          </TouchableOpacity>
         </View>
 
         <FlatList
@@ -186,16 +177,13 @@ function HomeScreen({ navigation }) {
         />
 
         <View style={styles.box}>
-        <Text style={[styles.boxTitle, { color: 'black' }]}>Activites</Text>
+          <Text style={[styles.boxTitle, { color: 'black' }]}>Activites</Text>
           <Text style={[styles.boxDescription, { color: 'black' }]}>Discover new {'\n'}activities</Text>
           <Image style={styles.train} source={require("../../../assets/images/train.png")} />
         </View>
 
         <View style={styles.categoriesContainer}>
           <Text style={styles.categories}>categories</Text>
-          <TouchableOpacity>
-            <Text style={styles.viewAll}>View All</Text>
-          </TouchableOpacity>
         </View>
 
         <FlatList
@@ -208,10 +196,7 @@ function HomeScreen({ navigation }) {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.flatListCon}
         />
-
-        <View style={{ marginBottom: 78 }}></View>
       </ScrollView>
-      
     </SafeAreaView>
   );
 }
@@ -222,12 +207,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
-    bottom:6,
-    
   },
   scrollcontainer: {
     backgroundColor: "#fff",
-    paddingTop: 5,
+  },
+  scrollContent: {
+    paddingBottom: 78, 
   },
   headerContainer: {
     flexDirection: "row",
@@ -265,7 +250,6 @@ const styles = StyleSheet.create({
     left: 7,
     bottom: 80,
   },
-
   train: {
     width: 220,
     height: 220,
@@ -292,7 +276,6 @@ const styles = StyleSheet.create({
     marginTop: 28,
     bottom: 6,
   },
-
   thirdBox: {
     width: 335,
     height: 160,
@@ -302,7 +285,6 @@ const styles = StyleSheet.create({
     marginTop: 45,
     bottom: 6,
   },
-
   boxTitle: {
     fontFamily: 'poppins-medium',
     fontSize: 40,

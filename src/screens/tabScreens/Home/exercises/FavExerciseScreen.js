@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import ExercisesList from '../../../../components/exercises/ExercisesList';
 import { getAuth } from 'firebase/auth';
 import { fetchFavoriteExercises } from '../../../../context/ExerciseFavoriteService';
@@ -30,23 +30,18 @@ function FavExercisesScreen({ route }) {
   };
 
   useEffect(() => {
-    if (isFocused && route.params?.exerciseRemoved) {
+    if (isFocused) {
       fetchFavorites(categoryId);
     }
-  }, [isFocused, route.params?.exerciseRemoved]);
+  }, [isFocused, categoryId]);
 
-  useEffect(() => {
-    fetchFavorites(categoryId);
-  }, [categoryId]);
-
-  if (loading) {
-    return <LoadingOverlay message="Loading..." />;
-  }
+  
 
   if (favoriteExercises.length === 0) {
     return (
       <View style={styles.rootContainer}>
-        <Text style={styles.text}>You have no favorite exercises yet</Text>
+         {loading ? <ActivityIndicator size="small" color="#ffffff" style={styles.loadingOverlay} /> : <Text style={styles.text}>You have no favorite exercises yet</Text>}
+        
       </View>
     );
   }
@@ -61,10 +56,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#272D34',
   },
   text: {
     fontSize: 18,
     fontFamily: 'poppins',
-    color: 'black',
+    color: '#ffffff',
   },
 });

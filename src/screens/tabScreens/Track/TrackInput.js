@@ -1,9 +1,8 @@
-import { collection, addDoc, doc,  onSnapshot, getDocs } from 'firebase/firestore';
-import { useState, useEffect } from 'react';
-import { View, TextInput, Button, StyleSheet, Modal, Text, TouchableOpacity, Image, SafeAreaView, } from 'react-native';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { useState } from 'react';
+import { View, TextInput, StyleSheet, Modal, Text, TouchableOpacity, SafeAreaView } from 'react-native';
 import { getAuth } from 'firebase/auth';
 import { FIRESTORE_DB } from '../../../../FirebaseConfig';
-import TabScreenTitle from '../../../components/TabScreenTitle';
 
 function TrackInput(props) {
   const [enteredExerciseName, setEnteredExerciseName] = useState('');
@@ -20,15 +19,16 @@ function TrackInput(props) {
       try {
         const docRef = await addDoc(progressRef, {
           name: enteredExerciseName,
-          reps: (enteredReps),
-          weight: (enteredWeight),
+          reps: enteredReps,
+          weight: enteredWeight,
+          createdAt: serverTimestamp(), // Add timestamp here
         });
 
         props.onAddExercise({
           id: docRef.id,
           name: enteredExerciseName,
-          reps: (enteredReps),
-          weight: (enteredWeight)
+          reps: enteredReps,
+          weight: enteredWeight
         });
 
         setEnteredExerciseName('');
@@ -41,15 +41,14 @@ function TrackInput(props) {
     }
   };
 
+  const isButtonDisabled = !enteredExerciseName || !enteredReps || !enteredWeight;
+
   return (
-
     <Modal style={styles.ModalContanier} visible={props.visible} animationType="slide">
-
       <SafeAreaView style={styles.inputContainer}>
-
-      <View style={styles.TitleContainer}>
-        <Text style={styles.PageTitle}>Add exercise</Text>
-      </View>
+        <View style={styles.TitleContainer}>
+          <Text style={styles.PageTitle}>Add exercise</Text>
+        </View>
 
         <View style={styles.userContainer}> 
           <Text style={styles.userName}>Exercise name</Text>
@@ -58,7 +57,6 @@ function TrackInput(props) {
           placeholder='write something'
           onChangeText={setEnteredExerciseName} 
           value={enteredExerciseName}
-    
         /> 
 
         <View style={styles.Container}>  
@@ -70,63 +68,60 @@ function TrackInput(props) {
           value={enteredReps}   
         /> 
         
-        
         <View style={styles.Container}> 
-          <Text style={styles.userName}>Max wieght </Text>
+          <Text style={styles.userName}>Max weight</Text>
         </View>
         <TextInput style={styles.textInput} 
           placeholder='write something'
           onChangeText={setEnteredWeight} 
           value={enteredWeight}
-          multiline={true} 
         /> 
 
         <View style={styles.bContainer}>
+          <TouchableOpacity 
+            style={[styles.button, isButtonDisabled && styles.disabledButton]} 
+            onPress={addExerciseHandler} 
+            disabled={isButtonDisabled}
+          >
+            <Text style={styles.post}>Add</Text>
+          </TouchableOpacity>
           <TouchableOpacity style={styles.cancelButton} onPress={props.onCancel}>
            <Text style={styles.cancel}>Cancel</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={addExerciseHandler}>
-            <Text style={styles.post}>Add</Text>
-          </TouchableOpacity>
         </View>
-        
-
       </SafeAreaView>
-
     </Modal>
-
   );
 }
 
 export default TrackInput;
 
-
 const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
-    justifyContent: 'flex start',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     paddingHorizontal: 10,
-    paddingBottom:30,
+    paddingBottom: 30,
     backgroundColor: 'white',
   },
 
   userContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: 8,
     alignSelf: 'flex-start',
-    marginLeft: 20,
-    marginTop: 30,
+    marginLeft: 11,
+    marginTop: 50,
   },
 
   Container: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 5,
+    marginBottom: 8,
     alignSelf: 'flex-start',
-    marginLeft: 20,
-    marginTop: 5,
+    marginLeft: 11,
+    marginTop: 12,
   },
 
   userImage: {
@@ -139,48 +134,37 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
 
-  textInputCon:{
-    justifyContent: 'flex-start',
-  },
-
   textInput: {
     fontFamily: "poppins",
     textAlign: 'left',
     textAlignVertical: 'top',
     backgroundColor: '#f1f1f1',
     color: 'black',
-    borderRadius:15,
+    borderRadius: 8,
     width: '90%',
-    padding: 20,
-    
-    // borderColor: 'black',
-    // borderWidth: 1,
+    padding: 12,
     textAlign: 'justify',
     bottom: 5,
+    height: 50, 
   },
 
-  buttonContainer:{
-    width: '45%',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    position: "absolute",
-    right: 20,
-    top: 50
-  },
-
-  bContainer:{ 
+  bContainer: { 
     alignContent: 'center',
     marginTop: 10,
   },
 
-  button:{
+  button: {
     width: 150,
     height: 50,
     borderRadius: 12,
     backgroundColor: "#272D34",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 8,
+    marginTop: 35,
+  },
+
+  disabledButton: {
+    backgroundColor: "#A9A9A9",
   },
 
   cancelButton: {
@@ -189,14 +173,13 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 10,
+    marginTop: 5,
   },
 
   post: {
     fontFamily: "poppins",
     color: "white",
     fontSize: 14,
-    
   },
 
   cancel: {
@@ -213,10 +196,10 @@ const styles = StyleSheet.create({
     textAlign: "left",
     paddingBottom: 3,
   },
+  
   TitleContainer: {
     alignSelf: 'flex-start',
     paddingLeft: 25, 
     top: 10,
   }
-
 });

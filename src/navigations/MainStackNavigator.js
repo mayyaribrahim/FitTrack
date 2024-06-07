@@ -71,14 +71,14 @@ const Stack = createNativeStackNavigator();
         <Stack.Screen name="home" component={MyTabs} options={{ gestureEnabled: false, headerShown: false }} />
 
         {/*exercise screens*/}
-        <Stack.Screen name="ExercisesScreen" component={ExercisesScreen} options={{ title: 'Exercises'}}/>
+        <Stack.Screen name="ExercisesScreen" component={ExercisesScreen} options={{ title: 'Exercises', headerStyle: { backgroundColor: '#272D34' }, headerTintColor: 'white'}}/>
         <Stack.Screen name="ExerciseDetail" component={ExDetailScreen} options={{ title: 'Exercise Details'}}/>
-        <Stack.Screen name="FavExerciseScreen" component={FavExerciseScreen} options={{ title: 'Favorite Exercises'}}/>
+        <Stack.Screen name="FavExerciseScreen" component={FavExerciseScreen} options={{ title: 'Favorite Exercises',  headerStyle: { backgroundColor: '#272D34' }, headerTintColor: 'white'}}/>
 
         {/*meals screens*/}
-        <Stack.Screen name="MealsScreen" component={MealsScreen} options={{ title: ' Meals' }}/>
+        <Stack.Screen name="MealsScreen" component={MealsScreen} options={{ title: ' Meals', headerStyle: { backgroundColor: '#272D34' }, headerTintColor: 'white' }}/>
         <Stack.Screen name="MealDetail" component={MlDetailScreen} options={{ title: 'Meal Detail' }}/>
-        <Stack.Screen name="FavMealsScreen" component={FavMealsScreen} options={{ title: 'Favorite Meals'}} />
+        <Stack.Screen name="FavMealsScreen" component={FavMealsScreen} options={{ title: 'Favorite Meals', headerStyle: { backgroundColor: '#272D34' }, headerTintColor: 'white'}} />
         
         {/*Activites screens*/}
         <Stack.Screen name="ActivitesScreen" component={ActivitesScreen} options={{ title: ' ' }}/>

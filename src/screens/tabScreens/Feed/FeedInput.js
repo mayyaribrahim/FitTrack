@@ -127,6 +127,8 @@ function FeedInput(props) {
     setSelectedImage(null);
   };
 
+  const isButtonDisabled = !enteredTweetText;
+
   return (
     <Modal style={styles.ModalContanier} visible={props.visible} animationType="slide">
       <SafeAreaView style={styles.inputContainer}>
@@ -146,7 +148,11 @@ function FeedInput(props) {
           <TouchableOpacity style={styles.cancelButton} onPress={cancelHandler} disabled={isLoading}>
             <Text style={styles.cancel}>Cancel</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={addTweetHandler} disabled={isLoading}>
+          <TouchableOpacity 
+            style={[styles.button, isButtonDisabled && styles.disabledButton]} 
+            onPress={addTweetHandler} 
+            disabled={isButtonDisabled || isLoading}
+          >
             <Text style={styles.post}>{isLoading ? <ActivityIndicator size="small" color="#ffffff" /> : 'Post'}</Text>
           </TouchableOpacity>
         </View>
@@ -222,7 +228,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#EFEFEF',
     borderRadius: 30,
     width: '90%',
-    height: 282,
+    height: 285,
     paddingVertical: 8,
   },
   buttonContainer: {
@@ -240,6 +246,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#272D34",
     alignItems: "center",
     justifyContent: "center",
+  },
+  disabledButton: {
+    backgroundColor: "#A9A9A9",
   },
   cancelButton: {
     width: 80,

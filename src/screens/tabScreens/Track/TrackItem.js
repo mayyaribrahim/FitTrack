@@ -23,24 +23,24 @@ function TrackItem({ id, name, reps, weight }) {
   };
 
   return (
-    <View style={styles.tweetItem}>
-      <View style={styles.nameContainer}>
-        <Text style={styles.name}>Exercise: {name}</Text>
-        <View style={styles.deleteButton}>
-          <Pressable
-            android_ripple={{ color: '#555555' }}
-            onPress={handleDelete}
-            style={({ pressed }) => pressed && styles.pressedItem}
-          >
-            <Ionicons name='close-circle' color='#FFFF' size={27} />
-          </Pressable>
-        </View>
+    <View style={styles.card}>
+      <View style={styles.header}>
+        <Text style={styles.name}>{name}</Text>
+        <Pressable
+          android_ripple={{ color: '#ddd' }}
+          onPress={handleDelete}
+          style={({ pressed }) => pressed && styles.pressedItem}
+        >
+          <Ionicons name='trash-outline' color='#fff' size={24} />
+        </Pressable>
       </View>
-      <View style={styles.nameContainer}>
-        <Text style={styles.sets}>Sets & Reps: {reps}</Text>
+      <View style={styles.detailContainer}>
+        <Ionicons name="repeat-outline" color="#fff" size={20} />
+        <Text style={styles.detailText}>Sets & Reps: {reps}</Text>
       </View>
-      <View style={styles.nameContainer}>
-        <Text style={styles.weight}>Max wieght {weight}</Text>
+      <View style={styles.detailContainer}>
+        <Ionicons name="barbell-outline" color="#fff" size={20} />
+        <Text style={styles.detailText}>Max Weight: {weight}</Text>
       </View>
     </View>
   );
@@ -49,44 +49,41 @@ function TrackItem({ id, name, reps, weight }) {
 export default TrackItem;
 
 const styles = StyleSheet.create({
-  tweetItem: {
-    alignSelf: 'center',
-    width: '89%',
-    margin: 8,
-    padding: 8,
-    borderRadius: 15,
+  card: {
     backgroundColor: '#272D34',
-    paddingVertical: 15,
+    margin: 10,
+    borderRadius: 10,
+    padding: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5,
   },
   pressedItem: {
-    opacity: 0.5,
+    opacity: 0.7,
   },
-  nameContainer: {
+  header: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 7,
-    backgroundColor: '#22272c',
-    borderRadius: 10,
-    width: '100%',
-    marginBottom: 5,
+    marginBottom: 10,
   },
   name: {
-    color: '#FFFF',
-    fontFamily: "poppins-medium",
-    fontSize: 20,
-    marginLeft: 12,
+    color: '#FFF',
+    fontFamily: 'poppins-semibold',
+    fontSize: 18,
   },
-  sets: {
-    color: '#FFFF',
-    fontFamily: "poppins-medium",
-    fontSize: 13,
-    marginLeft: 12,
+  detailContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 5,
   },
-  weight: {
-    color: '#FFFF',
-    fontFamily: "poppins-medium",
-    fontSize: 13,
-    marginLeft: 12,
+  detailText: {
+    color: '#DDD',
+    fontFamily: 'poppins',
+    fontSize: 14,
+    marginLeft: 8,
   },
   deleteButton: {
     flex: 1,

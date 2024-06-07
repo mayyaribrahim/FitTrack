@@ -1,12 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
-import { FavoritesContext } from '../../../../context/Favorites-context';
-import MealsList from '../../../../components/meals/MealsList';
-import { collection, query, where, getDocs, doc, getDoc } from 'firebase/firestore';
-import { FIRESTORE_DB } from '../../../../../FirebaseConfig'; 
-import { fetchFavoriteMeals, removeFromFavorites } from '../../../../context/favoritesService';
 import { getAuth } from 'firebase/auth';
 import { useIsFocused } from '@react-navigation/native';
+import MealsList from '../../../../components/meals/MealsList';
+import { fetchFavoriteMeals } from '../../../../context/favoritesService';
 import LoadingOverlay from '../../../../components/LoadingOverlay';
 
 function FavMealsScreen({ route }) {
@@ -15,7 +12,6 @@ function FavMealsScreen({ route }) {
   const isFocused = useIsFocused();
 
   const categoryIds = route.params?.categoryIds || [];
-  console.log(categoryIds)
 
   const fetchMeals = async (categoryIds) => {
     try {
@@ -29,27 +25,22 @@ function FavMealsScreen({ route }) {
       }
     } catch (error) {
       console.error('Error fetching favorite meals:', error);
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    if (isFocused && route.params?.mealRemoved) {
+    if (isFocused) {
       fetchMeals(categoryIds);
     }
-  }, [isFocused, route.params?.mealRemoved]);
+  }, [isFocused, categoryIds]);
 
-  useEffect(() => {
-    fetchMeals(categoryIds);
-  }, [categoryIds]);
-
-  if (loading) {
-    return <LoadingOverlay message="Loading..." />;
-  }
+  
 
   if (favoriteMeals.length === 0) {
     return (
       <View style={styles.rootContainer}>
-        <Text style={styles.text}>You have no favorite meals yet</Text>
+        {loading ? <ActivityIndicator size="small" color="#ffffff" style={styles.loadingOverlay} /> : <Text style={styles.text}>You have no favorite meals yet</Text>}
       </View>
     );
   }
@@ -68,15 +59,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#272D34'
   },
-
   text: {
     fontSize: 18,
     fontFamily: 'poppins',
-    color: 'black',
+    color: '#ffffff',
   },
-
   container: {
     flex: 1,
+  },
+
+  loadingOverlay: {
+    position: 'absolute',
+    zIndex: 1,
   },
 });

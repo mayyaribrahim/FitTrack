@@ -2,21 +2,21 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { FIRESTORE_DB } from '../../../../FirebaseConfig';
 import { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Image, KeyboardAvoidingView, Platform, TouchableOpacity, } from "react-native";
+import { Text, View, StyleSheet, KeyboardAvoidingView, Platform } from "react-native";
 import PrimaryButton from "../../../components/PrimaryButton";
 import InputField from "../../../components/InputFeild";
 import ShortInput from "../../../components/ShortInput";
 import Avatar from "../../../components/Avatar";
 import LoadingOverlay from '../../../components/LoadingOverlay';
 
-function PersonalInfo ({ navigation }) {
+function PersonalInfo({ navigation }) {
   const [loading, setLoading] = useState(true);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState("");
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
-
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -26,6 +26,7 @@ function PersonalInfo ({ navigation }) {
         
         if (user) {
           const uid = user.uid;
+          setEmail(user.email); // Set email from the auth user object
           
           const userDocRef = doc(FIRESTORE_DB, 'users', uid);
           const userDocSnap = await getDoc(userDocRef);
@@ -33,12 +34,11 @@ function PersonalInfo ({ navigation }) {
           if (userDocSnap.exists()) {
             const userData = userDocSnap.data();
             setFirstName(userData.firstName);
+            setLastName(userData.lastName);
             setAge(userData.age);
             setHeight(userData.height);
             setWeight(userData.weight);
-            setLastName(userData.lastName);
             setLoading(false);
-            // Set the user's first name in state
           } else {
             console.log("User document does not exist.");
             navigation.replace("SecondSignup");
@@ -80,88 +80,62 @@ function PersonalInfo ({ navigation }) {
       console.log("Error updating user data: ", error);
     }
   };
-  
 
-  if(loading) {
-    return <LoadingOverlay message="loading" />;
+  if (loading) {
+    return <LoadingOverlay message="Loading..." />;
   }
 
-
-
-
-return (
-
-  <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.container}>
-    
-    <Avatar />
-
-    <View style={styles.inputContainer}>
-      <View style={styles.ShortInputContainer}>
-
-        <ShortInput
-          secondIconName={"ruler"}
-          placeholder={height}
+  return (
+    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.container}>
+      <Avatar />
+      <View style={styles.inputContainer}>
+        <View style={styles.ShortInputContainer}>
+          <ShortInput
+            secondIconName={"ruler"}
+            placeholder={height.toString()}
+            keyboardType="numeric"
+            onChange={setHeight}
+            type="Height"
+          />
+          <ShortInput
+            secondIconName={"weight-scale"}
+            placeholder={weight.toString()}
+            keyboardType="numeric"
+            onChange={setWeight}
+            type="Weight"
+          />
+        </View>
+        <InputField
+          secondIconName={"calendar"}
+          placeholder={age.toString()}
           keyboardType="numeric"
-          //value={password}
-          onChange={setHeight}
-          type="Height"
+          onChange={setAge}
+          type="Age"
         />
-
-        <ShortInput
-          secondIconName={"weight-scale"}
-          placeholder={weight}
-          keyboardType="numeric"
-          //value={password}
-          onChange={setWeight}
-          type="Weight"
+        <InputField
+          iconName={"user"}
+          placeholder={firstName}
+          onChange={setFirstName}
+          type="name"
         />
-
-      </View > 
-
-      <InputField
-        secondIconName={"calendar"}
-        placeholder={age}
-        keyboardType="numeric"
-        //value={password}
-        onChange={setAge}
-        type="Age"
-      />
-
-      <InputField
-        iconName={"user"}
-        placeholder={firstName}
-        //value={email}
-        onChange={setFirstName}
-        type="name"
-      />
-
-      <InputField
-        iconName={"user"}
-        placeholder={lastName}
-        //value={email}
-        onChange={setLastName}
-        type="name"
-      />
-
-      <InputField
-        iconName={"mail"}
-        placeholder={"Email"}
-        //value={password}
-        //onChange={handlePasswordChange}
-        type="email"
-      />
-
-      
-
-    </View>
-
-    <View style={styles.primaryButton}>
-      <PrimaryButton onPress={updateUserData}>Confirm</PrimaryButton>
-    </View>
-
-  </KeyboardAvoidingView>
-  
-)
+        <InputField
+          iconName={"user"}
+          placeholder={lastName}
+          onChange={setLastName}
+          type="name"
+        />
+        <InputField
+          iconName={"mail"}
+          placeholder={email}
+          editable={false} // Make the email field non-editable
+          type="email"
+        />
+      </View>
+      <View style={styles.primaryButton}>
+        <PrimaryButton onPress={updateUserData}>Confirm</PrimaryButton>
+      </View>
+    </KeyboardAvoidingView>
+  );
 }
 
 export default PersonalInfo;
@@ -172,22 +146,18 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     alignItems: "center",
     justifyContent: 'center',
-
   },
-
   image: {
     width: 160,
     height: 162,
   },
-  
   imageContainer: {
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 250,
     bottom: 80,
   },
-
-  editButton:{
+  editButton: {
     width: 40,
     height: 40,
     borderRadius: 20,
@@ -197,21 +167,16 @@ const styles = StyleSheet.create({
     right: 6,
     bottom: 0,
     backgroundColor: "#E9E9E9",
-    
   },
-
   inputContainer: {
     bottom: 20,
     marginBottom: 10,
     bottom: 45,
   },
-
   ShortInputContainer: {
     flexDirection: 'row',
   },
-
   primaryButton: {
     bottom: 35,
   },
-
-})
+});

@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, SafeAreaView } from "react-native";
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, SafeAreaView, ActivityIndicator } from "react-native";
 import TabScreenTitle from "../../../components/TabScreenTitle";
 import { FIRESTORE_DB } from "../../../../FirebaseConfig";
-
 import TrackItem from "./TrackItem";
 import TrackInput from "./TrackInput";
+import LoadingOverlay from '../../../components/LoadingOverlay';
 
 function TrackScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [progress, setProgress] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const auth = getAuth();
@@ -19,13 +20,15 @@ function TrackScreen() {
     if (user) {
       const uid = user.uid;
       const progressCollectionRef = collection(FIRESTORE_DB, `users/${uid}/progress`);
-      
-      const unsubscribe = onSnapshot(progressCollectionRef, (querySnapshot) => {
+      const q = query(progressCollectionRef, orderBy("createdAt", "desc")); // Order by createdAt in descending order
+
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
         const progressData = [];
         querySnapshot.forEach((doc) => {
           progressData.push({ id: doc.id, ...doc.data() });
         });
         setProgress(progressData);
+        setLoading(false); // Set loading to false after data is fetched
       });
 
       return () => unsubscribe();
@@ -56,22 +59,30 @@ function TrackScreen() {
       </View>
       <TrackInput visible={modalVisible} onAddExercise={addExerciseHandler} onCancel={endAddExerciseHandler} />
       <View style={styles.progressContainer}>
-        <FlatList
-          style={styles.progress}
-          data={progress}
-          renderItem={({ item }) => (
-            <TrackItem
-              id={item.id}
-              name={item.name}
-              reps={item.reps}
-              weight={item.weight}
-            />
-          )}
-          keyExtractor={(item) => item.id}
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          alwaysBounceVertical={false}
-        />
+        {loading ? (
+          <LoadingOverlay size="large" color="#272D34" />
+        ) : progress.length === 0 ? (
+          <View style={styles.emptyContainer}>
+            <Text style={styles.emptyText}>Start documenting your exercises!</Text>
+          </View>
+        ) : (
+          <FlatList
+            style={styles.progress}
+            data={progress}
+            renderItem={({ item }) => (
+              <TrackItem
+                id={item.id}
+                name={item.name}
+                reps={item.reps}
+                weight={item.weight}
+              />
+            )}
+            keyExtractor={(item) => item.id}
+            showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}
+            alwaysBounceVertical={false}
+          />
+        )}
       </View>
     </SafeAreaView>
   );
@@ -104,11 +115,23 @@ const styles = StyleSheet.create({
   plus: {
     color: "white",
     fontSize: 15,
+    fontFamily: 'poppins',
   },
   progressContainer: {
     marginTop: 15,
+    flex: 1,
   },
   progress: {
-    marginBottom: 120,
+    marginBottom: 10,
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  emptyText: {
+    fontSize: 18,
+    fontFamily: 'poppins',
+    color: '#272D34',
   },
 });

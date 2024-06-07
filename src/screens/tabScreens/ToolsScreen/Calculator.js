@@ -171,6 +171,7 @@ function Calculator({ navigation }) {
         <Modal visible={showModal} animationType="fade" transparent>
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
+              <Text style={styles.modalTitle}>Your Macros</Text>
               <View style={styles.eachResult}>
                 <Text style={styles.resultTitle}>Calories: </Text>
                 <Text style={styles.result}>{calories}</Text>
@@ -242,28 +243,40 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
     width: '80%',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5,
+  },
+  modalTitle: {
+    fontFamily: 'poppins-semibold',
+    fontSize: 22,
+    color: '#272D34',
+    marginBottom: 15,
   },
   eachResult: {
     flexDirection: "row",
     alignItems: "center",
     width: '90%',
     justifyContent: "space-between",
-    marginBottom: 20,
+    marginBottom: 10,
   },
   resultTitle: {
     fontFamily: 'poppins-semibold',
-    fontSize: 26,
+    fontSize: 20,
     color: '#272D34',
   },
   result: {
     fontFamily: 'poppins',
-    fontSize: 20,
+    fontSize: 18,
     color: '#272D34',
   },
   doneButton: {
     marginTop: 20,
     backgroundColor: '#272D34',
-    padding: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     borderRadius: 5,
   },
   doneButtonText: {

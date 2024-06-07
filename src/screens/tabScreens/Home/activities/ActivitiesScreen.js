@@ -22,7 +22,7 @@ const ActivitesScreen = ({ route }) => {
 
   return (
     <View>
-      <ScrollView style={styles.rootContainer}>
+      <ScrollView style={styles.rootContainer} showsVerticalScrollIndicator={false}>
         <Text style={styles.title}>{activity?.title || "loading"}</Text>
         <YoutubeIframe  
            height={200}
